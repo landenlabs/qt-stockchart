@@ -1,0 +1,53 @@
+name: Windows Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers when you push a tag like v1.0, v2.1.3, etc.
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.0' # Matches your local Qt6 setup
+          arch: 'win64_msvc2019_64'
+          modules: 'qtcharts' # Important: Adds the Charts module you need
+
+      - name: Set up MSVC (Visual Studio Compiler)
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build Project
+        run: |
+          cd build
+          cmake --build . --config Release
+
+      - name: Package with windeployqt
+        run: |
+          # This pulls in all required DLLs so the app runs on any PC
+          windeployqt build/Release/StockChart.exe
+          
+      - name: Create Zip Archive
+        shell: pwsh
+        run: |
+          Compress-Archive -Path build/Release/* -DestinationPath StockChart-Windows-x64.zip
+
+      - name: Upload to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.ref_name }} StockChart-Windows-x64.zip --clobber
