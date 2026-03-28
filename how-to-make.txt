@@ -22,3 +22,24 @@ curl -s -o /dev/null -w "%{http_code}" -H "User-Agent: Mozilla/5.0 (Macintosh; I
 brew info qt
 brew upgrade
 
+
+----- publish mac exe -----
+
+mkdir build_exe
+cd build_exe
+cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF
+make -j10
+
+----- publish mac dmg -----
+
+mkdir build_app
+cd build_app
+cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=ON
+make -j10
+
+macdeployqt StockChart.app \
+-libpath=/opt/homebrew/lib \
+-libpath=/opt/homebrew/opt/qt/lib \
+-dmg
+
+gh release create v1.0.0 StockChart.dmg --title "v1.0.0 - macOS" --notes "First Mac release"
