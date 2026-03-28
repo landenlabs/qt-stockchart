@@ -1,3 +1,8 @@
+# For an App builds: 
+#  cd build
+#    cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=ON
+#    cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF
+
 cmake_minimum_required(VERSION 3.16)
 project(StockChart VERSION 0.1 LANGUAGES CXX)
 
@@ -30,7 +35,23 @@ set(HEADERS
     src/TwelveDataProvider.h
 )
 
-add_executable(StockChart ${SOURCES} ${HEADERS})
+option(BUILD_AS_BUNDLE "Build as a macOS App Bundle" ON)
+
+if(APPLE AND BUILD_AS_BUNDLE)
+    add_executable(StockChart MACOSX_BUNDLE ${SOURCES} ${HEADERS})
+else()
+    add_executable(StockChart ${SOURCES} ${HEADERS})
+endif()
+
+# Optional: Set Mac-specific bundle metadata
+if(APPLE)
+    set_target_properties(StockChart PROPERTIES
+        MACOSX_BUNDLE_BUNDLE_NAME "Qt StockChart"
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.landenlabs.qt-stockchart"
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
+    )
+endif()
 
 target_link_libraries(StockChart PRIVATE
     Qt6::Widgets
