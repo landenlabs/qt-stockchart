@@ -37,11 +37,17 @@ set(HEADERS
 
 option(BUILD_AS_BUNDLE "Build as a macOS App Bundle" ON)
 
-if(APPLE AND BUILD_AS_BUNDLE)
+# Determine executable type based on Platform
+# MACOSX_BUNDLE creates the .app folder structure macdeployqt needs.
+# WIN32 prevents a command prompt from appearing behind the GUI on Windows.
+if(APPLE)
     add_executable(StockChart MACOSX_BUNDLE ${SOURCES} ${HEADERS})
+elseif(WIN32)
+    add_executable(StockChart WIN32 ${SOURCES} ${HEADERS})
 else()
     add_executable(StockChart ${SOURCES} ${HEADERS})
 endif()
+
 
 # Optional: Set Mac-specific bundle metadata
 if(APPLE)

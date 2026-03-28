@@ -39,7 +39,8 @@ jobs:
       - name: Package with windeployqt
         run: |
           # This pulls in all required DLLs so the app runs on any PC
-          windeployqt build/Release/StockChart.exe
+          # Added --no-translations to prevent the "exit code 1" during the QM copy phase
+          windeployqt --no-translations build/Release/StockChart.exe
           
       - name: Create Zip Archive
         shell: pwsh

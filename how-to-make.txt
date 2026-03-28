@@ -43,3 +43,12 @@ macdeployqt StockChart.app \
 -dmg
 
 gh release create v1.0.0 StockChart.dmg --title "v1.0.0 - macOS" --notes "First Mac release"
+
+
+----- git actions to build windows app ----
+
+git tag v1.0.1
+git push origin v1.0.1
+
+https://github.com/landenlabs/qt-stockchart/actions
+
