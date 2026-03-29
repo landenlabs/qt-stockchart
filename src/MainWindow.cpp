@@ -970,6 +970,10 @@ void MainWindow::onError(const QString &symbol, const QString &message)
 
 void MainWindow::updateChart(const QStringList &selectedSymbols)
 {
+    static volatile bool isUpdating = false;
+    if (isUpdating) return;
+    isUpdating = true;
+
     m_chart->removeAllSeries();
     for (QAbstractAxis *ax : m_chart->axes()) m_chart->removeAxis(ax);
 
@@ -979,7 +983,13 @@ void MainWindow::updateChart(const QStringList &selectedSymbols)
 
     if (ready.isEmpty()) {
         updateCrosshair();
+        isUpdating = false;
         return;
+    }
+    
+    // Before adding new series
+    for (auto* axis : m_chart->axes()) {
+        m_chart->removeAxis(axis);
     }
 
     auto *axisX = new QDateTimeAxis();
@@ -1050,15 +1060,15 @@ void MainWindow::updateChart(const QStringList &selectedSymbols)
             auto *greenArea = new QAreaSeries(upperPos, zeroLineGreen);
             greenArea->setBrush(QColor(56, 142, 60, 130));  // Material green, semi-transparent
             greenArea->setPen(QPen(Qt::transparent));
-            upperPos->setParent(greenArea);
-            zeroLineGreen->setParent(greenArea);
+            //2 upperPos->setParent(greenArea);
+            //2 zeroLineGreen->setParent(greenArea);
 
             // Red area: between y=0 and min(pct,0)
             auto *redArea = new QAreaSeries(zeroLine, lowerNeg);
             redArea->setBrush(QColor(198, 40, 40, 130));    // Material red, semi-transparent
             redArea->setPen(QPen(Qt::transparent));
-            zeroLine->setParent(redArea);
-            lowerNeg->setParent(redArea);
+            //2 zeroLine->setParent(redArea);
+            //2 lowerNeg->setParent(redArea);
 
             QPen linePen(QColor(40, 40, 40));
             linePen.setWidthF(1.5);
@@ -1087,7 +1097,10 @@ void MainWindow::updateChart(const QStringList &selectedSymbols)
         }
     }
 
-    if (minTime.isNull()) { updateCrosshair(); return; } // no data in range
+    if (minTime.isNull()) { updateCrosshair(); 
+        isUpdating = false;
+        return;
+    } // no data in range
 
     axisX->setMin(minTime);
     axisX->setMax(maxTime);
@@ -1096,6 +1109,7 @@ void MainWindow::updateChart(const QStringList &selectedSymbols)
     axisY->setMax(maxPct + pad);
     m_chart->legend()->setVisible(true);
     updateCrosshair();
+    isUpdating = false;
 }
 
 // ── Settings ──────────────────────────────────────────────────────────────────
