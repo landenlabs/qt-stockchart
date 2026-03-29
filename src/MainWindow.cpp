@@ -110,11 +110,16 @@ void MainWindow::setupUI()
     leftLayout->setContentsMargins(0, 0, 0, 0);
     leftLayout->setSpacing(2);
 
+    // Two-column tree: symbol | latest price
     m_stockTree = new QTreeWidget(leftPanel);
+    m_stockTree->setColumnCount(2);
     m_stockTree->setHeaderHidden(true);
     m_stockTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
     m_stockTree->setIndentation(16);
     m_stockTree->setContextMenuPolicy(Qt::CustomContextMenu);
+    // Layout columns: name stretches, price sized to contents
+    m_stockTree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    m_stockTree->header()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
     connect(m_stockTree, &QTreeWidget::itemSelectionChanged,
             this, &MainWindow::onStockSelectionChanged);
     connect(m_stockTree, &QTreeWidget::customContextMenuRequested,
@@ -652,9 +657,24 @@ QTreeWidgetItem *MainWindow::addGroup(const QString &name, bool expanded)
 
 void MainWindow::addStockToGroup(QTreeWidgetItem *groupItem, const QString &symbol)
 {
+    // Two-column item: column 0 = symbol, column 1 = latest price (if cached)
     auto *item = new QTreeWidgetItem(groupItem);
     item->setText(0, symbol);
+    item->setTextAlignment(0, Qt::AlignLeft | Qt::AlignVCenter);
+    item->setTextAlignment(1, Qt::AlignRight | Qt::AlignVCenter);
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+
+    // Set price and tint if cached
+    if (m_cache.contains(symbol) && !m_cache[symbol].isEmpty()) {
+        const double latest = m_cache[symbol].last().price;
+        item->setText(1, QString("$%1").arg(latest, 0, 'f', 2));
+        const QColor cachedBg(230, 245, 230); // light green
+        item->setBackground(0, QBrush(cachedBg));
+        item->setBackground(1, QBrush(cachedBg));
+    } else {
+        item->setText(1, QString());
+    }
+
     // Apply cached icon immediately if available
     if (m_symbolErrors.contains(symbol))
         item->setIcon(0, makeErrorIcon());
@@ -1296,6 +1316,61 @@ void MainWindow::onSymbolTypeReady(const QString &symbol, SymbolType type)
     updateTreeItemIcon(symbol);
 }
 
+void MainWindow::updateTreeItemIcon(const QString& symbol) {
+    QIcon icon;
+    if (m_symbolErrors.contains(symbol))
+        icon = makeErrorIcon();
+    else if (m_symbolTypes.contains(symbol))
+        icon = makeTypeIcon(m_symbolTypes[symbol]);
+
+    const QColor cachedBg(230, 245, 230); // light green
+
+    for (int i = 0; i < m_stockTree->topLevelItemCount(); ++i) {
+        QTreeWidgetItem* group = m_stockTree->topLevelItem(i);
+        for (int j = 0; j < group->childCount(); ++j) {
+            QTreeWidgetItem* child = group->child(j);
+            if (child->text(0) == symbol) {
+                // update icon
+                child->setIcon(0, icon);
+                // update price and background based on cache
+                if (m_cache.contains(symbol) && !m_cache[symbol].isEmpty()) {
+                    const double latest = m_cache[symbol].last().price;
+                    child->setText(1, QString("$%1").arg(latest, 0, 'f', 2));
+                    child->setBackground(0, QBrush(cachedBg));
+                    child->setBackground(1, QBrush(cachedBg));
+                }
+                else {
+                    child->setText(1, QString());
+                    child->setBackground(0, QBrush());
+                    child->setBackground(1, QBrush());
+                }
+            }
+        }
+    }
+}
+
+void MainWindow::refreshAllStockCacheVisuals() {
+    const QColor cachedBg(230, 245, 230); // light green 
+    for (int i = 0; i < m_stockTree->topLevelItemCount(); ++i) {
+        QTreeWidgetItem *group = m_stockTree->topLevelItem(i); 
+        for (int j = 0; j < group->childCount(); ++j) {
+            QTreeWidgetItem *child = group->child(j); 
+            const QString sym = child->text(0); 
+            if (m_cache.contains(sym) && !m_cache[sym].isEmpty()) { 
+                const double latest = m_cache[sym].last().price; 
+                child->setText(1, QString("$%1").arg(latest, 0, 'f', 2));
+                child->setBackground(0, QBrush(cachedBg));
+                child->setBackground(1, QBrush(cachedBg)); 
+            } 
+            else { child->setText(1, QString()); 
+            child->setBackground(0, QBrush()); 
+            child->setBackground(1, QBrush()); 
+            }
+        }
+    } 
+}
+
+/* 
 void MainWindow::updateTreeItemIcon(const QString &symbol)
 {
     QIcon icon;
@@ -1304,14 +1379,16 @@ void MainWindow::updateTreeItemIcon(const QString &symbol)
     else if (m_symbolTypes.contains(symbol))
         icon = makeTypeIcon(m_symbolTypes[symbol]);
 
+ 
     for (int i = 0; i < m_stockTree->topLevelItemCount(); ++i) {
-        QTreeWidgetItem *group = m_stockTree->topLevelItem(i);
+        QTreeWidgetItem* group = m_stockTree->topLevelItem(i);
         for (int j = 0; j < group->childCount(); ++j) {
             if (group->child(j)->text(0) == symbol)
                 group->child(j)->setIcon(0, icon);
         }
     }
 }
+*/
 
 void MainWindow::loadSymbolTypeCache()
 {

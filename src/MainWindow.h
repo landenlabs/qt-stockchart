@@ -84,6 +84,7 @@ private:
     void saveSymbolType(const QString &symbol, SymbolType type);
     static QIcon makeTypeIcon(SymbolType type);
     static QIcon makeErrorIcon();
+    void refreshAllStockCacheVisuals();
 
     // ── Widgets ──────────────────────────────────────────────────────────────
     QSplitter      *m_splitter;          // horizontal: left | right
