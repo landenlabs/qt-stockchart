@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\build_win_vs\StockChart_autogen\mocs_compilation_Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\SettingsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\StockDataProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\AlphaVantageProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\FinnhubProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\PolygonProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\src\TwelveDataProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\build_win_vs\StockChart_autogen\mocs_compilation_Release.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\build_win_vs\StockChart_autogen\mocs_compilation_MinSizeRel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\opt\projects\qt-projects\qt-stockchart\build_win_vs\StockChart_autogen\mocs_compilation_RelWithDebInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\SettingsDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\StockDataProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\AlphaVantageProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\FinnhubProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\PolygonProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\opt\projects\qt-projects\qt-stockchart\src\TwelveDataProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\opt\projects\qt-projects\qt-stockchart\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C446945E-E6F7-3586-8949-2D192484A7F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{258C5EF7-4D5B-3A63-953D-A08DC9F1CA76}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

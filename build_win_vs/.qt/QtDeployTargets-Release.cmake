@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_StockChart_FILE C:/opt/projects/qt-projects/qt-stockchart/build_win_vs/Release/StockChart.exe)
+set(__QT_DEPLOY_TARGET_StockChart_RUNTIME_DLLS C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6Charts.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6Network.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6OpenGLWidgets.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6Widgets.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6OpenGL.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6Gui.dll;C:/opt/dev/qt/6.7.0/msvc2019_64/bin/Qt6Core.dll)

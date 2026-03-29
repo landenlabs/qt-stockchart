@@ -22,9 +22,10 @@ install_manifest.txt
 build/
 build_exe/
 build_app/
-build_win_vs/
-build_win_ninja/
 out/
+
+
+
 
 # Qt specific
 *.moc
@@ -37,4 +38,11 @@ ui_*.h
 
 # windows
 .vs/
+**/x64/
+**/Debug/
+**/Release/
+*_log
+*.pdb
+*.exe
+
 
