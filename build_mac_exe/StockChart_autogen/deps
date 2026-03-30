@@ -750,11 +750,19 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/ptrcheck.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/CMakeLists.txt \
-	/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/4.3.0/CMakeCXXCompiler.cmake \
-	/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/4.3.0/CMakeSystem.cmake \
-	/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/StockChart_autogen/moc_predefs.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/CMakeFiles/4.3.0/CMakeCXXCompiler.cmake \
+	/Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/CMakeFiles/4.3.0/CMakeSystem.cmake \
+	/Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/StockChart_autogen/moc_predefs.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/AlphaVantageProvider.cpp \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/AlphaVantageProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/ApiCallTracker.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/ApiCallTracker.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/ChartManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/ChartManager.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/CrashHandler.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/CrashHandler.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/CsvPorter.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/CsvPorter.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/FinnhubProvider.cpp \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/FinnhubProvider.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/MainWindow.cpp \
@@ -763,8 +771,14 @@ StockChart_autogen/timestamp: \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/PolygonProvider.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/SettingsDialog.cpp \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/SettingsDialog.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockCacheManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockCacheManager.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockDataProvider.cpp \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockDataProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockGroupManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/StockGroupManager.h \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/TableManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/stocks/src/TableManager.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/TwelveDataProvider.cpp \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/TwelveDataProvider.h \
 	/Users/dennislang/opt/projects/qt-projects/stocks/src/main.cpp \
@@ -778,12 +792,14 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QMetaType \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QObject \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QPair \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QPointF \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QRect \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSet \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSharedDataPointer \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSize \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSizeF \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QString \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QStringList \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QUrl \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QVariant \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QVector \
@@ -940,6 +956,7 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QFont \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QIcon \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QPen \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QPixmap \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QTransform \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/qaction.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/qactiongroup.h \
@@ -1008,11 +1025,11 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetwork-config.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetworkexports.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetworkglobal.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QBoxLayout \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QButtonGroup \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QComboBox \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QDialog \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QFrame \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsLineItem \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsPixmapItem \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsView \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsWidget \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QLabel \
@@ -1030,7 +1047,6 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractscrollarea.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractslider.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractspinbox.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qboxlayout.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qbuttongroup.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qcombobox.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qdialog.h \
@@ -1040,10 +1056,7 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsscene.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsview.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicswidget.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgridlayout.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlabel.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlayout.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlayoutitem.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlineedit.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qmainwindow.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qpushbutton.h \
@@ -1407,81 +1420,23 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargetsPrecheck.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsVersionlessTargets.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeCXXCompiler.cmake.in \
-	/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp \
 	/opt/homebrew/share/cmake/Modules/CMakeCXXInformation.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeCommonLanguageInclude.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeCompilerIdDetection.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerSupport.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeGenericSystem.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeInitializeConfigs.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeLanguageInformation.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeSystem.cmake.in \
 	/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
 	/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeTestCompilerCommon.cmake \
-	/opt/homebrew/share/cmake/Modules/CMakeUnixFindMake.cmake \
 	/opt/homebrew/share/cmake/Modules/CheckCXXCompilerFlag.cmake \
 	/opt/homebrew/share/cmake/Modules/CheckCXXSourceCompiles.cmake \
 	/opt/homebrew/share/cmake/Modules/CheckIncludeFileCXX.cmake \
 	/opt/homebrew/share/cmake/Modules/CheckLibraryExists.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/AppleClang-CXX.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/Clang.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Diab-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/GNU.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Renesas-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-	/opt/homebrew/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake \
 	/opt/homebrew/share/cmake/Modules/FindPackageHandleStandardArgs.cmake \
 	/opt/homebrew/share/cmake/Modules/FindPackageMessage.cmake \
@@ -1490,19 +1445,15 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/share/cmake/Modules/GNUInstallDirs.cmake \
 	/opt/homebrew/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
 	/opt/homebrew/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
-	/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake \
-	/opt/homebrew/share/cmake/Modules/Internal/CMakeInspectCXXLinker.cmake \
 	/opt/homebrew/share/cmake/Modules/Internal/CheckCompilerFlag.cmake \
 	/opt/homebrew/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake \
 	/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake \
-	/opt/homebrew/share/cmake/Modules/Internal/FeatureTesting.cmake \
 	/opt/homebrew/share/cmake/Modules/Linker/AppleClang-CXX.cmake \
 	/opt/homebrew/share/cmake/Modules/Linker/AppleClang.cmake \
 	/opt/homebrew/share/cmake/Modules/MacroAddFileDependencies.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Apple-Clang.cmake \
-	/opt/homebrew/share/cmake/Modules/Platform/Darwin-Determine-CXX.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Darwin-Initialize.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Darwin.cmake \
 	/opt/homebrew/share/cmake/Modules/Platform/Linker/Apple-AppleClang-CXX.cmake \

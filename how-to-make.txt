@@ -29,6 +29,8 @@ mkdir build_exe
 cd build_exe
 cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF
 make -j10
+cmake --build . --clean-first
+
 
 ----- publish mac dmg -----
 

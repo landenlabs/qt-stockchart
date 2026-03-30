@@ -23,6 +23,13 @@ set(SOURCES
     src/FinnhubProvider.cpp
     src/PolygonProvider.cpp
     src/TwelveDataProvider.cpp
+    src/StockCacheManager.cpp
+    src/StockGroupManager.cpp
+    src/ApiCallTracker.cpp
+    src/ChartManager.cpp
+    src/TableManager.cpp
+    src/CsvPorter.cpp
+    src/CrashHandler.cpp
 )
 
 set(HEADERS
@@ -33,6 +40,13 @@ set(HEADERS
     src/FinnhubProvider.h
     src/PolygonProvider.h
     src/TwelveDataProvider.h
+    src/StockCacheManager.h
+    src/StockGroupManager.h
+    src/ApiCallTracker.h
+    src/ChartManager.h
+    src/TableManager.h
+    src/CsvPorter.h
+    src/CrashHandler.h
 )
 
 option(BUILD_AS_BUNDLE "Build as a macOS App Bundle" ON)
@@ -64,6 +78,11 @@ target_link_libraries(StockChart PRIVATE
     Qt6::Charts
     Qt6::Network
 )
+
+# Windows: DbgHelp for stack walking in the crash handler
+if(WIN32)
+    target_link_libraries(StockChart PRIVATE DbgHelp)
+endif()
 
 qt_add_resources(StockChart "app_resources"
     PREFIX "/"

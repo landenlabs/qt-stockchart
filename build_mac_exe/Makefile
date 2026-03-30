@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/dennislang/opt/projects/qt-projects/stocks
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dennislang/opt/projects/qt-projects/stocks/build_exe
+CMAKE_BINARY_DIR = /Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles /Users/dennislang/opt/projects/qt-projects/stocks/build_exe//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/CMakeFiles /Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -192,29 +192,29 @@ StockChart_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/StockChart_autogen/mocs_compilation.cpp.s
 .PHONY : StockChart_autogen/mocs_compilation.cpp.s
 
-build_exe/.qt/rcc/qrc_app_resources.o: build_exe/.qt/rcc/qrc_app_resources.cpp.o
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.o
+build_mac_exe/.qt/rcc/qrc_app_resources.o: build_mac_exe/.qt/rcc/qrc_app_resources.cpp.o
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.o
 
 # target to build an object file
-build_exe/.qt/rcc/qrc_app_resources.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_exe/.qt/rcc/qrc_app_resources.cpp.o
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.cpp.o
+build_mac_exe/.qt/rcc/qrc_app_resources.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_exe/.qt/rcc/qrc_app_resources.cpp.o
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.cpp.o
 
-build_exe/.qt/rcc/qrc_app_resources.i: build_exe/.qt/rcc/qrc_app_resources.cpp.i
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.i
+build_mac_exe/.qt/rcc/qrc_app_resources.i: build_mac_exe/.qt/rcc/qrc_app_resources.cpp.i
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.i
 
 # target to preprocess a source file
-build_exe/.qt/rcc/qrc_app_resources.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_exe/.qt/rcc/qrc_app_resources.cpp.i
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.cpp.i
+build_mac_exe/.qt/rcc/qrc_app_resources.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_exe/.qt/rcc/qrc_app_resources.cpp.i
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.cpp.i
 
-build_exe/.qt/rcc/qrc_app_resources.s: build_exe/.qt/rcc/qrc_app_resources.cpp.s
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.s
+build_mac_exe/.qt/rcc/qrc_app_resources.s: build_mac_exe/.qt/rcc/qrc_app_resources.cpp.s
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.s
 
 # target to generate assembly for a file
-build_exe/.qt/rcc/qrc_app_resources.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_exe/.qt/rcc/qrc_app_resources.cpp.s
-.PHONY : build_exe/.qt/rcc/qrc_app_resources.cpp.s
+build_mac_exe/.qt/rcc/qrc_app_resources.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_exe/.qt/rcc/qrc_app_resources.cpp.s
+.PHONY : build_mac_exe/.qt/rcc/qrc_app_resources.cpp.s
 
 src/AlphaVantageProvider.o: src/AlphaVantageProvider.cpp.o
 .PHONY : src/AlphaVantageProvider.o
@@ -239,6 +239,102 @@ src/AlphaVantageProvider.s: src/AlphaVantageProvider.cpp.s
 src/AlphaVantageProvider.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/AlphaVantageProvider.cpp.s
 .PHONY : src/AlphaVantageProvider.cpp.s
+
+src/ApiCallTracker.o: src/ApiCallTracker.cpp.o
+.PHONY : src/ApiCallTracker.o
+
+# target to build an object file
+src/ApiCallTracker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ApiCallTracker.cpp.o
+.PHONY : src/ApiCallTracker.cpp.o
+
+src/ApiCallTracker.i: src/ApiCallTracker.cpp.i
+.PHONY : src/ApiCallTracker.i
+
+# target to preprocess a source file
+src/ApiCallTracker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ApiCallTracker.cpp.i
+.PHONY : src/ApiCallTracker.cpp.i
+
+src/ApiCallTracker.s: src/ApiCallTracker.cpp.s
+.PHONY : src/ApiCallTracker.s
+
+# target to generate assembly for a file
+src/ApiCallTracker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ApiCallTracker.cpp.s
+.PHONY : src/ApiCallTracker.cpp.s
+
+src/ChartManager.o: src/ChartManager.cpp.o
+.PHONY : src/ChartManager.o
+
+# target to build an object file
+src/ChartManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ChartManager.cpp.o
+.PHONY : src/ChartManager.cpp.o
+
+src/ChartManager.i: src/ChartManager.cpp.i
+.PHONY : src/ChartManager.i
+
+# target to preprocess a source file
+src/ChartManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ChartManager.cpp.i
+.PHONY : src/ChartManager.cpp.i
+
+src/ChartManager.s: src/ChartManager.cpp.s
+.PHONY : src/ChartManager.s
+
+# target to generate assembly for a file
+src/ChartManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ChartManager.cpp.s
+.PHONY : src/ChartManager.cpp.s
+
+src/CrashHandler.o: src/CrashHandler.cpp.o
+.PHONY : src/CrashHandler.o
+
+# target to build an object file
+src/CrashHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CrashHandler.cpp.o
+.PHONY : src/CrashHandler.cpp.o
+
+src/CrashHandler.i: src/CrashHandler.cpp.i
+.PHONY : src/CrashHandler.i
+
+# target to preprocess a source file
+src/CrashHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CrashHandler.cpp.i
+.PHONY : src/CrashHandler.cpp.i
+
+src/CrashHandler.s: src/CrashHandler.cpp.s
+.PHONY : src/CrashHandler.s
+
+# target to generate assembly for a file
+src/CrashHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CrashHandler.cpp.s
+.PHONY : src/CrashHandler.cpp.s
+
+src/CsvPorter.o: src/CsvPorter.cpp.o
+.PHONY : src/CsvPorter.o
+
+# target to build an object file
+src/CsvPorter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CsvPorter.cpp.o
+.PHONY : src/CsvPorter.cpp.o
+
+src/CsvPorter.i: src/CsvPorter.cpp.i
+.PHONY : src/CsvPorter.i
+
+# target to preprocess a source file
+src/CsvPorter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CsvPorter.cpp.i
+.PHONY : src/CsvPorter.cpp.i
+
+src/CsvPorter.s: src/CsvPorter.cpp.s
+.PHONY : src/CsvPorter.s
+
+# target to generate assembly for a file
+src/CsvPorter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/CsvPorter.cpp.s
+.PHONY : src/CsvPorter.cpp.s
 
 src/FinnhubProvider.o: src/FinnhubProvider.cpp.o
 .PHONY : src/FinnhubProvider.o
@@ -336,6 +432,30 @@ src/SettingsDialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/SettingsDialog.cpp.s
 .PHONY : src/SettingsDialog.cpp.s
 
+src/StockCacheManager.o: src/StockCacheManager.cpp.o
+.PHONY : src/StockCacheManager.o
+
+# target to build an object file
+src/StockCacheManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockCacheManager.cpp.o
+.PHONY : src/StockCacheManager.cpp.o
+
+src/StockCacheManager.i: src/StockCacheManager.cpp.i
+.PHONY : src/StockCacheManager.i
+
+# target to preprocess a source file
+src/StockCacheManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockCacheManager.cpp.i
+.PHONY : src/StockCacheManager.cpp.i
+
+src/StockCacheManager.s: src/StockCacheManager.cpp.s
+.PHONY : src/StockCacheManager.s
+
+# target to generate assembly for a file
+src/StockCacheManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockCacheManager.cpp.s
+.PHONY : src/StockCacheManager.cpp.s
+
 src/StockDataProvider.o: src/StockDataProvider.cpp.o
 .PHONY : src/StockDataProvider.o
 
@@ -359,6 +479,54 @@ src/StockDataProvider.s: src/StockDataProvider.cpp.s
 src/StockDataProvider.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockDataProvider.cpp.s
 .PHONY : src/StockDataProvider.cpp.s
+
+src/StockGroupManager.o: src/StockGroupManager.cpp.o
+.PHONY : src/StockGroupManager.o
+
+# target to build an object file
+src/StockGroupManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockGroupManager.cpp.o
+.PHONY : src/StockGroupManager.cpp.o
+
+src/StockGroupManager.i: src/StockGroupManager.cpp.i
+.PHONY : src/StockGroupManager.i
+
+# target to preprocess a source file
+src/StockGroupManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockGroupManager.cpp.i
+.PHONY : src/StockGroupManager.cpp.i
+
+src/StockGroupManager.s: src/StockGroupManager.cpp.s
+.PHONY : src/StockGroupManager.s
+
+# target to generate assembly for a file
+src/StockGroupManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockGroupManager.cpp.s
+.PHONY : src/StockGroupManager.cpp.s
+
+src/TableManager.o: src/TableManager.cpp.o
+.PHONY : src/TableManager.o
+
+# target to build an object file
+src/TableManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TableManager.cpp.o
+.PHONY : src/TableManager.cpp.o
+
+src/TableManager.i: src/TableManager.cpp.i
+.PHONY : src/TableManager.i
+
+# target to preprocess a source file
+src/TableManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TableManager.cpp.i
+.PHONY : src/TableManager.cpp.i
+
+src/TableManager.s: src/TableManager.cpp.s
+.PHONY : src/TableManager.s
+
+# target to generate assembly for a file
+src/TableManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TableManager.cpp.s
+.PHONY : src/TableManager.cpp.s
 
 src/TwelveDataProvider.o: src/TwelveDataProvider.cpp.o
 .PHONY : src/TwelveDataProvider.o
@@ -423,12 +591,24 @@ help:
 	@echo "... StockChart_autogen/mocs_compilation.o"
 	@echo "... StockChart_autogen/mocs_compilation.i"
 	@echo "... StockChart_autogen/mocs_compilation.s"
-	@echo "... build_exe/.qt/rcc/qrc_app_resources.o"
-	@echo "... build_exe/.qt/rcc/qrc_app_resources.i"
-	@echo "... build_exe/.qt/rcc/qrc_app_resources.s"
+	@echo "... build_mac_exe/.qt/rcc/qrc_app_resources.o"
+	@echo "... build_mac_exe/.qt/rcc/qrc_app_resources.i"
+	@echo "... build_mac_exe/.qt/rcc/qrc_app_resources.s"
 	@echo "... src/AlphaVantageProvider.o"
 	@echo "... src/AlphaVantageProvider.i"
 	@echo "... src/AlphaVantageProvider.s"
+	@echo "... src/ApiCallTracker.o"
+	@echo "... src/ApiCallTracker.i"
+	@echo "... src/ApiCallTracker.s"
+	@echo "... src/ChartManager.o"
+	@echo "... src/ChartManager.i"
+	@echo "... src/ChartManager.s"
+	@echo "... src/CrashHandler.o"
+	@echo "... src/CrashHandler.i"
+	@echo "... src/CrashHandler.s"
+	@echo "... src/CsvPorter.o"
+	@echo "... src/CsvPorter.i"
+	@echo "... src/CsvPorter.s"
 	@echo "... src/FinnhubProvider.o"
 	@echo "... src/FinnhubProvider.i"
 	@echo "... src/FinnhubProvider.s"
@@ -441,9 +621,18 @@ help:
 	@echo "... src/SettingsDialog.o"
 	@echo "... src/SettingsDialog.i"
 	@echo "... src/SettingsDialog.s"
+	@echo "... src/StockCacheManager.o"
+	@echo "... src/StockCacheManager.i"
+	@echo "... src/StockCacheManager.s"
 	@echo "... src/StockDataProvider.o"
 	@echo "... src/StockDataProvider.i"
 	@echo "... src/StockDataProvider.s"
+	@echo "... src/StockGroupManager.o"
+	@echo "... src/StockGroupManager.i"
+	@echo "... src/StockGroupManager.s"
+	@echo "... src/TableManager.o"
+	@echo "... src/TableManager.i"
+	@echo "... src/TableManager.s"
 	@echo "... src/TwelveDataProvider.o"
 	@echo "... src/TwelveDataProvider.i"
 	@echo "... src/TwelveDataProvider.s"

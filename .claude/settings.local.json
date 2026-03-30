@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF -DCMAKE_BUILD_TYPE=Debug)",
+      "Bash(cmake:*)"
+    ]
+  }
+}

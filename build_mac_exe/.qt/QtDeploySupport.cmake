@@ -35,7 +35,7 @@ set(__QT_DEPLOY_SYSTEM_NAME "Darwin")
 set(__QT_DEPLOY_SHARED_LIBRARY_SUFFIX ".dylib")
 set(__QT_DEPLOY_IS_SHARED_LIBS_BUILD "ON")
 set(__QT_DEPLOY_TOOL "/opt/homebrew/opt/qt/bin/macdeployqt")
-set(__QT_DEPLOY_IMPL_DIR "/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/.qt")
+set(__QT_DEPLOY_IMPL_DIR "/Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/.qt")
 set(__QT_DEPLOY_VERBOSE "")
 set(__QT_CMAKE_EXPORT_NAMESPACE "Qt6")
 set(__QT_LIBINFIX "")
@@ -60,7 +60,7 @@ set(__QT_DEPLOY_QT_DEBUG_POSTFIX "")
 
 # Define the CMake commands to be made available during deployment.
 set(__qt_deploy_support_files
-    "/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/.qt/QtDeployTargets.cmake"
+    "/Users/dennislang/opt/projects/qt-projects/stocks/build_mac_exe/.qt/QtDeployTargets.cmake"
     "/opt/homebrew/Cellar/qtbase/6.11.0/lib/cmake/Qt6Core/Qt6CoreDeploySupport.cmake"
 )
 foreach(__qt_deploy_support_file IN LISTS __qt_deploy_support_files)
