@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="bg_graph.jpg">/Users/dennislang/opt/projects/qt-projects/stocks/bg_graph.jpg</file>
+  </qresource>
+</RCC>
+

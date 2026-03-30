@@ -1,6 +1,0 @@
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/StockChart.dir
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/StockChart_other_files.dir
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/edit_cache.dir
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/rebuild_cache.dir
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/StockChart_autogen_timestamp_deps.dir
-/Users/dennislang/opt/projects/qt-projects/stocks/build_exe/CMakeFiles/StockChart_autogen.dir

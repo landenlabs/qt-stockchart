@@ -1,4 +1,0 @@
-# Hashes of file build rules.
-d86688b50893d980477d2d6c97b2dcda .qt/rcc/qrc_app_resources.cpp
-d598c0aeb49adb97434c16ba9c78b087 CMakeFiles/StockChart_autogen
-a02436155158db044584540ffcbcef6c StockChart_autogen/timestamp
