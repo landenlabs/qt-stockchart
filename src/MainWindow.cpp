@@ -24,6 +24,7 @@
 #include <QAction>
 #include <QSettings>
 #include <QInputDialog>
+#include <QDataStream>
 #include <QMessageBox>
 #include <QHeaderView>
 #include <QModelIndex>
@@ -731,6 +732,9 @@ void MainWindow::addStockToGroup(QTreeWidgetItem *groupItem, const QString &symb
     if (m_cache.contains(symbol) && !m_cache[symbol].isEmpty()) {
         const double latest = m_cache[symbol].last().price;
         item->setText(3, QString("$%1").arg(latest, 0, 'f', 2));
+        const QColor cachedBg(230, 245, 230); // light green
+        item->setBackground(2, QBrush(cachedBg));
+        item->setBackground(3, QBrush(cachedBg));
     }
     item->setData(4, PurPriceRole, purPrice);
     if (purPrice > 0) item->setText(4, QString::number(purPrice, 'f', 2));
@@ -1287,6 +1291,7 @@ void MainWindow::loadSettings()
 
     loadDailyCallCounts();
     loadSymbolTypeCache();
+    loadCache();
     loadTableSettings();
 
     if (s.contains("mainSplitterState")) {
@@ -1302,6 +1307,7 @@ void MainWindow::saveSettings()
     QSettings s("StockChart", "StockChart");
     s.setValue("activeProvider", m_activeProviderId);
     s.setValue("mainSplitterState", m_splitter->saveState());
+    saveCache();
     for (StockDataProvider *p : m_providers) {
         s.beginGroup(p->id());
         for (const auto &field : p->credentialFields())
@@ -1437,19 +1443,19 @@ QIcon MainWindow::makeTypeIcon(SymbolType type)
     default:                     return QIcon();
     }
 
-    QPixmap pm(14, 14);
+    QPixmap pm(24, 14); // Wider pixmap for centering/padding
     pm.fill(Qt::transparent);
     QPainter p(&pm);
     p.setRenderHint(QPainter::Antialiasing);
     p.setBrush(bg);
     p.setPen(Qt::NoPen);
-    p.drawRoundedRect(0, 0, 14, 14, 3, 3);
+    p.drawRoundedRect(5, 0, 14, 14, 3, 3); // Centered horizontally
     p.setPen(Qt::white);
     QFont f;
     f.setPixelSize(9);
     f.setBold(true);
     p.setFont(f);
-    p.drawText(QRect(0, 0, 14, 14), Qt::AlignCenter, letter);
+    p.drawText(QRect(5, 0, 14, 14), Qt::AlignCenter, letter);
     return QIcon(pm);
 }
 
@@ -1463,7 +1469,7 @@ QIcon MainWindow::makeStarIcon(int index)
     if (index <= 0) return QIcon();
     static const QColor colors[] = { Qt::transparent, QColor("#FFD700"), QColor("#448AFF"),
                                      QColor("#4CAF50"), QColor("#F44336"), QColor("#9C27B0") };
-    QPixmap pm(16, 16);
+    QPixmap pm(24, 16); // Wider pixmap for centering/padding
     pm.fill(Qt::transparent);
     QPainter p(&pm);
     p.setRenderHint(QPainter::Antialiasing);
@@ -1471,7 +1477,7 @@ QIcon MainWindow::makeStarIcon(int index)
     p.setPen(QPen(p.brush().color().darker(), 1));
 
     static const QPointF points[] = {
-        {8, 1}, {10, 6}, {15, 6}, {11, 9}, {13, 15}, {8, 12}, {3, 15}, {5, 9}, {1, 6}, {6, 6}
+        {12, 1}, {14, 6}, {19, 6}, {15, 9}, {17, 15}, {12, 12}, {7, 15}, {9, 9}, {5, 6}, {10, 6}
     };
     p.drawPolygon(points, 10);
     return QIcon(pm);
@@ -1573,6 +1579,46 @@ void MainWindow::saveSymbolType(const QString &symbol, SymbolType type)
     QSettings s("StockChart", "StockChart");
     s.beginGroup("symbolTypes");
     s.setValue(symbol, static_cast<int>(type));
+    s.endGroup();
+}
+
+void MainWindow::saveCache()
+{
+    QSettings s("StockChart", "StockChart");
+    s.beginGroup("historyCache");
+    for (auto it = m_cache.cbegin(); it != m_cache.cend(); ++it) {
+        QByteArray data;
+        QDataStream out(&data, QIODevice::WriteOnly);
+        out << (qint32)it.value().size();
+        for (const auto &pt : it.value()) {
+            out << pt.timestamp << pt.price;
+        }
+        s.setValue(it.key(), data);
+    }
+    s.endGroup();
+}
+
+void MainWindow::loadCache()
+{
+    QSettings s("StockChart", "StockChart");
+    s.beginGroup("historyCache");
+    for (const QString &sym : s.childKeys()) {
+        QByteArray data = s.value(sym).toByteArray();
+        QDataStream in(&data, QIODevice::ReadOnly);
+        qint32 size;
+        in >> size;
+        QVector<StockDataPoint> points;
+        points.reserve(size);
+        for (int i = 0; i < size; ++i) {
+            QDateTime dt;
+            double p;
+            in >> dt >> p;
+            if (!dt.isNull()) {
+                points.append({dt, p});
+            }
+        }
+        if (!points.isEmpty()) m_cache[sym] = points;
+    }
     s.endGroup();
 }
 

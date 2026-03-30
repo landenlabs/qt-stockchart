@@ -68,6 +68,8 @@ private:
     StockDataProvider *activeProvider() const;
     void loadSettings();
     void saveSettings();
+    void loadCache();
+    void saveCache();
     void closeEvent(QCloseEvent *event) override;
     QStringList selectedSymbols() const;
 
