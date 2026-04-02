@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsTextItem>
 #include <QPixmap>
 #include "StockCacheManager.h"
 
@@ -47,6 +48,7 @@ signals:
 private:
     void onChartClicked(const QPointF &chartPos);
     void updateZeroLine();
+    void updateMinMaxLines();
 
     QChart            *m_chart;
     QChartView        *m_chartView;
@@ -55,10 +57,21 @@ private:
 
     QGraphicsLineItem   *m_crosshairLine = nullptr;
     QGraphicsLineItem   *m_zeroLine      = nullptr;
+    QGraphicsLineItem   *m_minLine       = nullptr;
+    QGraphicsLineItem   *m_maxLine       = nullptr;
+    QGraphicsTextItem   *m_minLabel      = nullptr;
+    QGraphicsTextItem   *m_maxLabel      = nullptr;
     QGraphicsPixmapItem *m_bgImageItem   = nullptr;
     QPixmap              m_bgPixmap;
 
     int    m_chartRangeDays = 0;
     qint64 m_clickedMsecs   = -1;
     QDate  m_clickedDate;
+
+    // Single-stock extremes for min/max reference lines
+    bool   m_isSingleStock = false;
+    double m_minPct        = 0.0;
+    double m_maxPct        = 0.0;
+    double m_minPrice      = 0.0;
+    double m_maxPrice      = 0.0;
 };

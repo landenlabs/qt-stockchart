@@ -7,6 +7,7 @@
 #include <QPen>
 #include <QTimeZone>
 #include <QDateTime>
+#include <QLinearGradient>
 #include <limits>
 #include <cmath>
 
@@ -41,6 +42,7 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
     if (isUpdating) return;
     isUpdating = true;
 
+    m_isSingleStock = false;
     m_chart->removeAllSeries();
     for (QAbstractAxis *ax : m_chart->axes()) m_chart->removeAxis(ax);
 
@@ -88,6 +90,11 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
         }
         if (std::isnan(basePrice) || basePrice == 0.0) continue;
 
+        double singleMinPct   = std::numeric_limits<double>::max();
+        double singleMaxPct   = std::numeric_limits<double>::lowest();
+        double singleMinPrice = 0.0;
+        double singleMaxPrice = 0.0;
+
         QVector<QPair<qint64, double>> pts;
         for (const StockDataPoint &pt : data) {
             if (rangeStart.isValid() && pt.timestamp < rangeStart) continue;
@@ -95,48 +102,130 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
             pts.append({pt.timestamp.toMSecsSinceEpoch(), pct});
             minPct = std::min(minPct, pct);
             maxPct = std::max(maxPct, pct);
+            if (singleStock) {
+                if (pct < singleMinPct) { singleMinPct = pct; singleMinPrice = pt.price; }
+                if (pct > singleMaxPct) { singleMaxPct = pct; singleMaxPrice = pt.price; }
+            }
             if (minTime.isNull() || pt.timestamp < minTime) minTime = pt.timestamp;
             if (maxTime.isNull() || pt.timestamp > maxTime) maxTime = pt.timestamp;
         }
         if (pts.isEmpty()) continue;
 
         if (singleStock) {
-            auto *upperPos     = new QLineSeries();
-            auto *zeroLine     = new QLineSeries();
-            auto *lowerNeg     = new QLineSeries();
-            auto *mainLine     = new QLineSeries();
-            auto *zeroLineGreen = new QLineSeries();
-            mainLine->setName(sym);
-
-            for (const auto &[msecs, pct] : pts) {
-                upperPos->append(msecs, qMax(0.0, pct));
-                zeroLine->append(msecs, 0.0);
-                lowerNeg->append(msecs, qMin(0.0, pct));
-                mainLine->append(msecs, pct);
-                zeroLineGreen->append(msecs, 0.0);
+            // ── Build augmented point list with interpolated zero crossings ──
+            // Inserting exact crossing points ensures the fill polygons meet cleanly
+            // at zero rather than having a diagonal wedge across the boundary.
+            QVector<QPair<qint64, double>> augPts;
+            augPts.reserve(pts.size() * 2);
+            for (int i = 0; i < pts.size(); ++i) {
+                if (i > 0) {
+                    const auto &[prevMs, prevPct] = pts[i - 1];
+                    const auto &[curMs,  curPct]  = pts[i];
+                    if (prevPct != 0.0 && curPct != 0.0 && ((prevPct > 0) != (curPct > 0))) {
+                        double t       = prevPct / (prevPct - curPct);
+                        qint64 crossMs = prevMs + static_cast<qint64>(t * static_cast<double>(curMs - prevMs));
+                        augPts.append({crossMs, 0.0});
+                    }
+                }
+                augPts.append(pts[i]);
             }
 
-            auto *greenArea = new QAreaSeries(upperPos, zeroLineGreen);
-            greenArea->setBrush(QColor(56, 142, 60, 130));
+            // ── Area fill series ──
+            auto *upperPos    = new QLineSeries();
+            auto *zeroLinePos = new QLineSeries();
+            auto *lowerNeg    = new QLineSeries();
+            auto *zeroLineNeg = new QLineSeries();
+            for (const auto &[ms, pct] : augPts) {
+                upperPos->append(ms,    qMax(0.0, pct));
+                zeroLinePos->append(ms, 0.0);
+                lowerNeg->append(ms,    qMin(0.0, pct));
+                zeroLineNeg->append(ms, 0.0);
+            }
+
+            // Green gradient: 20% alpha at top (max value) → 10% alpha at bottom (zero)
+            QLinearGradient greenGrad(0, 0, 0, 1);
+            greenGrad.setCoordinateMode(QGradient::ObjectBoundingMode);
+            greenGrad.setColorAt(0.0, QColor(56, 142, 60, 51));  // top = max value = 20%
+            greenGrad.setColorAt(1.0, QColor(56, 142, 60, 26));  // bottom = zero line = 10%
+            auto *greenArea = new QAreaSeries(upperPos, zeroLinePos);
+            greenArea->setBrush(QBrush(greenGrad));
             greenArea->setPen(QPen(Qt::transparent));
 
-            auto *redArea = new QAreaSeries(zeroLine, lowerNeg);
-            redArea->setBrush(QColor(198, 40, 40, 130));
+            // Red gradient: 10% alpha at top (zero) → 20% alpha at bottom (min value)
+            QLinearGradient redGrad(0, 0, 0, 1);
+            redGrad.setCoordinateMode(QGradient::ObjectBoundingMode);
+            redGrad.setColorAt(0.0, QColor(198, 40, 40, 26));    // top = zero line = 10%
+            redGrad.setColorAt(1.0, QColor(198, 40, 40, 51));    // bottom = min value = 20%
+            auto *redArea = new QAreaSeries(zeroLineNeg, lowerNeg);
+            redArea->setBrush(QBrush(redGrad));
             redArea->setPen(QPen(Qt::transparent));
-
-            QPen linePen(QColor(40, 40, 40));
-            linePen.setWidthF(1.5);
-            mainLine->setPen(linePen);
 
             m_chart->addSeries(greenArea);
             m_chart->addSeries(redArea);
-            m_chart->addSeries(mainLine);
             greenArea->attachAxis(axisX); greenArea->attachAxis(axisY);
             redArea->attachAxis(axisX);   redArea->attachAxis(axisY);
-            mainLine->attachAxis(axisX);  mainLine->attachAxis(axisY);
-
             for (QLegendMarker *mk : m_chart->legend()->markers(greenArea)) mk->setVisible(false);
             for (QLegendMarker *mk : m_chart->legend()->markers(redArea))   mk->setVisible(false);
+
+            // ── Colored line segments: green where positive, red where negative ──
+            // Each zero crossing (inserted in augPts) starts a new segment, shared
+            // as the last point of the ending segment and first of the next.
+            struct ColorSeg {
+                bool positive = true;
+                QVector<QPair<qint64, double>> points;
+            };
+            QVector<ColorSeg> colorSegs;
+            {
+                ColorSeg cur;
+                bool hasSign = false;
+                for (int i = 0; i < augPts.size(); ++i) {
+                    auto [ms, pct] = augPts[i];
+                    if (!hasSign) {
+                        if (pct != 0.0) { cur.positive = (pct > 0); hasSign = true; }
+                        cur.points.append({ms, pct});
+                        continue;
+                    }
+                    // At an interpolated zero crossing: end current segment here,
+                    // start new one from this point if the next point changes sign.
+                    if (pct == 0.0 && i + 1 < augPts.size()) {
+                        bool nextPos = (augPts[i + 1].second >= 0);
+                        if (nextPos != cur.positive) {
+                            cur.points.append({ms, pct});
+                            colorSegs.append(cur);
+                            cur = ColorSeg();
+                            cur.positive = nextPos;
+                            cur.points.append({ms, pct});
+                            continue;
+                        }
+                    }
+                    cur.points.append({ms, pct});
+                }
+                if (!cur.points.isEmpty()) colorSegs.append(cur);
+            }
+
+            for (int si = 0; si < colorSegs.size(); ++si) {
+                const auto &seg = colorSegs[si];
+                auto *segLine = new QLineSeries();
+                QPen segPen(seg.positive ? QColor(56, 142, 60) : QColor(198, 40, 40));
+                segPen.setWidthF(1.5);
+                segLine->setPen(segPen);
+                if (si == 0) segLine->setName(sym);  // first segment shows in legend
+                for (auto [ms, p] : seg.points) segLine->append(ms, p);
+                m_chart->addSeries(segLine);
+                segLine->attachAxis(axisX);
+                segLine->attachAxis(axisY);
+                if (si > 0) {
+                    for (QLegendMarker *mk : m_chart->legend()->markers(segLine))
+                        mk->setVisible(false);
+                }
+            }
+
+            m_isSingleStock = true;
+            m_minPct        = singleMinPct;
+            m_maxPct        = singleMaxPct;
+            m_minPrice      = singleMinPrice;
+            m_maxPrice      = singleMaxPrice;
+
         } else {
             auto *series = new QLineSeries();
             series->setName(sym);
@@ -240,9 +329,83 @@ void ChartManager::updateZeroLine()
     m_zeroLine->setVisible(true);
 }
 
+void ChartManager::updateMinMaxLines()
+{
+    // Lazy-init graphics items
+    if (!m_minLine) {
+        m_minLine = new QGraphicsLineItem(m_chart);
+        m_minLine->setPen(QPen(QColor(198, 40, 40), 1, Qt::DotLine));
+        m_minLine->setZValue(2);
+        m_maxLine = new QGraphicsLineItem(m_chart);
+        m_maxLine->setPen(QPen(QColor(56, 142, 60), 1, Qt::DotLine));
+        m_maxLine->setZValue(2);
+    }
+    if (!m_minLabel) {
+        QFont f;
+        f.setPointSizeF(12.8);
+        m_minLabel = new QGraphicsTextItem(m_chart);
+        m_minLabel->setFont(f);
+        m_minLabel->setDefaultTextColor(QColor(80, 80, 80));
+        m_minLabel->setZValue(3);
+        m_maxLabel = new QGraphicsTextItem(m_chart);
+        m_maxLabel->setFont(f);
+        m_maxLabel->setDefaultTextColor(QColor(80, 80, 80));
+        m_maxLabel->setZValue(3);
+    }
+
+    if (!m_isSingleStock) {
+        m_minLine->setVisible(false);
+        m_maxLine->setVisible(false);
+        m_minLabel->setVisible(false);
+        m_maxLabel->setVisible(false);
+        return;
+    }
+
+    const auto vertAxes = m_chart->axes(Qt::Vertical);
+    if (vertAxes.isEmpty()) {
+        m_minLine->setVisible(false); m_maxLine->setVisible(false);
+        m_minLabel->setVisible(false); m_maxLabel->setVisible(false);
+        return;
+    }
+    auto *axisY = qobject_cast<QValueAxis*>(vertAxes.first());
+    if (!axisY) return;
+
+    const QRectF plotRect = m_chart->plotArea();
+
+    auto drawLine = [&](QGraphicsLineItem *line, QGraphicsTextItem *label,
+                        double pct, double price, bool isMin) {
+        if (pct == 0.0 || pct < axisY->min() || pct > axisY->max()) {
+            line->setVisible(false);
+            label->setVisible(false);
+            return;
+        }
+        const QPointF pt = m_chart->mapToPosition(QPointF(0, pct));
+        line->setLine(plotRect.left(), pt.y(), plotRect.right(), pt.y());
+        line->setVisible(true);
+
+        const QString sign = (pct >= 0.0) ? "+" : "";
+        const QString text = QString("%1%2%  $%3")
+                                 .arg(sign)
+                                 .arg(pct,   0, 'f', 1)
+                                 .arg(price, 0, 'f', 2);
+        label->setPlainText(text);
+        const double lw = label->boundingRect().width();
+        const double lh = label->boundingRect().height();
+        const double lx = plotRect.left() + (plotRect.width() - lw) / 2.0;
+        // Min line is at the bottom: label goes above it. Max line at top: label below.
+        const double ly = isMin ? (pt.y() - lh - 2) : (pt.y() + 2);
+        label->setPos(lx, ly);
+        label->setVisible(true);
+    };
+
+    drawLine(m_minLine, m_minLabel, m_minPct, m_minPrice, /*isMin=*/true);
+    drawLine(m_maxLine, m_maxLabel, m_maxPct, m_maxPrice, /*isMin=*/false);
+}
+
 void ChartManager::updateCrosshair()
 {
     updateZeroLine();
+    updateMinMaxLines();
 
     if (m_clickedMsecs < 0 || m_chart->series().isEmpty()) {
         if (m_crosshairLine) m_crosshairLine->setVisible(false);
