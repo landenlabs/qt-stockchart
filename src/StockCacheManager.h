@@ -3,6 +3,7 @@
 #include <QVector>
 #include <QDate>
 #include <QDateTime>
+#include <QTimeZone>
 #include <QString>
 #include "StockDataProvider.h"
 
@@ -16,20 +17,15 @@ public:
     void loadSymbolTypeCache();
     void saveSymbolType(const QString &symbol, SymbolType type);
 
-    void loadLoadTimes();
-    void saveLoadTimes();
+    // Seconds since the newest data-point timestamp for sym, or -1 if no data.
+    qint64 dataSecs(const QString &sym) const;
 
-    // Records the current datetime as the last load time for symbol.
-    void setLoadTime(const QString &sym) { m_loadTimes[sym] = QDateTime::currentDateTime(); }
+    // True if cached data is recent enough that a new API call is not needed.
+    // Uses NYSE market hours: open Mon–Fri 9:30am–4:00pm ET → 15-min threshold;
+    // market closed → 17-hour threshold.
+    bool isDataFresh(const QString &sym) const;
 
-    // Returns age of last load in seconds, or -1 if no load time recorded.
-    qint64 loadAgeSecs(const QString &sym) const {
-        if (!m_loadTimes.contains(sym)) return -1;
-        qint64 s = m_loadTimes[sym].secsTo(QDateTime::currentDateTime());
-        return s >= 0 ? s : 0;
-    }
-
-    // Returns a human-readable age string ("12d", "3h", "10m") or empty if unknown.
+    // Human-readable age of the newest data point ("12d", "3h", "10m").
     QString ageString(const QString &sym) const;
 
     // Returns the last closing price on or before `target` in ascending-sorted data.
@@ -45,5 +41,4 @@ public:
 private:
     QMap<QString, QVector<StockDataPoint>> m_cache;
     QMap<QString, SymbolType>              m_symbolTypes;
-    QMap<QString, QDateTime>               m_loadTimes;
 };

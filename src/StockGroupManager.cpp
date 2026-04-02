@@ -31,7 +31,7 @@ static const QStringList kDefaultStocks = {
 static QBrush ageBgBrush(const StockCacheManager *cache, const QString &sym)
 {
     if (!cache->cache().contains(sym) || cache->cache()[sym].isEmpty()) return QBrush();
-    const qint64 secs = cache->loadAgeSecs(sym);
+    const qint64 secs = cache->dataSecs(sym);
     if (secs < 0 || secs >= 7 * 86400) return QBrush();
     if (secs >= 86400) return QBrush(QColor(255, 255, 210));  // light yellow
     return QBrush(QColor(230, 245, 230));                      // light green

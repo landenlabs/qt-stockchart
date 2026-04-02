@@ -1,6 +1,7 @@
 #include "StockCacheManager.h"
 #include <QSettings>
 #include <QDataStream>
+#include <QTime>
 #include <limits>
 #include <cmath>
 
@@ -71,32 +72,33 @@ void StockCacheManager::saveSymbolType(const QString &symbol, SymbolType type)
     s.endGroup();
 }
 
-void StockCacheManager::saveLoadTimes()
+qint64 StockCacheManager::dataSecs(const QString &sym) const
 {
-    QSettings s("StockChart", "StockChart");
-    s.beginGroup("loadTimes");
-    s.remove("");
-    for (auto it = m_loadTimes.cbegin(); it != m_loadTimes.cend(); ++it)
-        s.setValue(it.key(), it.value().toString(Qt::ISODate));
-    s.endGroup();
+    if (!m_cache.contains(sym) || m_cache[sym].isEmpty()) return -1;
+    qint64 s = m_cache[sym].last().timestamp.secsTo(QDateTime::currentDateTime());
+    return s >= 0 ? s : 0;
 }
 
-void StockCacheManager::loadLoadTimes()
+bool StockCacheManager::isDataFresh(const QString &sym) const
 {
-    QSettings s("StockChart", "StockChart");
-    s.beginGroup("loadTimes");
-    for (const QString &sym : s.childKeys()) {
-        QDateTime dt = QDateTime::fromString(s.value(sym).toString(), Qt::ISODate);
-        if (dt.isValid()) m_loadTimes[sym] = dt;
-    }
-    s.endGroup();
+    const qint64 secs = dataSecs(sym);
+    if (secs < 0) return false;
+
+    // Determine whether NYSE is currently open: Mon–Fri 9:30am–4:00pm US/Eastern
+    const QDateTime nowET = QDateTime::currentDateTime().toTimeZone(QTimeZone("America/New_York"));
+    const int  dow        = nowET.date().dayOfWeek(); // 1=Mon … 7=Sun
+    const QTime t         = nowET.time();
+    const bool marketOpen = (dow >= 1 && dow <= 5)
+                            && t >= QTime(9, 30)
+                            && t < QTime(16, 0);
+
+    return secs <= (marketOpen ? 15 * 60 : 17 * 3600);
 }
 
 QString StockCacheManager::ageString(const QString &sym) const
 {
-    if (!m_loadTimes.contains(sym)) return {};
-    qint64 secs = m_loadTimes[sym].secsTo(QDateTime::currentDateTime());
-    if (secs < 0) secs = 0;
+    const qint64 secs = dataSecs(sym);
+    if (secs < 0) return {};
     const qint64 days = secs / 86400;
     const qint64 hrs  = secs / 3600;
     const qint64 mins = secs / 60;

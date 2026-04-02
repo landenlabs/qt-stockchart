@@ -54,23 +54,32 @@ SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
         form->setSpacing(8);
 
         QMap<QString, QLineEdit*> fieldMap;
-        for (const auto &field : p->credentialFields()) {
-            auto *edit = new QLineEdit(page);
-            edit->setText(p->credentials().value(field.first));
-            edit->setEchoMode(QLineEdit::Password);
-            edit->setPlaceholderText("Paste your " + field.second.toLower() + " here");
-            edit->setMinimumWidth(280);
-            form->addRow(field.second + ":", edit);
-            fieldMap[field.first] = edit;
-        }
+        if (p->credentialFields().isEmpty()) {
+            auto *note = new QLabel(
+                "<i>No API key required — works out of the box.</i><br>"
+                "<small>Note: this is an unofficial API and may break without warning.</small>",
+                page);
+            note->setWordWrap(true);
+            form->addRow(note);
+        } else {
+            for (const auto &field : p->credentialFields()) {
+                auto *edit = new QLineEdit(page);
+                edit->setText(p->credentials().value(field.first));
+                edit->setEchoMode(QLineEdit::Password);
+                edit->setPlaceholderText("Paste your " + field.second.toLower() + " here");
+                edit->setMinimumWidth(280);
+                form->addRow(field.second + ":", edit);
+                fieldMap[field.first] = edit;
+            }
 
-        // Sign-up link
-        QString url = signupUrl(p->id());
-        if (!url.isEmpty()) {
-            auto *link = new QLabel(
-                QString("<a href='%1'>Get a free key at %2</a>").arg(url, url), page);
-            link->setOpenExternalLinks(true);
-            form->addRow(link);
+            // Sign-up link
+            QString url = signupUrl(p->id());
+            if (!url.isEmpty()) {
+                auto *link = new QLabel(
+                    QString("<a href='%1'>Get a free key at %2</a>").arg(url, url), page);
+                link->setOpenExternalLinks(true);
+                form->addRow(link);
+            }
         }
 
         m_fields[p->id()] = fieldMap;

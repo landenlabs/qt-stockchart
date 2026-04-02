@@ -40,6 +40,9 @@ void PolygonProvider::fetchData(const QString &symbol, const QString &range)
 
     QNetworkRequest request{url};
     request.setRawHeader("User-Agent", "StockChart/1.0");
+    // Send key both ways — Polygon supports both; some API versions prefer the header.
+    request.setRawHeader("Authorization",
+        ("Bearer " + m_credentials.value("apiKey").trimmed()).toUtf8());
 
     QNetworkReply *reply = m_manager->get(request);
     m_pending[reply] = {symbol, range};
@@ -51,29 +54,47 @@ void PolygonProvider::onReplyFinished(QNetworkReply *reply)
     reply->deleteLater();
     auto [symbol, range] = m_pending.take(reply);
 
+    // Always read the body — Polygon puts useful diagnostic JSON in error responses too.
+    const QByteArray body = reply->readAll();
+
     if (reply->error() != QNetworkReply::NoError) {
-        emit errorOccurred(symbol, reply->errorString());
+        // Try to surface Polygon's own error text from the body.
+        const QJsonObject errObj = QJsonDocument::fromJson(body).object();
+        QString msg = errObj["error"].toString();
+        if (msg.isEmpty()) msg = errObj["message"].toString();
+        if (msg.isEmpty()) msg = reply->errorString();
+        emit errorOccurred(symbol, "Polygon.io: " + msg);
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+    QJsonDocument doc = QJsonDocument::fromJson(body);
     if (doc.isNull()) {
-        emit errorOccurred(symbol, "Polygon.io: failed to parse JSON");
+        emit errorOccurred(symbol, "Polygon.io: failed to parse JSON response");
         return;
     }
 
     QJsonObject root   = doc.object();
     QString     status = root["status"].toString();
 
-    // Free tier returns "DELAYED"; both are valid
+    // Free tier returns "DELAYED"; paid returns "OK". Anything else is an error.
     if (status != "OK" && status != "DELAYED") {
-        emit errorOccurred(symbol, "Polygon.io: " + root["error"].toString());
+        // Polygon uses "error" in some responses, "message" in others.
+        QString msg = root["error"].toString();
+        if (msg.isEmpty()) msg = root["message"].toString();
+        if (msg.isEmpty()) msg = "status=" + status;
+        emit errorOccurred(symbol, "Polygon.io: " + msg);
         return;
     }
 
     QJsonArray results = root["results"].toArray();
     if (results.isEmpty()) {
-        emit errorOccurred(symbol, "Polygon.io: no data returned for " + symbol);
+        // Include any extra context Polygon provides for empty result sets.
+        QString extra = root["message"].toString();
+        if (extra.isEmpty()) extra = root["error"].toString();
+        const QString detail = extra.isEmpty() ? QString() : " (" + extra + ")";
+        emit errorOccurred(symbol,
+            "Polygon.io: no data for " + symbol + detail
+            + " — verify symbol and subscription level");
         return;
     }
 

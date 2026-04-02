@@ -8,6 +8,7 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QInputDialog>
+#include <QLineEdit>
 #include <QHeaderView>
 #include <QTableWidgetItem>
 #include <limits>
@@ -43,6 +44,8 @@ void TableManager::loadSettings()
         m_periods.clear();
         for (const QVariant &v : vl) m_periods << v.toInt();
     }
+
+    emit periodsChanged(m_periods);
 
     m_showPercentChange = s.value("tableShowPercent", false).toBool();
     m_displayModeBtn->setChecked(m_showPercentChange);
@@ -146,13 +149,19 @@ void TableManager::configurePeriods()
 
     connect(addBtn, &QPushButton::clicked, &dlg, [&]() {
         bool ok;
-        int offset = QInputDialog::getInt(&dlg, "Add Period",
-            "Day offset (e.g. -30 for 30 days ago, 0 for today):",
-            -30, -3650, 0, 1, &ok);
-        if (!ok) return;
-        for (int i = 0; i < list->count(); ++i)
-            if (list->item(i)->text().toInt() == offset) return;
-        list->addItem(QString::number(offset));
+        const QString input = QInputDialog::getText(&dlg, "Add Period(s)",
+            "Day offset(s), comma-separated\n(e.g. -30, -60 for 30 and 60 days ago, 0 for today):",
+            QLineEdit::Normal, {}, &ok);
+        if (!ok || input.trimmed().isEmpty()) return;
+        for (const QString &part : input.split(',', Qt::SkipEmptyParts)) {
+            bool numOk;
+            const int offset = part.trimmed().toInt(&numOk);
+            if (!numOk) continue;
+            bool exists = false;
+            for (int i = 0; i < list->count(); ++i)
+                if (list->item(i)->text().toInt() == offset) { exists = true; break; }
+            if (!exists) list->addItem(QString::number(offset));
+        }
     });
 
     connect(remBtn, &QPushButton::clicked, &dlg, [&]() {
@@ -173,6 +182,7 @@ void TableManager::configurePeriods()
 
     if (newPeriods.isEmpty()) return;
     m_periods = newPeriods;
+    emit periodsChanged(m_periods);
     saveSettings();
     if (m_tableExpanded)
         refresh(m_lastSymbols, m_clickedDate);

@@ -33,6 +33,11 @@ public:
     void onToggle();
     void onSplitterMoved(); // call from MainWindow splitterMoved signal
 
+    const QList<int> &periods() const { return m_periods; }
+
+signals:
+    void periodsChanged(const QList<int> &periods);
+
 private:
     QTableWidget  *m_table;
     QSplitter     *m_vertSplitter;

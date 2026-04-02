@@ -48,13 +48,16 @@ private:
     void closeEvent(QCloseEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
 
+    void rebuildPeriodButtons(const QList<int> &periods);
+
     // ── Widgets ──────────────────────────────────────────────────────────────
     QSplitter     *m_splitter    = nullptr;
     QTreeWidget   *m_stockTree   = nullptr;
     QLabel        *m_statusLabel = nullptr;
-    QButtonGroup  *m_chartRangeBtnGroup = nullptr;
-    QComboBox     *m_yScaleCombo        = nullptr;
-    QActionGroup  *m_providerActionGroup = nullptr;
+    QWidget       *m_periodBtnsContainer  = nullptr;
+    QButtonGroup  *m_chartRangeBtnGroup   = nullptr;
+    QComboBox     *m_yScaleCombo          = nullptr;
+    QActionGroup  *m_providerActionGroup  = nullptr;
 
     // ── Helpers ───────────────────────────────────────────────────────────────
     StockCacheManager *m_cacheManager  = nullptr;

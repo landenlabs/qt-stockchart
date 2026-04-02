@@ -23,6 +23,7 @@ set(SOURCES
     src/FinnhubProvider.cpp
     src/PolygonProvider.cpp
     src/TwelveDataProvider.cpp
+    src/YahooFinanceProvider.cpp
     src/StockCacheManager.cpp
     src/StockGroupManager.cpp
     src/ApiCallTracker.cpp
@@ -40,6 +41,7 @@ set(HEADERS
     src/FinnhubProvider.h
     src/PolygonProvider.h
     src/TwelveDataProvider.h
+    src/YahooFinanceProvider.h
     src/StockCacheManager.h
     src/StockGroupManager.h
     src/ApiCallTracker.h

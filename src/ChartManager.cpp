@@ -261,9 +261,11 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
             axisY->setRange(minPct - pad, maxPct + pad);
         } else {
             double percent = 0.0;
-            if      (scaleIdx == 1) percent = 30.0;
+            if      (scaleIdx == 1) percent = 10.0;
             else if (scaleIdx == 2) percent = 20.0;
-            else if (scaleIdx == 3) percent = 10.0;
+            else if (scaleIdx == 3) percent = 30.0;
+            else if (scaleIdx == 4) percent = 40.0;
+            else if (scaleIdx == 5) percent = 50.0;
             axisY->setRange(-percent, percent);
         }
     }

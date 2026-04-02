@@ -4,6 +4,7 @@
 #include "FinnhubProvider.h"
 #include "PolygonProvider.h"
 #include "TwelveDataProvider.h"
+#include "YahooFinanceProvider.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -22,6 +23,9 @@
 #include <QCloseEvent>
 #include <QLinearGradient>
 #include <QStyleFactory>
+#include <QTimer>
+#include <QApplication>
+#include <QAbstractButton>
 
 // ── Construction ──────────────────────────────────────────────────────────────
 
@@ -32,7 +36,8 @@ MainWindow::MainWindow(QWidget *parent)
         new AlphaVantageProvider(this),
         new FinnhubProvider(this),
         new PolygonProvider(this),
-        new TwelveDataProvider(this)
+        new TwelveDataProvider(this),
+        new YahooFinanceProvider(this)
     };
 
     for (StockDataProvider *p : m_providers) {
@@ -105,6 +110,14 @@ void MainWindow::setupUI()
     // buttons connect to lambdas that call m_groupManager->selectedSymbols(), so
     // m_groupManager must exist before setCurrentIndex(2) fires currentIndexChanged.
     m_groupManager = new StockGroupManager(m_stockTree, m_cacheManager, this, this);
+
+    // Refresh the Age column every minute so displayed values stay current
+    auto *ageTimer = new QTimer(this);
+    connect(ageTimer, &QTimer::timeout, this, [this]() {
+        m_groupManager->refreshAllStockCacheVisuals();
+    });
+    ageTimer->start(60 * 1000);
+
     connect(addGroupBtn, &QPushButton::clicked, m_groupManager, &StockGroupManager::onAddGroupClicked);
     connect(m_stockTree, &QTreeWidget::customContextMenuRequested,
             m_groupManager, &StockGroupManager::onTreeContextMenu);
@@ -165,29 +178,21 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
 
     m_chartRangeBtnGroup = new QButtonGroup(this);
     m_chartRangeBtnGroup->setExclusive(true);
-    const QList<QPair<QString,int>> ranges = {
-        {"60d", 60}, {"30d", 30}, {"7d", 7}, {"Today", 0}
-    };
-    const QString rangeCheckedStyle =
-        "QToolButton { border: 1px solid transparent; border-radius: 3px; padding: 1px 4px; }"
-        "QToolButton:checked { background-color: palette(highlight); color: palette(highlighted-text); border-radius: 3px; }";
-    for (const auto &[label, days] : ranges) {
-        auto *btn = new QToolButton(toolbar);
-        btn->setText(label);
-        btn->setCheckable(true);
-        btn->setAutoRaise(false);
-        btn->setStyleSheet(rangeCheckedStyle);
-        m_chartRangeBtnGroup->addButton(btn, days);
-        tbLayout->addWidget(btn);
-    }
-    m_chartRangeBtnGroup->button(0)->setChecked(true);
+
+    m_periodBtnsContainer = new QWidget(toolbar);
+    auto *periodBtnsLayout = new QHBoxLayout(m_periodBtnsContainer);
+    periodBtnsLayout->setContentsMargins(0, 0, 0, 0);
+    periodBtnsLayout->setSpacing(2);
+    tbLayout->addWidget(m_periodBtnsContainer);
+
     connect(m_chartRangeBtnGroup, &QButtonGroup::idClicked, this, [this](int days) {
+        QSettings("StockChart", "StockChart").setValue("lastChartRangeDays", days);
         m_chartManager->setRangeDays(days);
         m_chartManager->updateChart(m_groupManager->selectedSymbols());
     });
 
     m_yScaleCombo = new QComboBox(toolbar);
-    m_yScaleCombo->addItems({ "Auto", "+/- 30%", "+/- 20%", "+/- 10%" });
+    m_yScaleCombo->addItems({ "Auto", "+/- 10%", "+/- 20%", "+/- 30%", "+/- 40%", "+/- 50%" });
     connect(m_yScaleCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int) {
         m_chartManager->updateChart(m_groupManager->selectedSymbols());
@@ -196,7 +201,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     tbLayout->addSpacing(10);
     tbLayout->addWidget(new QLabel("Y:"));
     tbLayout->addWidget(m_yScaleCombo);
-    m_chartRangeBtnGroup->button(60)->setChecked(true);
 
     tbLayout->addStretch();
 
@@ -263,6 +267,8 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     m_tableManager = new TableManager(stockTable, vertSplitter,
                                       tableToggleBtn, displayModeBtn,
                                       m_cacheManager, this, this);
+    connect(m_tableManager, &TableManager::periodsChanged,
+            this, &MainWindow::rebuildPeriodButtons);
     connect(tableToggleBtn, &QToolButton::clicked, m_tableManager, &TableManager::onToggle);
     connect(displayModeBtn, &QPushButton::toggled, m_tableManager, &TableManager::onToggleDisplayMode);
     connect(stockTable->horizontalHeader(), &QHeaderView::sectionClicked,
@@ -399,7 +405,7 @@ void MainWindow::onStockSelectionChanged()
 
     QStringList loading;
     for (const QString &sym : selected) {
-        if (!m_cacheManager->cache().contains(sym)) {
+        if (!m_cacheManager->isDataFresh(sym)) {
             m_apiTracker->incrementCallCount(p->id());
             m_apiTracker->updatePanel(m_activeProviderId);
             p->fetchData(sym, "3mo");
@@ -423,6 +429,7 @@ void MainWindow::onStockSelectionChanged()
 
 void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint> &data)
 {
+    if (data.isEmpty()) return;
     auto &existing = m_cacheManager->cache()[symbol];
     if (existing.isEmpty()) {
         existing = data;
@@ -437,8 +444,6 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
         for (auto it = merged.cbegin(); it != merged.cend(); ++it)
             existing.append({it.key(), it.value()});
     }
-    m_cacheManager->setLoadTime(symbol);
-
     m_groupManager->symbolErrors().remove(symbol);
     m_groupManager->updateTreeItemIcon(symbol);
 
@@ -464,10 +469,16 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
 
 void MainWindow::onError(const QString &symbol, const QString &message)
 {
+    QApplication::beep();
     m_statusLabel->setText("Error: " + message);
     if (!symbol.isEmpty()) {
         m_groupManager->symbolErrors().insert(symbol);
         m_groupManager->updateTreeItemIcon(symbol);
+    }
+    const QStringList selected = m_groupManager->selectedSymbols();
+    if (!selected.isEmpty()) {
+        m_chartManager->updateChart(selected);
+        m_tableManager->refresh(selected, m_chartManager->clickedDate());
     }
 }
 
@@ -477,6 +488,65 @@ void MainWindow::onSymbolTypeReady(const QString &symbol, SymbolType type)
     m_cacheManager->symbolTypes()[symbol] = type;
     m_cacheManager->saveSymbolType(symbol, type);
     m_groupManager->updateTreeItemIcon(symbol);
+}
+
+// ── Period buttons ────────────────────────────────────────────────────────────
+
+void MainWindow::rebuildPeriodButtons(const QList<int> &periods)
+{
+    // Remove and delete all existing buttons
+    for (QAbstractButton *btn : m_chartRangeBtnGroup->buttons()) {
+        m_chartRangeBtnGroup->removeButton(btn);
+        delete btn;
+    }
+
+    // Restore the previously selected range (default 60 days)
+    const int savedId = QSettings("StockChart", "StockChart")
+                            .value("lastChartRangeDays", 60).toInt();
+
+    auto periodLabel = [](int p) -> QString {
+        if (p == 0) return "Today";
+        const int d = qAbs(p);
+        if (d >= 365 && d % 365 == 0) return QString("%1y").arg(d / 365);
+        return QString("%1d").arg(d);
+    };
+
+    const QString btnStyle =
+        "QToolButton { border: 1px solid transparent; border-radius: 3px; padding: 1px 4px; }"
+        "QToolButton:checked { background-color: palette(highlight); "
+        "color: palette(highlighted-text); border-radius: 3px; }";
+
+    auto *layout = qobject_cast<QHBoxLayout *>(m_periodBtnsContainer->layout());
+
+    for (int p : periods) {
+        const int id = qAbs(p);
+        auto *btn = new QToolButton(m_periodBtnsContainer);
+        btn->setText(periodLabel(p));
+        btn->setCheckable(true);
+        btn->setAutoRaise(false);
+        btn->setStyleSheet(btnStyle);
+        m_chartRangeBtnGroup->addButton(btn, id);
+        layout->addWidget(btn);
+    }
+
+    // Select the button whose id is closest to the saved range
+    if (!m_chartRangeBtnGroup->buttons().isEmpty()) {
+        QAbstractButton *best = m_chartRangeBtnGroup->buttons().first();
+        int bestDiff = std::abs(m_chartRangeBtnGroup->id(best) - savedId);
+        for (QAbstractButton *btn : m_chartRangeBtnGroup->buttons()) {
+            const int diff = std::abs(m_chartRangeBtnGroup->id(btn) - savedId);
+            if (diff < bestDiff) { bestDiff = diff; best = btn; }
+        }
+        best->setChecked(true);
+    }
+
+    const int selectedId = m_chartRangeBtnGroup->checkedId();
+    if (selectedId >= 0 && m_chartManager) {
+        m_chartManager->setRangeDays(selectedId);
+        const QStringList sel = m_groupManager ? m_groupManager->selectedSymbols() : QStringList{};
+        if (!sel.isEmpty())
+            m_chartManager->updateChart(sel);
+    }
 }
 
 // ── Settings ──────────────────────────────────────────────────────────────────
@@ -493,10 +563,6 @@ void MainWindow::loadSettings()
         p->setCredentials(creds);
         s.endGroup();
     }
-
-    m_cacheManager->loadCache();
-    m_cacheManager->loadSymbolTypeCache();
-    m_cacheManager->loadLoadTimes();
 
     // Build the API info panel now that the left layout is complete.
     // We need to reach the left panel's layout — find it via the splitter.
@@ -520,7 +586,14 @@ void MainWindow::loadSettings()
     // Build CSV porter now that group manager is ready
     m_csvPorter = new CsvPorter(m_stockTree, m_groupManager, this);
 
+    // setActiveProvider clears m_cache and calls saveCache. saveCache only writes
+    // current m_cache entries to QSettings — it never deletes existing keys — so
+    // calling loadCache AFTER setActiveProvider re-populates m_cache from the
+    // still-intact QSettings data, preserving cached prices across sessions.
     setActiveProvider(s.value("activeProvider", m_providers.first()->id()).toString());
+    m_cacheManager->loadCache();
+    m_cacheManager->loadSymbolTypeCache();
+    m_groupManager->refreshAllStockCacheVisuals();
 }
 
 void MainWindow::saveSettings()
@@ -529,7 +602,6 @@ void MainWindow::saveSettings()
     s.setValue("activeProvider",     m_activeProviderId);
     s.setValue("mainSplitterState",  m_splitter->saveState());
     m_cacheManager->saveCache();
-    m_cacheManager->saveLoadTimes();
     for (StockDataProvider *p : m_providers) {
         s.beginGroup(p->id());
         for (const auto &field : p->credentialFields())
