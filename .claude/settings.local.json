@@ -4,7 +4,11 @@
       "Bash(cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF -DCMAKE_BUILD_TYPE=Debug)",
       "Bash(cmake:*)",
       "Bash(grep:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(pkg-config --modversion Qt6Charts)",
+      "Read(//usr/local/include/**)",
+      "Read(//opt/homebrew/include/QtCharts/**)",
+      "Read(//opt/homebrew/opt/qt/include/QtCharts/**)"
     ]
   }
 }

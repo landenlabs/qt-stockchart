@@ -54,6 +54,8 @@ private:
     void onChartClicked(const QPointF &chartPos);
     void updateZeroLine();
     void updateMinMaxLines();
+    void updateYAxisLabels();
+    void updateMinorTicks();
 
     QChart            *m_chart;
     QChartView        *m_chartView;
@@ -80,4 +82,10 @@ private:
     double m_maxPct        = 0.0;
     double m_minPrice      = 0.0;
     double m_maxPrice      = 0.0;
+
+    // Single-stock custom y-axis labels
+    bool   m_singleStock = false;
+    double m_basePrice   = 0.0;
+    QVector<QGraphicsTextItem*> m_yAxisLabels;
+    QGraphicsTextItem          *m_yAxisTitle = nullptr;
 };

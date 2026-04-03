@@ -42,8 +42,12 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
     if (isUpdating) return;
     isUpdating = true;
 
-    m_showMinMax = false;
+    m_showMinMax  = false;
+    m_singleStock = false;
+    m_basePrice   = 0.0;
     m_seriesColors.clear();
+    for (auto *item : m_yAxisLabels) delete item;
+    m_yAxisLabels.clear();
     // Stop any in-flight animations before removing series to prevent
     // XYAnimation from calling chart() on a deleted QAbstractSeries.
     m_chart->setAnimationOptions(QChart::NoAnimation);
@@ -64,13 +68,22 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
 
     if (m_bgImageItem) m_bgImageItem->setVisible(false);
 
+    const bool singleStock = (ready.size() == 1);
+
     auto *axisX = new QDateTimeAxis();
     axisX->setFormat("MMM dd");
     m_chart->addAxis(axisX, Qt::AlignBottom);
 
     auto *axisY = new QValueAxis();
-    axisY->setTitleText("% Change");
-    axisY->setLabelFormat("%.1f%%");
+    if (singleStock) {
+        axisY->setTitleText("");          // custom rotated title drawn in updateYAxisLabels
+        axisY->setLabelsVisible(false);   // custom tick labels drawn in updateYAxisLabels
+        m_chart->setMargins(QMargins(130, 20, 20, 20));
+    } else {
+        axisY->setTitleText("% Change");
+        axisY->setLabelFormat("%.1f%%");
+        m_chart->setMargins(QMargins(20, 20, 20, 20));
+    }
     m_chart->addAxis(axisY, Qt::AlignLeft);
 
     const QDateTime rangeStart = (m_chartRangeDays > 0)
@@ -80,8 +93,6 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
     double    minPct = std::numeric_limits<double>::max();
     double    maxPct = std::numeric_limits<double>::lowest();
     QDateTime minTime, maxTime;
-
-    const bool singleStock = (ready.size() == 1);
 
     for (const QString &sym : ready) {
         const auto &data = m_cache->cache()[sym];
@@ -229,6 +240,8 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
             }
 
             m_showMinMax = true;
+            m_singleStock   = true;
+            m_basePrice     = basePrice;
             m_minPct        = singleMinPct;
             m_maxPct        = singleMaxPct;
             m_minPrice      = singleMinPrice;
@@ -423,6 +436,8 @@ void ChartManager::updateMinMaxLines()
 void ChartManager::updateCrosshair()
 {
     updateZeroLine();
+    updateMinorTicks();
+    updateYAxisLabels();
     updateMinMaxLines();
 
     if (m_clickedMsecs < 0 || m_chart->series().isEmpty()) {
@@ -443,6 +458,103 @@ void ChartManager::updateCrosshair()
     QPointF pt       = m_chart->mapToPosition(QPointF(static_cast<double>(m_clickedMsecs), 0.0));
     m_crosshairLine->setLine(pt.x(), plotArea.top(), pt.x(), plotArea.bottom());
     m_crosshairLine->setVisible(true);
+}
+
+void ChartManager::updateYAxisLabels()
+{
+    for (auto *item : m_yAxisLabels) item->setVisible(false);
+    if (m_yAxisTitle) m_yAxisTitle->setVisible(false);
+
+    if (!m_singleStock || m_basePrice <= 0.0) return;
+
+    const auto vertAxes = m_chart->axes(Qt::Vertical);
+    if (vertAxes.isEmpty()) return;
+    auto *axisY = qobject_cast<QValueAxis*>(vertAxes.first());
+    if (!axisY) return;
+
+    const int    tickCount = axisY->tickCount();
+    const double minVal    = axisY->min();
+    const double maxVal    = axisY->max();
+    if (tickCount < 2) return;
+
+    const QRectF plotRect  = m_chart->plotArea();
+    const QFont  labelFont = axisY->labelsFont();
+
+    while (m_yAxisLabels.size() < tickCount) {
+        auto *lbl = new QGraphicsTextItem(m_chart);
+        lbl->setFont(labelFont);
+        lbl->setDefaultTextColor(QColor(80, 80, 80));
+        lbl->setZValue(5);
+        m_yAxisLabels.append(lbl);
+    }
+
+    for (int i = 0; i < tickCount; ++i) {
+        const double pct   = minVal + static_cast<double>(i) / (tickCount - 1) * (maxVal - minVal);
+        const double price = m_basePrice * (1.0 + pct / 100.0);
+        const QString sign = (pct >= 0.0) ? "+" : "";
+        const QString text = QString("$%1 %2%3%")
+            .arg(price, 0, 'f', 2)
+            .arg(sign)
+            .arg(pct, 0, 'f', 1);
+
+        auto *label = m_yAxisLabels[i];
+        label->setFont(labelFont);
+        label->setPlainText(text);
+
+        const QPointF pt = m_chart->mapToPosition(QPointF(0.0, pct));
+        const double  lh = label->boundingRect().height();
+        const double  lw = label->boundingRect().width();
+        // Right-align to just left of the plot area
+        label->setPos(plotRect.left() - lw - 5.0, pt.y() - lh / 2.0);
+        label->setVisible(true);
+    }
+
+    for (int i = tickCount; i < m_yAxisLabels.size(); ++i)
+        m_yAxisLabels[i]->setVisible(false);
+
+    // Draw "% Change" title rotated -90° at the far left, centered on the plot area.
+    // Using rotation -90° around (0,0): local (x,y) → scene (pos.x+y, pos.y-x).
+    // Visual horizontal extent: pos.x to pos.x+th.  Vertical: pos.y-tw to pos.y.
+    if (!m_yAxisTitle) {
+        m_yAxisTitle = new QGraphicsTextItem(m_chart);
+        m_yAxisTitle->setDefaultTextColor(QColor(80, 80, 80));
+        m_yAxisTitle->setZValue(5);
+    }
+    m_yAxisTitle->setFont(axisY->titleFont());
+    m_yAxisTitle->setPlainText("% Change");
+    m_yAxisTitle->setTransformOriginPoint(0, 0);
+    m_yAxisTitle->setRotation(-90);
+    {
+        const double tw = m_yAxisTitle->boundingRect().width();
+        const double th = m_yAxisTitle->boundingRect().height();
+        // pos.x=3 puts visual left edge at x=3 (well left of the tick labels).
+        // pos.y = plotCenter.y + tw/2 centers the rotated text vertically.
+        m_yAxisTitle->setPos(3.0, plotRect.center().y() + tw / 2.0);
+        Q_UNUSED(th);
+    }
+    m_yAxisTitle->setVisible(true);
+}
+
+void ChartManager::updateMinorTicks()
+{
+    const QRectF plot = m_chart->plotArea();
+    if (plot.isEmpty()) return;
+
+    // Y axis – QValueAxis
+    const auto vAxes = m_chart->axes(Qt::Vertical);
+    if (!vAxes.isEmpty()) {
+        auto *axisY = qobject_cast<QValueAxis*>(vAxes.first());
+        if (axisY && axisY->tickCount() > 1) {
+            const double pxPerMajor = plot.height() / (axisY->tickCount() - 1);
+            int minor = 0;
+            if      (pxPerMajor >= 80) minor = 4;   // 5 sub-divisions
+            else if (pxPerMajor >= 40) minor = 1;   // 2 sub-divisions
+            if (axisY->minorTickCount() != minor)
+                axisY->setMinorTickCount(minor);
+        }
+    }
+
+    // QDateTimeAxis (X axis) does not support minor ticks in Qt Charts.
 }
 
 void ChartManager::updateBgImage()
