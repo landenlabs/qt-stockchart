@@ -90,6 +90,8 @@ void MainWindow::setupUI()
     m_stockTree->setContextMenuPolicy(Qt::CustomContextMenu);
 
     m_stockTree->header()->setSectionResizeMode(QHeaderView::Fixed);
+    m_stockTree->header()->setSectionsClickable(true);
+    m_stockTree->header()->setSortIndicatorShown(true);
     m_stockTree->header()->resizeSection(0, 32);
     m_stockTree->header()->resizeSection(1, 24);
     m_stockTree->header()->resizeSection(2, 80);
@@ -123,6 +125,10 @@ void MainWindow::setupUI()
             m_groupManager, &StockGroupManager::onTreeContextMenu);
     connect(m_groupManager, &StockGroupManager::forceReloadRequested,
             this, &MainWindow::onForceReload);
+    connect(m_stockTree->header(), &QHeaderView::sectionClicked,
+            this, [this](int col) {
+                if (col == 2) m_groupManager->sortBySymbol();
+            });
 
     // ── Right panel ──────────────────────────────────────────────────────────
     QWidget *rightPanel = new QWidget(m_splitter);

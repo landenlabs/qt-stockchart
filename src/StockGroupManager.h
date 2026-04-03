@@ -58,6 +58,7 @@ public slots:
     void onEditStockDetails(QTreeWidgetItem *item);
     void onSetStar(QTreeWidgetItem *item, int starIndex);
     void showAddStockDialog(QTreeWidgetItem *groupItem);
+    void sortBySymbol();
 
 private:
     void onClearCache(QTreeWidgetItem *item);
@@ -67,4 +68,5 @@ private:
     StockCacheManager *m_cache;
     QWidget          *m_dialogParent;
     QSet<QString>     m_symbolErrors;
+    bool              m_sortAscending = true;
 };

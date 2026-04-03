@@ -1,5 +1,6 @@
 #include "StockGroupManager.h"
 #include <QSettings>
+#include <algorithm>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QDialog>
@@ -370,6 +371,28 @@ void StockGroupManager::onSetStar(QTreeWidgetItem *item, int starIndex)
 {
     item->setData(0, StarRole, starIndex);
     item->setIcon(0, makeStarIcon(starIndex));
+    saveGroups();
+}
+
+void StockGroupManager::sortBySymbol()
+{
+    const Qt::SortOrder order = m_sortAscending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
+        QTreeWidgetItem *group = m_tree->topLevelItem(i);
+        QList<QTreeWidgetItem *> children;
+        children.reserve(group->childCount());
+        while (group->childCount() > 0)
+            children.append(group->takeChild(0));
+        std::sort(children.begin(), children.end(),
+                  [this](QTreeWidgetItem *a, QTreeWidgetItem *b) {
+                      return m_sortAscending ? a->text(2) < b->text(2)
+                                             : a->text(2) > b->text(2);
+                  });
+        for (auto *child : children)
+            group->addChild(child);
+    }
+    m_tree->header()->setSortIndicator(2, order);
+    m_sortAscending = !m_sortAscending;
     saveGroups();
 }
 
