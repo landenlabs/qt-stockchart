@@ -5,10 +5,12 @@
 #include <QStringList>
 #include <QChart>
 #include <QChartView>
+#include <QColor>
 #include <QComboBox>
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
+#include <QMap>
 #include <QPixmap>
 #include "StockCacheManager.h"
 
@@ -42,6 +44,9 @@ public:
     QDate  clickedDate()  const { return m_clickedDate; }
     qint64 clickedMsecs() const { return m_clickedMsecs; }
 
+    // Series colors keyed by symbol (populated after updateChart)
+    const QMap<QString, QColor> &seriesColors() const { return m_seriesColors; }
+
 signals:
     void dateClicked(const QDate &date); // emitted after a chart click snaps to a data point
 
@@ -65,6 +70,7 @@ private:
     QPixmap              m_bgPixmap;
 
     int    m_chartRangeDays = 0;
+    QMap<QString, QColor> m_seriesColors;
     qint64 m_clickedMsecs   = -1;
     QDate  m_clickedDate;
 

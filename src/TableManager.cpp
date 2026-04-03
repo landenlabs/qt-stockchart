@@ -11,8 +11,22 @@
 #include <QLineEdit>
 #include <QHeaderView>
 #include <QTableWidgetItem>
+#include <QPainter>
+#include <QPixmap>
 #include <limits>
 #include <cmath>
+
+static QIcon makeColorIcon(const QColor &color)
+{
+    QPixmap pm(14, 14);
+    pm.fill(Qt::transparent);
+    QPainter p(&pm);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setBrush(color);
+    p.setPen(Qt::NoPen);
+    p.drawRoundedRect(1, 1, 12, 12, 2, 2);
+    return QIcon(pm);
+}
 
 static const QList<int> kDefaultPeriods = { -365, -90, -60, -30, -7, 0 };
 
@@ -114,16 +128,6 @@ void TableManager::onToggleDisplayMode(bool checked)
         refresh(m_lastSymbols, m_clickedDate);
 }
 
-// ── Column click (reference column for % mode) ────────────────────────────────
-
-void TableManager::onColumnClicked(int col)
-{
-    if (!m_showPercentChange) return;
-    m_refColIndex = col;
-    if (m_tableExpanded)
-        refresh(m_lastSymbols, m_clickedDate);
-}
-
 // ── Period configuration ──────────────────────────────────────────────────────
 
 void TableManager::configurePeriods()
@@ -192,82 +196,102 @@ void TableManager::configurePeriods()
 
 void TableManager::refresh(const QStringList &syms, const QDate &clickedDate)
 {
-    m_clickedDate  = clickedDate;
-    m_lastSymbols  = syms;
+    m_clickedDate = clickedDate;
+    m_lastSymbols = syms;
 
     if (!m_tableExpanded) return;
 
     const QDate today    = QDate::currentDate();
     const int   nPeriods = m_periods.size();
     const bool  hasClick = m_clickedDate.isValid();
-    const int   nCols    = nPeriods + (hasClick ? 1 : 0);
+    const int   nCols    = nPeriods + (hasClick ? 1 : 0);  // period + click columns
     const int   nRows    = syms.size();
 
-    if (nCols > 0 && m_refColIndex >= nCols)
-        m_refColIndex = 0;
-
+    // Column 0 is the color swatch; period/click columns start at index 1.
     m_table->setRowCount(nRows);
-    m_table->setColumnCount(nCols);
+    m_table->setColumnCount(nCols + 1);
+
+    // Find the period column (0-based period index) matching the active graph range.
+    int activeOffset = 0;  // fallback to first period
+    for (int c = 0; c < nPeriods; ++c) {
+        if (qAbs(m_periods[c]) == m_activePeriodDays) { activeOffset = c; break; }
+    }
 
     const QColor refBg(210, 228, 255);
 
+    // colDate: takes a period-loop index c (0..nCols-1), returns the date for that column.
     auto colDate = [&](int c) -> QDate {
         return c < nPeriods ? today.addDays(m_periods[c]) : m_clickedDate;
     };
 
-    // Column headers
+    // Color-swatch column header (narrow, no label)
+    m_table->setHorizontalHeaderItem(0, new QTableWidgetItem(""));
+
+    // Period column headers (table col = c + 1)
     for (int c = 0; c < nPeriods; ++c) {
-        int days = m_periods[c];
+        const int days = m_periods[c];
         QString label = (days == 0) ? "Today" : QString("%1d").arg(days);
         auto *hdr = new QTableWidgetItem(label);
-        if (m_showPercentChange && c == m_refColIndex)
-            hdr->setBackground(refBg);
-        m_table->setHorizontalHeaderItem(c, hdr);
+        const bool isActive = (c == activeOffset);
+        if (isActive) {
+            QFont f = hdr->font();
+            f.setBold(true);
+            hdr->setFont(f);
+            if (m_showPercentChange)
+                hdr->setBackground(refBg);
+        }
+        m_table->setHorizontalHeaderItem(c + 1, hdr);
     }
     if (hasClick) {
         auto *hdr = new QTableWidgetItem(m_clickedDate.toString("MMM d"));
-        if (m_showPercentChange && nPeriods == m_refColIndex)
-            hdr->setBackground(refBg);
-        m_table->setHorizontalHeaderItem(nPeriods, hdr);
+        m_table->setHorizontalHeaderItem(nPeriods + 1, hdr);
     }
 
-    m_table->horizontalHeader()->setCursor(
-        m_showPercentChange ? Qt::PointingHandCursor : Qt::ArrowCursor);
+    m_table->horizontalHeader()->setCursor(Qt::ArrowCursor);
 
     for (int r = 0; r < nRows; ++r) {
         const QString &sym = syms[r];
         m_table->setVerticalHeaderItem(r, new QTableWidgetItem(sym));
 
+        // Column 0: series color swatch
+        auto *colorCell = new QTableWidgetItem();
+        colorCell->setFlags(Qt::ItemIsEnabled);
+        if (m_seriesColors.contains(sym))
+            colorCell->setIcon(makeColorIcon(m_seriesColors[sym]));
+        m_table->setItem(r, 0, colorCell);
+
         const bool hasCached = m_cache->cache().contains(sym) && !m_cache->cache()[sym].isEmpty();
 
         double basePrice = std::numeric_limits<double>::quiet_NaN();
-        if (hasCached && m_showPercentChange && nCols > 0)
-            basePrice = StockCacheManager::priceAt(m_cache->cache()[sym], colDate(m_refColIndex));
+        if (hasCached && m_showPercentChange && nPeriods > 0)
+            basePrice = StockCacheManager::priceAt(m_cache->cache()[sym], colDate(activeOffset));
 
+        // Period + click columns (loop index c → table column c + 1)
         for (int c = 0; c < nCols; ++c) {
+            const int tableCol   = c + 1;
+            const bool isActive  = (c == activeOffset) && (c < nPeriods);
             QTableWidgetItem *cell;
 
             if (!hasCached) {
                 cell = new QTableWidgetItem("…");
                 cell->setForeground(Qt::gray);
             } else {
-                double price = StockCacheManager::priceAt(m_cache->cache()[sym], colDate(c));
+                const double price = StockCacheManager::priceAt(m_cache->cache()[sym], colDate(c));
 
                 if (std::isnan(price)) {
                     cell = new QTableWidgetItem("N/A");
                     cell->setForeground(Qt::gray);
-                } else if (m_showPercentChange && c == m_refColIndex) {
+                } else if (m_showPercentChange && isActive) {
+                    // Active period column: show the base price
                     cell = new QTableWidgetItem(QString("$%1").arg(price, 0, 'f', 2));
                 } else if (m_showPercentChange) {
                     if (std::isnan(basePrice) || basePrice == 0.0) {
                         cell = new QTableWidgetItem("N/A");
                         cell->setForeground(Qt::gray);
                     } else {
-                        double pct  = (price / basePrice - 1.0) * 100.0;
-                        QString text = QString("%1%2%")
-                                           .arg(pct >= 0 ? "+" : "")
-                                           .arg(pct, 0, 'f', 2);
-                        cell = new QTableWidgetItem(text);
+                        const double pct = (price / basePrice - 1.0) * 100.0;
+                        cell = new QTableWidgetItem(
+                            QString("%1%2%").arg(pct >= 0 ? "+" : "").arg(pct, 0, 'f', 2));
                         if      (pct > 0) cell->setForeground(QColor("#2e7d32"));
                         else if (pct < 0) cell->setForeground(QColor("#c62828"));
                     }
@@ -278,9 +302,9 @@ void TableManager::refresh(const QStringList &syms, const QDate &clickedDate)
 
             cell->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
             cell->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-            if (m_showPercentChange && c == m_refColIndex)
+            if (m_showPercentChange && isActive)
                 cell->setBackground(refBg);
-            m_table->setItem(r, c, cell);
+            m_table->setItem(r, tableCol, cell);
         }
     }
 }

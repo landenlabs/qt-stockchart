@@ -43,6 +43,7 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
     isUpdating = true;
 
     m_showMinMax = false;
+    m_seriesColors.clear();
     // Stop any in-flight animations before removing series to prevent
     // XYAnimation from calling chart() on a deleted QAbstractSeries.
     m_chart->setAnimationOptions(QChart::NoAnimation);
@@ -213,7 +214,10 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
                 QPen segPen(seg.positive ? QColor(56, 142, 60) : QColor(198, 40, 40));
                 segPen.setWidthF(1.5);
                 segLine->setPen(segPen);
-                if (si == 0) segLine->setName(sym);  // first segment shows in legend
+                if (si == 0) {
+                    segLine->setName(sym);
+                    m_seriesColors[sym] = segPen.color();
+                }
                 for (auto [ms, p] : seg.points) segLine->append(ms, p);
                 m_chart->addSeries(segLine);
                 segLine->attachAxis(axisX);
@@ -236,6 +240,7 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
             for (const auto &[msecs, pct] : pts)
                 series->append(msecs, pct);
             m_chart->addSeries(series);
+            m_seriesColors[sym] = series->color();
             series->attachAxis(axisX);
             series->attachAxis(axisY);
         }

@@ -20,6 +20,8 @@
 #include <QChartView>
 #include <QTableWidget>
 #include <QMouseEvent>
+#include <QContextMenuEvent>
+#include <QMenu>
 #include <QCloseEvent>
 #include <QLinearGradient>
 #include <QStyleFactory>
@@ -196,7 +198,11 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     connect(m_chartRangeBtnGroup, &QButtonGroup::idClicked, this, [this](int days) {
         QSettings("StockChart", "StockChart").setValue("lastChartRangeDays", days);
         m_chartManager->setRangeDays(days);
-        m_chartManager->updateChart(m_groupManager->selectedSymbols());
+        const QStringList sel = m_groupManager->selectedSymbols();
+        m_chartManager->updateChart(sel);
+        m_tableManager->setActivePeriodDays(days);
+        m_tableManager->setSeriesColors(m_chartManager->seriesColors());
+        m_tableManager->refresh(sel, m_chartManager->clickedDate());
     });
 
     m_yScaleCombo = new QComboBox(toolbar);
@@ -280,8 +286,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
             this, &MainWindow::rebuildPeriodButtons);
     connect(tableToggleBtn, &QToolButton::clicked, m_tableManager, &TableManager::onToggle);
     connect(displayModeBtn, &QPushButton::toggled, m_tableManager, &TableManager::onToggleDisplayMode);
-    connect(stockTable->horizontalHeader(), &QHeaderView::sectionClicked,
-            m_tableManager, &TableManager::onColumnClicked);
     connect(periodsBtn, &QPushButton::clicked, m_tableManager, &TableManager::configurePeriods);
 
     // Save table height on splitter drag
@@ -327,6 +331,16 @@ void MainWindow::setupMenu()
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
+    if (event->type() == QEvent::ContextMenu) {
+        for (StockDataProvider *p : m_providers) {
+            if (m_apiTracker && m_apiTracker->rowWidget(p->id()) == obj) {
+                QMenu menu(this);
+                menu.addAction("Configure API Keys...", this, &MainWindow::openSettings);
+                menu.exec(static_cast<QContextMenuEvent*>(event)->globalPos());
+                return true;
+            }
+        }
+    }
     if (event->type() == QEvent::MouseButtonPress) {
         auto *me = static_cast<QMouseEvent*>(event);
         if (me->button() == Qt::LeftButton) {
@@ -433,6 +447,7 @@ void MainWindow::onStockSelectionChanged()
     }
 
     m_chartManager->updateChart(selected);
+    m_tableManager->setSeriesColors(m_chartManager->seriesColors());
     m_tableManager->refresh(selected, m_chartManager->clickedDate());
 
     int ready = 0;
@@ -475,6 +490,7 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
     if (!selected.contains(symbol)) return;
 
     m_chartManager->updateChart(selected);
+    m_tableManager->setSeriesColors(m_chartManager->seriesColors());
     m_tableManager->refresh(selected, m_chartManager->clickedDate());
 
     int ready = 0;
@@ -510,6 +526,7 @@ void MainWindow::onError(const QString &symbol, const QString &message)
     const QStringList selected = m_groupManager->selectedSymbols();
     if (!selected.isEmpty()) {
         m_chartManager->updateChart(selected);
+        m_tableManager->setSeriesColors(m_chartManager->seriesColors());
         m_tableManager->refresh(selected, m_chartManager->clickedDate());
     }
 }
@@ -579,6 +596,8 @@ void MainWindow::rebuildPeriodButtons(const QList<int> &periods)
         if (!sel.isEmpty())
             m_chartManager->updateChart(sel);
     }
+    if (selectedId >= 0 && m_tableManager)
+        m_tableManager->setActivePeriodDays(selectedId);
 }
 
 // ── Settings ──────────────────────────────────────────────────────────────────

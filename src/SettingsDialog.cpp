@@ -12,7 +12,16 @@ static QString signupUrl(const QString &id)
     if (id == "alphavantage") return "https://www.alphavantage.co/support/#api-key";
     if (id == "finnhub")      return "https://finnhub.io/register";
     if (id == "polygon")      return "https://polygon.io/dashboard/signup";
-    if (id == "twelvedata")      return "https://twelvedata.com/";
+    if (id == "twelvedata")   return "https://twelvedata.com/";
+    return {};
+}
+
+static QString accountUrl(const QString &id)
+{
+    if (id == "alphavantage") return "https://www.alphavantage.co/premium/";
+    if (id == "finnhub")      return "https://finnhub.io/dashboard";
+    if (id == "polygon")      return "https://polygon.io/dashboard/billing";
+    if (id == "twelvedata")   return "https://twelvedata.com/account";
     return {};
 }
 
@@ -79,6 +88,15 @@ SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
                     QString("<a href='%1'>Get a free key at %2</a>").arg(url, url), page);
                 link->setOpenExternalLinks(true);
                 form->addRow(link);
+            }
+
+            // Account / plan link
+            QString aUrl = accountUrl(p->id());
+            if (!aUrl.isEmpty()) {
+                auto *aLink = new QLabel(
+                    QString("<a href='%1'>Account / Plan info</a>").arg(aUrl), page);
+                aLink->setOpenExternalLinks(true);
+                form->addRow(aLink);
             }
         }
 

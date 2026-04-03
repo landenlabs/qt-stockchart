@@ -1,7 +1,9 @@
 #pragma once
-#include <QObject>
+#include <QColor>
 #include <QDate>
 #include <QList>
+#include <QMap>
+#include <QObject>
 #include <QTableWidget>
 #include <QSplitter>
 #include <QToolButton>
@@ -27,8 +29,10 @@ public:
     void setExpanded(bool expanded);
     bool isExpanded() const { return m_tableExpanded; }
 
+    void setActivePeriodDays(int days) { m_activePeriodDays = days; }
+    void setSeriesColors(const QMap<QString, QColor> &colors) { m_seriesColors = colors; }
+
     void configurePeriods();
-    void onColumnClicked(int col);
     void onToggleDisplayMode(bool checked);
     void onToggle();
     void onSplitterMoved(); // call from MainWindow splitterMoved signal
@@ -50,9 +54,10 @@ private:
     int        m_savedTableHeight  = -1;
     bool       m_showPercentChange = false;
     QList<int> m_periods;
-    int        m_refColIndex       = 0;
+    int        m_activePeriodDays  = 0;
 
     // Stored so onToggle can refresh with last-known state
-    QDate       m_clickedDate;
-    QStringList m_lastSymbols;
+    QDate                 m_clickedDate;
+    QStringList           m_lastSymbols;
+    QMap<QString, QColor> m_seriesColors;
 };
