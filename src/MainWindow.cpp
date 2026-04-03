@@ -121,6 +121,8 @@ void MainWindow::setupUI()
     connect(addGroupBtn, &QPushButton::clicked, m_groupManager, &StockGroupManager::onAddGroupClicked);
     connect(m_stockTree, &QTreeWidget::customContextMenuRequested,
             m_groupManager, &StockGroupManager::onTreeContextMenu);
+    connect(m_groupManager, &StockGroupManager::forceReloadRequested,
+            this, &MainWindow::onForceReload);
 
     // ── Right panel ──────────────────────────────────────────────────────────
     QWidget *rightPanel = new QWidget(m_splitter);
@@ -476,6 +478,19 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
         m_statusLabel->setText(QString("%1 stock(s) — normalized % change").arg(ready));
     else
         m_statusLabel->setText(QString("Loaded %1/%2 stocks...").arg(ready).arg(selected.size()));
+}
+
+void MainWindow::onForceReload(const QString &symbol)
+{
+    StockDataProvider *p = activeProvider();
+    if (!p || !p->hasCredentials()) {
+        m_statusLabel->setText("API key not configured. Use Providers > Configure API Keys...");
+        return;
+    }
+    m_apiTracker->incrementCallCount(p->id());
+    m_apiTracker->updatePanel(m_activeProviderId);
+    p->fetchData(symbol, "3mo");
+    m_statusLabel->setText("Reloading " + symbol + "...");
 }
 
 void MainWindow::onError(const QString &symbol, const QString &message)

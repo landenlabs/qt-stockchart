@@ -49,6 +49,9 @@ public:
     static QIcon makeTypeIcon(SymbolType type);
     static QIcon makeErrorIcon();
 
+signals:
+    void forceReloadRequested(const QString &symbol);
+
 public slots:
     void onAddGroupClicked();
     void onTreeContextMenu(const QPoint &pos);
@@ -57,6 +60,9 @@ public slots:
     void showAddStockDialog(QTreeWidgetItem *groupItem);
 
 private:
+    void onClearCache(QTreeWidgetItem *item);
+    void onForceReload(QTreeWidgetItem *item);
+    void onListHistorical(QTreeWidgetItem *item);
     QTreeWidget      *m_tree;
     StockCacheManager *m_cache;
     QWidget          *m_dialogParent;

@@ -43,8 +43,12 @@ void ChartManager::updateChart(const QStringList &selectedSymbols)
     isUpdating = true;
 
     m_showMinMax = false;
+    // Stop any in-flight animations before removing series to prevent
+    // XYAnimation from calling chart() on a deleted QAbstractSeries.
+    m_chart->setAnimationOptions(QChart::NoAnimation);
     m_chart->removeAllSeries();
     for (QAbstractAxis *ax : m_chart->axes()) m_chart->removeAxis(ax);
+    m_chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList ready;
     for (const QString &sym : selectedSymbols)

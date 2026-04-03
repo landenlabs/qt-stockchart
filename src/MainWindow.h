@@ -34,6 +34,7 @@ private slots:
     void onDataReady(const QString &symbol, const QVector<StockDataPoint> &data);
     void onError(const QString &symbol, const QString &message);
     void onSymbolTypeReady(const QString &symbol, SymbolType type);
+    void onForceReload(const QString &symbol);
     void openSettings();
     void showHelp();
 

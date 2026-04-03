@@ -17,6 +17,9 @@ public:
     void loadSymbolTypeCache();
     void saveSymbolType(const QString &symbol, SymbolType type);
 
+    // Removes all cached data for symbol from memory and QSettings.
+    void clearSymbolCache(const QString &symbol);
+
     // Seconds since the newest data-point timestamp for sym, or -1 if no data.
     qint64 dataSecs(const QString &sym) const;
 

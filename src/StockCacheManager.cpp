@@ -72,6 +72,15 @@ void StockCacheManager::saveSymbolType(const QString &symbol, SymbolType type)
     s.endGroup();
 }
 
+void StockCacheManager::clearSymbolCache(const QString &symbol)
+{
+    m_cache.remove(symbol);
+    QSettings s("StockChart", "StockChart");
+    s.beginGroup("historyCache");
+    s.remove(symbol);
+    s.endGroup();
+}
+
 qint64 StockCacheManager::dataSecs(const QString &sym) const
 {
     if (!m_cache.contains(sym) || m_cache[sym].isEmpty()) return -1;

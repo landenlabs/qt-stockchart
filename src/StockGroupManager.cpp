@@ -9,6 +9,8 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
+#include <QTableWidget>
+#include <QHeaderView>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QMenu>
@@ -272,6 +274,11 @@ void StockGroupManager::onTreeContextMenu(const QPoint &pos)
         }
 
         menu.addSeparator();
+        menu.addAction("Clear Cache",    this, [this, item]() { onClearCache(item); });
+        menu.addAction("Force Reload",   this, [this, item]() { onForceReload(item); });
+        menu.addAction("List Historical",this, [this, item]() { onListHistorical(item); });
+
+        menu.addSeparator();
         menu.addAction("Remove Stock", this, [this, item]() {
             delete item;
             saveGroups();
@@ -304,6 +311,59 @@ void StockGroupManager::onEditStockDetails(QTreeWidgetItem *item)
         item->setData(6, PurDateRole, dateEdit->text());
         saveGroups();
     }
+}
+
+void StockGroupManager::onClearCache(QTreeWidgetItem *item)
+{
+    const QString sym = item->text(2);
+    m_cache->clearSymbolCache(sym);
+    updateTreeItemIcon(sym);
+}
+
+void StockGroupManager::onForceReload(QTreeWidgetItem *item)
+{
+    emit forceReloadRequested(item->text(2));
+}
+
+void StockGroupManager::onListHistorical(QTreeWidgetItem *item)
+{
+    const QString sym = item->text(2);
+    const QVector<StockDataPoint> &data = m_cache->cache()[sym];
+
+    QDialog dlg(m_dialogParent);
+    dlg.setWindowTitle("Historical Data: " + sym);
+    dlg.setMinimumSize(320, 450);
+
+    auto *layout = new QVBoxLayout(&dlg);
+
+    auto *table = new QTableWidget(data.size(), 2, &dlg);
+    table->setHorizontalHeaderLabels({"Date / Time", "Price"});
+    table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->verticalHeader()->setVisible(false);
+    table->setAlternatingRowColors(true);
+
+    for (int i = 0; i < data.size(); ++i) {
+        const StockDataPoint &pt = data[i];
+        auto *dtItem    = new QTableWidgetItem(pt.timestamp.toString("dd-MMM-yy hh:mm"));
+        auto *priceItem = new QTableWidgetItem(QString::number(pt.price, 'f', 2));
+        priceItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        table->setItem(i, 0, dtItem);
+        table->setItem(i, 1, priceItem);
+    }
+
+    if (!data.isEmpty())
+        table->scrollToBottom();
+
+    auto *btns = new QDialogButtonBox(QDialogButtonBox::Close, &dlg);
+    connect(btns, &QDialogButtonBox::rejected, &dlg, &QDialog::accept);
+
+    layout->addWidget(table);
+    layout->addWidget(btns);
+
+    dlg.exec();
 }
 
 void StockGroupManager::onSetStar(QTreeWidgetItem *item, int starIndex)
