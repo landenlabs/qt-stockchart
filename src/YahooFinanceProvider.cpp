@@ -8,11 +8,10 @@
 #include <QUrlQuery>
 #include <QDateTime>
 
-// Browser-like User-Agent reduces the chance of Yahoo rejecting the request.
 static const QByteArray kUserAgent =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/120.0.0.0 Safari/537.36";
+    "Chrome/124.0.0.0 Safari/537.36";
 
 YahooFinanceProvider::YahooFinanceProvider(QObject *parent)
     : StockDataProvider(parent)
@@ -22,18 +21,82 @@ YahooFinanceProvider::YahooFinanceProvider(QObject *parent)
             this, &YahooFinanceProvider::onReplyFinished);
 }
 
+// ── Crumb management ──────────────────────────────────────────────────────────
+
+void YahooFinanceProvider::ensureCrumb(std::function<void()> callback)
+{
+    if (m_crumbState == CrumbState::Ready) {
+        callback();
+        return;
+    }
+    m_crumbCallbacks.append(std::move(callback));
+    if (m_crumbState == CrumbState::Unknown)
+        fetchCrumb();
+}
+
+void YahooFinanceProvider::fetchCrumb()
+{
+    m_crumbState = CrumbState::Fetching;
+
+    // Step 1: visit Yahoo Finance to seed the cookie jar (.yahoo.com cookies)
+    QNetworkRequest req{QUrl("https://finance.yahoo.com/")};
+    req.setRawHeader("User-Agent", kUserAgent);
+    req.setRawHeader("Accept", "text/html,application/xhtml+xml");
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                     QNetworkRequest::NoLessSafeRedirectPolicy);
+
+    QNetworkReply *r = m_manager->get(req);
+    connect(r, &QNetworkReply::finished, this, [this, r]() {
+        r->deleteLater();
+
+        // Step 2: exchange cookies for a crumb token
+        QNetworkRequest req2{QUrl("https://query2.finance.yahoo.com/v1/test/getcrumb")};
+        req2.setRawHeader("User-Agent", kUserAgent);
+        req2.setRawHeader("Accept",     "*/*");
+        req2.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                          QNetworkRequest::NoLessSafeRedirectPolicy);
+
+        QNetworkReply *r2 = m_manager->get(req2);
+        connect(r2, &QNetworkReply::finished, this, [this, r2]() {
+            r2->deleteLater();
+
+            if (r2->error() == QNetworkReply::NoError)
+                m_crumb = QString::fromUtf8(r2->readAll()).trimmed();
+
+            m_crumbState = m_crumb.isEmpty() ? CrumbState::Unknown : CrumbState::Ready;
+
+            // Flush all queued requests (they will error on their own if crumb is empty)
+            const auto callbacks = std::move(m_crumbCallbacks);
+            m_crumbCallbacks.clear();
+            for (const auto &cb : callbacks) cb();
+        });
+    });
+}
+
+// ── Public API ────────────────────────────────────────────────────────────────
+
 void YahooFinanceProvider::fetchData(const QString &symbol, const QString &range)
 {
-    // Yahoo Finance range strings happen to match the internal ones (1mo, 3mo, 6mo, 1y).
+    ensureCrumb([this, symbol, range]() { doFetch(symbol, range); });
+}
+
+void YahooFinanceProvider::doFetch(const QString &symbol, const QString &range)
+{
+    if (m_crumb.isEmpty()) {
+        emit errorOccurred(symbol, "Yahoo: failed to obtain authentication token");
+        return;
+    }
+
     QUrl url(QString("https://query1.finance.yahoo.com/v8/finance/chart/%1").arg(symbol));
     QUrlQuery query;
     query.addQueryItem("interval", "1d");
     query.addQueryItem("range",    range);
+    query.addQueryItem("crumb",    m_crumb);
     url.setQuery(query);
 
     QNetworkRequest request{url};
     request.setRawHeader("User-Agent", kUserAgent);
-    request.setRawHeader("Accept", "application/json");
+    request.setRawHeader("Accept",     "application/json");
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
                          QNetworkRequest::NoLessSafeRedirectPolicy);
 
@@ -48,9 +111,21 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
     auto [symbol, range] = m_pending.take(reply);
 
     if (reply->error() != QNetworkReply::NoError) {
+        const int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        // On auth/rate-limit failure: reset the crumb and retry once per symbol
+        if ((status == 401 || status == 403 || status == 429) &&
+            !m_symbolsRetried.contains(symbol)) {
+            m_symbolsRetried.insert(symbol);
+            m_crumb.clear();
+            m_crumbState = CrumbState::Unknown;
+            ensureCrumb([this, symbol, range]() { doFetch(symbol, range); });
+            return;
+        }
+        m_symbolsRetried.remove(symbol);
         emit errorOccurred(symbol, "Yahoo: " + reply->errorString());
         return;
     }
+    m_symbolsRetried.remove(symbol);
 
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     if (doc.isNull()) {
@@ -63,7 +138,8 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
     QJsonValue errorVal = chart["error"];
     if (!errorVal.isNull() && !errorVal.toObject().isEmpty()) {
         const QString desc = errorVal.toObject()["description"].toString();
-        emit errorOccurred(symbol, desc.isEmpty() ? "Yahoo: unknown error for " + symbol : "Yahoo: " + desc);
+        emit errorOccurred(symbol, desc.isEmpty() ? "Yahoo: unknown error for " + symbol
+                                                   : "Yahoo: " + desc);
         return;
     }
 
@@ -78,8 +154,7 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
 
     // Prefer adjusted-close prices (accounts for splits/dividends); fall back to close.
     QJsonArray closes;
-    QJsonArray adjCloseArr = result["indicators"].toObject()
-                                   ["adjclose"].toArray();
+    QJsonArray adjCloseArr = result["indicators"].toObject()["adjclose"].toArray();
     if (!adjCloseArr.isEmpty())
         closes = adjCloseArr[0].toObject()["adjclose"].toArray();
 
@@ -112,17 +187,26 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
     emit dataReady(symbol, points);
 }
 
+// ── Symbol type ───────────────────────────────────────────────────────────────
+
 void YahooFinanceProvider::fetchSymbolType(const QString &symbol)
 {
-    QUrl url(QString("https://query1.finance.yahoo.com/v10/finance/quoteSummary/%1")
-                 .arg(symbol));
+    ensureCrumb([this, symbol]() { doFetchSymbolType(symbol); });
+}
+
+void YahooFinanceProvider::doFetchSymbolType(const QString &symbol)
+{
+    if (m_crumb.isEmpty()) return;  // best-effort; silently skip if no crumb
+
+    QUrl url(QString("https://query2.finance.yahoo.com/v10/finance/quoteSummary/%1").arg(symbol));
     QUrlQuery query;
     query.addQueryItem("modules", "quoteType");
+    query.addQueryItem("crumb",   m_crumb);
     url.setQuery(query);
 
     QNetworkRequest request{url};
     request.setRawHeader("User-Agent", kUserAgent);
-    request.setRawHeader("Accept", "application/json");
+    request.setRawHeader("Accept",     "application/json");
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
                          QNetworkRequest::NoLessSafeRedirectPolicy);
 
@@ -139,11 +223,11 @@ void YahooFinanceProvider::fetchSymbolType(const QString &symbol)
 
         const QString qt = res[0].toObject()["quoteType"].toObject()["quoteType"].toString();
         SymbolType type = SymbolType::Unknown;
-        if      (qt == "EQUITY")       type = SymbolType::Stock;
-        else if (qt == "ETF")          type = SymbolType::ETF;
-        else if (qt == "MUTUALFUND")   type = SymbolType::MutualFund;
+        if      (qt == "EQUITY")         type = SymbolType::Stock;
+        else if (qt == "ETF")            type = SymbolType::ETF;
+        else if (qt == "MUTUALFUND")     type = SymbolType::MutualFund;
         else if (qt == "CRYPTOCURRENCY") type = SymbolType::Crypto;
-        else if (qt == "INDEX")        type = SymbolType::Index;
+        else if (qt == "INDEX")          type = SymbolType::Index;
 
         if (type != SymbolType::Unknown)
             emit symbolTypeReady(symbol, type);
