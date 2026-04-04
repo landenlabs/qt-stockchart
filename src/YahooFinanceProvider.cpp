@@ -8,11 +8,12 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDateTime>
+#include <QTimer>
 
 static const QByteArray kUserAgent =
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/124.0.0.0 Safari/537.36";
+    "Chrome/135.0.0.0 Safari/537.36";
 
 YahooFinanceProvider::YahooFinanceProvider(QObject *parent)
     : StockDataProvider(parent)
@@ -39,10 +40,13 @@ void YahooFinanceProvider::fetchCrumb()
 {
     m_crumbState = CrumbState::Fetching;
 
-    // Step 1: visit Yahoo Finance to seed the cookie jar (.yahoo.com cookies)
+    // Step 1: fetch the Yahoo Finance homepage to seed cookies AND extract the crumb.
+    // Yahoo embeds the crumb token in the page HTML as "crumb":"VALUE", so we can
+    // avoid the separate /v1/test/getcrumb endpoint (which is aggressively rate-limited).
     QNetworkRequest req{QUrl("https://finance.yahoo.com/")};
-    req.setRawHeader("User-Agent", kUserAgent);
-    req.setRawHeader("Accept", "text/html,application/xhtml+xml");
+    req.setRawHeader("User-Agent",      kUserAgent);
+    req.setRawHeader("Accept",          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+    req.setRawHeader("Accept-Language", "en-US,en;q=0.9");
     req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
                      QNetworkRequest::NoLessSafeRedirectPolicy);
 
@@ -51,32 +55,67 @@ void YahooFinanceProvider::fetchCrumb()
     connect(r, &QNetworkReply::finished, this, [this, r]() {
         const int st1 = r->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
         Logger::instance().append(QString("Yahoo: HTTP %1 (crumb step 1)").arg(st1));
+        const QByteArray body = r->readAll(); // read before deleteLater
         r->deleteLater();
 
-        // Step 2: exchange cookies for a crumb token
-        QNetworkRequest req2{QUrl("https://query2.finance.yahoo.com/v1/test/getcrumb")};
-        req2.setRawHeader("User-Agent", kUserAgent);
-        req2.setRawHeader("Accept",     "*/*");
-        req2.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
-                          QNetworkRequest::NoLessSafeRedirectPolicy);
+        // Extract crumb from embedded JS: "crumb":"<value>"
+        // Yahoo sometimes encodes '/' as \u002F — unescape it.
+        const int idx = body.indexOf("\"crumb\":\"");
+        if (idx != -1) {
+            const int start = idx + 9; // length of "\"crumb\":\""
+            const int end   = body.indexOf('"', start);
+            if (end > start) {
+                m_crumb = QString::fromUtf8(body.mid(start, end - start));
+                m_crumb.replace("\\u002F", "/");
+            }
+        }
 
-        Logger::instance().append("Yahoo: GET https://query2.finance.yahoo.com/v1/test/getcrumb (crumb step 2)");
-        QNetworkReply *r2 = m_manager->get(req2);
-        connect(r2, &QNetworkReply::finished, this, [this, r2]() {
-            const int st2 = r2->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-            Logger::instance().append(QString("Yahoo: HTTP %1 (crumb step 2)").arg(st2));
-            r2->deleteLater();
-
-            if (r2->error() == QNetworkReply::NoError)
-                m_crumb = QString::fromUtf8(r2->readAll()).trimmed();
-
-            m_crumbState = m_crumb.isEmpty() ? CrumbState::Unknown : CrumbState::Ready;
-
-            // Flush all queued requests (they will error on their own if crumb is empty)
+        if (!m_crumb.isEmpty()) {
+            Logger::instance().append("Yahoo: crumb extracted from HTML");
+            m_crumbState = CrumbState::Ready;
             const auto callbacks = std::move(m_crumbCallbacks);
             m_crumbCallbacks.clear();
             for (const auto &cb : callbacks) cb();
-        });
+        } else {
+            // HTML extraction failed — fall back to the dedicated crumb endpoint.
+            Logger::instance().append("Yahoo: crumb not in HTML, trying getcrumb endpoint");
+            fetchCrumbStep2(/*retrying=*/false);
+        }
+    });
+}
+
+void YahooFinanceProvider::fetchCrumbStep2(bool retrying)
+{
+    // Fallback: dedicated crumb endpoint. Requires Referer to avoid 429.
+    QNetworkRequest req2{QUrl("https://query1.finance.yahoo.com/v1/test/getcrumb")};
+    req2.setRawHeader("User-Agent",      kUserAgent);
+    req2.setRawHeader("Accept",          "text/plain,*/*");
+    req2.setRawHeader("Accept-Language", "en-US,en;q=0.9");
+    req2.setRawHeader("Referer",         "https://finance.yahoo.com/");
+    req2.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                      QNetworkRequest::NoLessSafeRedirectPolicy);
+
+    Logger::instance().append("Yahoo: GET https://query1.finance.yahoo.com/v1/test/getcrumb (crumb step 2)");
+    QNetworkReply *r2 = m_manager->get(req2);
+    connect(r2, &QNetworkReply::finished, this, [this, r2, retrying]() {
+        const int st2 = r2->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        Logger::instance().append(QString("Yahoo: HTTP %1 (crumb step 2)").arg(st2));
+        r2->deleteLater();
+
+        if (r2->error() == QNetworkReply::NoError)
+            m_crumb = QString::fromUtf8(r2->readAll()).trimmed();
+
+        // On 429: retry once after a short delay.
+        if (m_crumb.isEmpty() && st2 == 429 && !retrying) {
+            Logger::instance().append("Yahoo: 429 on crumb — retrying in 2s");
+            QTimer::singleShot(2000, this, [this]() { fetchCrumbStep2(/*retrying=*/true); });
+            return;
+        }
+
+        m_crumbState = m_crumb.isEmpty() ? CrumbState::Unknown : CrumbState::Ready;
+        const auto callbacks = std::move(m_crumbCallbacks);
+        m_crumbCallbacks.clear();
+        for (const auto &cb : callbacks) cb();
     });
 }
 
@@ -84,21 +123,20 @@ void YahooFinanceProvider::fetchCrumb()
 
 void YahooFinanceProvider::fetchData(const QString &symbol, const QString &range)
 {
-    ensureCrumb([this, symbol, range]() { doFetch(symbol, range); });
+    // Call the chart API directly. Crumb is included only when one is already cached
+    // from a prior successful session; Yahoo's v8 API sometimes works with just cookies.
+    // Avoid the crumb-fetch preamble — those extra requests make rate-limiting worse.
+    doFetch(symbol, range);
 }
 
 void YahooFinanceProvider::doFetch(const QString &symbol, const QString &range)
 {
-    if (m_crumb.isEmpty()) {
-        emit errorOccurred(symbol, "Yahoo: failed to obtain authentication token");
-        return;
-    }
-
     QUrl url(QString("https://query1.finance.yahoo.com/v8/finance/chart/%1").arg(symbol));
     QUrlQuery query;
     query.addQueryItem("interval", "1d");
     query.addQueryItem("range",    range);
-    query.addQueryItem("crumb",    m_crumb);
+    if (!m_crumb.isEmpty())
+        query.addQueryItem("crumb", m_crumb); // include only when available
     url.setQuery(query);
 
     QNetworkRequest request{url};
@@ -123,17 +161,19 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
 
     if (reply->error() != QNetworkReply::NoError) {
         const int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-        // On auth/rate-limit failure: reset the crumb and retry once per symbol
-        if ((status == 401 || status == 403 || status == 429) &&
-            !m_symbolsRetried.contains(symbol)) {
+        // On rate-limit: retry once after a delay without fetching a crumb
+        // (more crumb requests to the same host make rate-limiting worse).
+        if (status == 429 && !m_symbolsRetried.contains(symbol)) {
             m_symbolsRetried.insert(symbol);
-            m_crumb.clear();
-            m_crumbState = CrumbState::Unknown;
-            ensureCrumb([this, symbol, range]() { doFetch(symbol, range); });
+            Logger::instance().append(QString("Yahoo [%1] 429 — retrying in 5s").arg(symbol));
+            QTimer::singleShot(5000, this, [this, symbol, range]() { doFetch(symbol, range); });
             return;
         }
         m_symbolsRetried.remove(symbol);
-        emit errorOccurred(symbol, "Yahoo: " + reply->errorString());
+        const QString hint = (status == 401 || status == 403 || status == 429)
+            ? " (Yahoo rate-limited — try another provider or wait a few minutes)"
+            : "";
+        emit errorOccurred(symbol, "Yahoo: " + reply->errorString() + hint);
         return;
     }
     m_symbolsRetried.remove(symbol);
@@ -202,26 +242,23 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
 
 void YahooFinanceProvider::fetchLatestQuote(const QString &symbol)
 {
-    // Reuse the existing chart API with a short range — "5d" is sufficient to
-    // include today's bar and avoid extra crumb/endpoint complexity.
-    ensureCrumb([this, symbol]() { doFetch(symbol, "5d"); });
+    doFetch(symbol, "5d");
 }
 
 // ── Symbol type ───────────────────────────────────────────────────────────────
 
 void YahooFinanceProvider::fetchSymbolType(const QString &symbol)
 {
-    ensureCrumb([this, symbol]() { doFetchSymbolType(symbol); });
+    doFetchSymbolType(symbol);
 }
 
 void YahooFinanceProvider::doFetchSymbolType(const QString &symbol)
 {
-    if (m_crumb.isEmpty()) return;  // best-effort; silently skip if no crumb
-
     QUrl url(QString("https://query2.finance.yahoo.com/v10/finance/quoteSummary/%1").arg(symbol));
     QUrlQuery query;
     query.addQueryItem("modules", "quoteType");
-    query.addQueryItem("crumb",   m_crumb);
+    if (!m_crumb.isEmpty())
+        query.addQueryItem("crumb", m_crumb); // include only when available
     url.setQuery(query);
 
     QNetworkRequest request{url};

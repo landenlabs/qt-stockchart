@@ -228,16 +228,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     tbLayout->setContentsMargins(6, 2, 6, 2);
     tbLayout->setSpacing(4);
 
-    auto *tableToggleBtn = new QToolButton(toolbar);
-    tableToggleBtn->setText("▼ Table");
-    tableToggleBtn->setAutoRaise(true);
-    tbLayout->addWidget(tableToggleBtn);
-
-    auto *sep = new QFrame(toolbar);
-    sep->setFrameShape(QFrame::VLine);
-    sep->setFrameShadow(QFrame::Sunken);
-    tbLayout->addWidget(sep);
-
     auto *displayModeBtn = new QPushButton("Price", toolbar);
     displayModeBtn->setCheckable(true);
     displayModeBtn->setFixedWidth(80);
@@ -307,7 +297,7 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
         "QSplitter::handle:vertical:hover { background-color: #5588cc; }";
 
     auto *vertSplitter = new QSplitter(Qt::Vertical, parent);
-    vertSplitter->setHandleWidth(6);
+    vertSplitter->setHandleWidth(20);
     vertSplitter->setChildrenCollapsible(true);
     vertSplitter->setStyleSheet(kVertSplitterStyle);
 
@@ -336,14 +326,23 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     stockTable->setSelectionMode(QAbstractItemView::SingleSelection);
     stockTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     stockTable->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    stockTable->hide();
-
     vertSplitter->addWidget(chartView);
     vertSplitter->addWidget(stockTable);
+    stockTable->setMinimumHeight(0);
+
+    // Embed the toggle button in the splitter handle so it stays visible when collapsed
+    auto *splitHandle = vertSplitter->handle(1);
+    auto *handleLayout = new QHBoxLayout(splitHandle);
+    handleLayout->setContentsMargins(0, 0, 0, 0);
+    auto *tableToggleBtn = new QToolButton(splitHandle);
+    tableToggleBtn->setText("▼ Table");
+    tableToggleBtn->setAutoRaise(true);
+    tableToggleBtn->setCursor(Qt::ArrowCursor); // keep arrow cursor over button, not resize
+    handleLayout->addWidget(tableToggleBtn);
 
     // ── Outer vertical splitter: chart+table (top) | log pane (bottom) ──────
     m_outerSplitter = new QSplitter(Qt::Vertical, parent);
-    m_outerSplitter->setHandleWidth(6);
+    m_outerSplitter->setHandleWidth(20);
     m_outerSplitter->setChildrenCollapsible(true);
     m_outerSplitter->setStyleSheet(kVertSplitterStyle);
     m_outerSplitter->addWidget(vertSplitter);
@@ -359,14 +358,9 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     auto *logHeaderLayout = new QHBoxLayout(logHeader);
     logHeaderLayout->setContentsMargins(6, 2, 6, 2);
     logHeaderLayout->setSpacing(6);
-    auto *logLabel = new QLabel("Log", logHeader);
-    QFont logLabelFont = logLabel->font();
-    logLabelFont.setBold(true);
-    logLabel->setFont(logLabelFont);
     auto *logClearBtn = new QPushButton("Clear", logHeader);
     logClearBtn->setFixedHeight(20);
     logClearBtn->setFixedWidth(50);
-    logHeaderLayout->addWidget(logLabel);
     logHeaderLayout->addStretch();
     logHeaderLayout->addWidget(logClearBtn);
     logLayout->addWidget(logHeader);
@@ -381,6 +375,17 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
 
     m_outerSplitter->addWidget(logPane);
     m_outerSplitter->setSizes({ 10000, 120 });
+
+    // Embed log toggle button in the outer splitter handle
+    auto *logHandle = m_outerSplitter->handle(1);
+    auto *logHandleLayout = new QHBoxLayout(logHandle);
+    logHandleLayout->setContentsMargins(0, 0, 0, 0);
+    m_logToggleBtn = new QToolButton(logHandle);
+    m_logToggleBtn->setText("▲ Log");
+    m_logToggleBtn->setAutoRaise(true);
+    m_logToggleBtn->setCursor(Qt::ArrowCursor);
+    logHandleLayout->addWidget(m_logToggleBtn);
+    connect(m_logToggleBtn, &QToolButton::clicked, this, &MainWindow::onLogToggle);
 
     connect(&Logger::instance(), &Logger::messageLogged, this, [this](const QString &htmlLine) {
         m_logEdit->append(htmlLine);
@@ -419,6 +424,20 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
             m_tableManager, &TableManager::onSplitterMoved);
 
     // ApiCallTracker is created in loadSettings() once the left panel layout is accessible.
+}
+
+void MainWindow::onLogToggle()
+{
+    m_logExpanded = !m_logExpanded;
+    m_logToggleBtn->setText(m_logExpanded ? "▲ Log" : "▼ Log");
+    const int total = m_outerSplitter->height();
+    if (total > 0) {
+        if (m_logExpanded)
+            m_outerSplitter->setSizes({ total - total / 5, total / 5 }); // 80/20 split
+        else
+            m_outerSplitter->setSizes({ total, 0 });
+    }
+    saveSettings();
 }
 
 void MainWindow::setupMenu()
@@ -783,6 +802,10 @@ void MainWindow::loadSettings()
 
     m_autoRefreshCheck->setChecked(s.value("autoRefresh", true).toBool());
 
+    m_logExpanded = s.value("logExpanded", true).toBool();
+    if (m_logToggleBtn)
+        m_logToggleBtn->setText(m_logExpanded ? "▲ Log" : "▼ Log");
+
     if (s.contains("mainSplitterState"))
         m_splitter->restoreState(s.value("mainSplitterState").toByteArray());
     if (s.contains("outerSplitterState"))
@@ -815,6 +838,7 @@ void MainWindow::saveSettings()
     QSettings s("StockChart", "StockChart");
     s.setValue("autoRefresh",           m_autoRefreshCheck->isChecked());
     s.setValue("activeProvider",        m_activeProviderId);
+    s.setValue("logExpanded",           m_logExpanded);
     s.setValue("mainSplitterState",     m_splitter->saveState());
     s.setValue("outerSplitterState",    m_outerSplitter->saveState());
     if (m_groupManager)
@@ -840,6 +864,9 @@ void MainWindow::showEvent(QShowEvent *event)
         m_tableRestored = true;
         QTimer::singleShot(0, this, [this]() {
             if (m_tableManager) m_tableManager->restoreTableSplitter();
+            // If log was saved as collapsed, apply after layout is complete
+            if (!m_logExpanded)
+                m_outerSplitter->setSizes({ m_outerSplitter->height(), 0 });
         });
     }
 }

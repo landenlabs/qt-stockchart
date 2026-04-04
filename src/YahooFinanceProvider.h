@@ -31,6 +31,7 @@ private:
     // Crumb management
     void ensureCrumb(std::function<void()> callback);
     void fetchCrumb();
+    void fetchCrumbStep2(bool retrying);
 
     // Actual network dispatchers (called once crumb is ready)
     void doFetch(const QString &symbol, const QString &range);

@@ -41,6 +41,7 @@ private slots:
     void onForceReload(const QString &symbol);
     void openSettings();
     void showHelp();
+    void onLogToggle();
 
 private:
     void setupUI();
@@ -67,6 +68,8 @@ private:
     QSplitter     *m_outerSplitter        = nullptr; // chart+table (top) | log pane (bottom)
     QTextEdit     *m_logEdit              = nullptr;
     QCheckBox     *m_autoRefreshCheck     = nullptr;
+    QToolButton   *m_logToggleBtn         = nullptr;
+    bool           m_logExpanded          = true;
 
     // ── State ─────────────────────────────────────────────────────────────────
     QSet<QString>  m_inFlightSymbols; // symbols with an active network request
