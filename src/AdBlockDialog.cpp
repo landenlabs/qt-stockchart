@@ -1,5 +1,6 @@
 #include "AdBlockDialog.h"
 #include "RequestInterceptor.h"
+#include "AppSettings.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -8,15 +9,16 @@
 #include <QTreeWidgetItem>
 #include <QPushButton>
 #include <QToolButton>
-#include <QTimer>
+#include <QLineEdit>
 #include <QHeaderView>
+#include <QFont>
 
 AdBlockDialog::AdBlockDialog(RequestInterceptor *interceptor, QWidget *parent)
     : QDialog(parent, Qt::Tool)
     , m_interceptor(interceptor)
 {
     setWindowTitle("Domain Filter / Ad Blocker");
-    setMinimumSize(600, 420);
+    setMinimumSize(600, 460);
 
     auto *mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(6);
@@ -26,7 +28,7 @@ AdBlockDialog::AdBlockDialog(RequestInterceptor *interceptor, QWidget *parent)
     auto *leftHeader = new QLabel("<b>Active Domains</b>  (this page load)");
     auto *rightHeader = new QLabel("<b>Blocked Domains</b>");
     headerRow->addWidget(leftHeader, 1);
-    headerRow->addSpacing(52); // aligns with centre buttons
+    headerRow->addSpacing(52);
     headerRow->addWidget(rightHeader, 1);
     mainLayout->addLayout(headerRow);
 
@@ -40,7 +42,7 @@ AdBlockDialog::AdBlockDialog(RequestInterceptor *interceptor, QWidget *parent)
 
     m_activeList = new QListWidget(this);
     m_activeList->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    m_activeList->setSortingEnabled(true);
+    m_activeList->setSortingEnabled(false); // managed manually so ~ items stay at bottom
     leftCol->addWidget(m_activeList, 1);
 
     auto *leftBtnRow = new QHBoxLayout();
@@ -96,24 +98,36 @@ AdBlockDialog::AdBlockDialog(RequestInterceptor *interceptor, QWidget *parent)
 
     mainLayout->addLayout(listsRow, 1);
 
-    // ── Hint label ───────────────────────────────────────────────────────────
+    // ── Hint label ────────────────────────────────────────────────────────────
     auto *hint = new QLabel(
         "Select domains in the left list and press <b>+</b> to block them.  "
-        "Select rows in the right list and press <b>−</b> to unblock them.", this);
+        "Select rows in the right list and press <b>\xe2\x88\x92</b> to unblock them.  "
+        "<b>~</b> prefix = already blocked.", this);
     hint->setWordWrap(true);
     mainLayout->addWidget(hint);
 
-    // ── Connections ──────────────────────────────────────────────────────────
-    connect(m_addBtn,    &QPushButton::clicked, this, &AdBlockDialog::onAdd);
-    connect(m_removeBtn, &QPushButton::clicked, this, &AdBlockDialog::onRemove);
-    connect(clearBtn,    &QToolButton::clicked, this, &AdBlockDialog::onClearActive);
-    connect(reloadBtn,   &QToolButton::clicked, this, &AdBlockDialog::reloadRequested);
+    // ── Ad pattern filter ─────────────────────────────────────────────────────
+    auto *regexRow = new QHBoxLayout();
+    regexRow->addWidget(new QLabel("Ad pattern:", this));
+    m_adRegexEdit = new QLineEdit(this);
+    m_adRegexEdit->setToolTip(
+        "Regular expression used to bold likely ad domains in the left list.\n"
+        "Case-insensitive. Changes are saved automatically.");
+    m_adRegexEdit->setText(AppSettings::instance().adBlockAdRegex());
+    regexRow->addWidget(m_adRegexEdit, 1);
+    mainLayout->addLayout(regexRow);
 
-    m_refreshTimer = new QTimer(this);
-    connect(m_refreshTimer, &QTimer::timeout, this, &AdBlockDialog::refreshLists);
-    m_refreshTimer->start(500);
+    // ── Connections ───────────────────────────────────────────────────────────
+    connect(m_addBtn,     &QPushButton::clicked,   this, &AdBlockDialog::onAdd);
+    connect(m_removeBtn,  &QPushButton::clicked,   this, &AdBlockDialog::onRemove);
+    connect(clearBtn,     &QToolButton::clicked,   this, &AdBlockDialog::onClearActive);
+    connect(reloadBtn,    &QToolButton::clicked,   this, &AdBlockDialog::reloadRequested);
+    connect(m_adRegexEdit, &QLineEdit::textChanged, this, &AdBlockDialog::onRegexChanged);
 
-    refreshLists();
+    // Initialise regex from the edit field content and populate lists once.
+    onRegexChanged(m_adRegexEdit->text());
+    refreshActiveList();
+    refreshBlacklist();
 }
 
 // ── Slots ──────────────────────────────────────────────────────────────────────
@@ -125,8 +139,12 @@ void AdBlockDialog::onAdd()
 
     QStringList domains;
     domains.reserve(selected.size());
-    for (const auto *item : selected)
-        domains << item->text();
+    for (const auto *item : selected) {
+        const QString text = item->text();
+        if (text.startsWith('~')) continue; // already blocked — skip
+        domains << text;
+    }
+    if (domains.isEmpty()) return;
 
     m_interceptor->addDomains(domains);
     refreshBlacklist();
@@ -152,33 +170,65 @@ void AdBlockDialog::onClearActive()
     m_activeList->clear();
 }
 
-void AdBlockDialog::refreshLists()
+void AdBlockDialog::onRegexChanged(const QString &text)
 {
+    m_adRx = QRegularExpression(text.trimmed(),
+                                QRegularExpression::CaseInsensitiveOption);
+    AppSettings::instance().setAdBlockAdRegex(text);
     refreshActiveList();
-    refreshBlacklist();
 }
 
 // ── Private helpers ────────────────────────────────────────────────────────────
 
 void AdBlockDialog::refreshActiveList()
 {
-    const QStringList current = m_interceptor->accessedDomains();
+    const QStringList current   = m_interceptor->accessedDomains();
+    const QSet<QString> blocked = m_interceptor->blacklist();
 
-    // If interceptor tracking was cleared (new page load), reset the list.
     if (current.isEmpty()) {
         m_activeList->clear();
         return;
     }
 
-    // Incrementally add new domains to avoid disrupting selection.
-    QSet<QString> existing;
-    existing.reserve(m_activeList->count());
-    for (int i = 0; i < m_activeList->count(); ++i)
-        existing.insert(m_activeList->item(i)->text());
+    // Remember which raw domain names are currently selected (strip ~ prefix)
+    QSet<QString> selectedDomains;
+    for (const auto *item : m_activeList->selectedItems()) {
+        QString t = item->text();
+        if (t.startsWith('~')) t = t.mid(1);
+        selectedDomains.insert(t);
+    }
 
-    for (const QString &d : current)
-        if (!existing.contains(d))
-            m_activeList->addItem(d);
+    // Split into two groups: normal (not blocked) and already-blocked
+    QStringList normal, alreadyBlocked;
+    for (const QString &d : current) {
+        if (blocked.contains(d)) alreadyBlocked << d;
+        else                     normal          << d;
+    }
+    normal.sort(Qt::CaseInsensitive);
+    alreadyBlocked.sort(Qt::CaseInsensitive);
+
+    m_activeList->clear();
+
+    // Normal domains first — bold those matching the ad regex
+    for (const QString &d : normal) {
+        auto *item = new QListWidgetItem(d);
+        if (m_adRx.isValid() && !m_adRx.pattern().isEmpty()
+                && m_adRx.match(d).hasMatch()) {
+            QFont f = item->font();
+            f.setBold(true);
+            item->setFont(f);
+        }
+        if (selectedDomains.contains(d))
+            item->setSelected(true);
+        m_activeList->addItem(item);
+    }
+
+    // Already-blocked domains at the bottom, prefixed with ~, grayed out
+    for (const QString &d : alreadyBlocked) {
+        auto *item = new QListWidgetItem("~" + d);
+        item->setForeground(Qt::gray);
+        m_activeList->addItem(item);
+    }
 }
 
 void AdBlockDialog::refreshBlacklist()

@@ -1,11 +1,12 @@
 #pragma once
 #include <QDialog>
+#include <QRegularExpression>
 
 class RequestInterceptor;
 class QListWidget;
 class QTreeWidget;
 class QPushButton;
-class QTimer;
+class QLineEdit;
 
 class AdBlockDialog : public QDialog
 {
@@ -20,7 +21,7 @@ private slots:
     void onAdd();
     void onRemove();
     void onClearActive();
-    void refreshLists();
+    void onRegexChanged(const QString &text);
 
 private:
     void refreshActiveList();
@@ -31,5 +32,7 @@ private:
     QTreeWidget        *m_blackList    = nullptr;
     QPushButton        *m_addBtn       = nullptr;
     QPushButton        *m_removeBtn    = nullptr;
-    QTimer             *m_refreshTimer = nullptr;
+    QLineEdit          *m_adRegexEdit  = nullptr;
+
+    QRegularExpression  m_adRx;
 };

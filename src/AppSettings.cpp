@@ -103,6 +103,12 @@ QStringList AppSettings::adBlockBlacklist() const
 void AppSettings::setAdBlockBlacklist(const QStringList &v)
     { m_settings.setValue("adBlockBlacklist", v); }
 
+static const QString kDefaultAdRegex = ".*(ad|doubleclick|amazon).*";
+QString AppSettings::adBlockAdRegex() const
+    { return m_settings.value("adBlockAdRegex", kDefaultAdRegex).toString(); }
+void AppSettings::setAdBlockAdRegex(const QString &v)
+    { m_settings.setValue("adBlockAdRegex", v); }
+
 // ── API call tracking ─────────────────────────────────────────────────────────
 // Stored as "dailyCalls/date" and "dailyCalls/<providerId>" — equivalent to the
 // old beginGroup("dailyCalls") + value("date") / value(providerId) pattern.

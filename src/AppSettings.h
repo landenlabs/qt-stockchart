@@ -81,6 +81,9 @@ public:
     QStringList  adBlockBlacklist() const;
     void         setAdBlockBlacklist(const QStringList &v);
 
+    QString      adBlockAdRegex() const;
+    void         setAdBlockAdRegex(const QString &v);
+
     // ── API call tracking ─────────────────────────────────────────────────────
     // Stored under the "dailyCalls" group.
     QString dailyCallDate() const;
