@@ -87,9 +87,11 @@ AdBlockDialog::AdBlockDialog(RequestInterceptor *interceptor, QWidget *parent)
     m_blackList = new QTreeWidget(this);
     m_blackList->setColumnCount(2);
     m_blackList->setHeaderLabels({ "Domain", "Hits" });
+    m_blackList->header()->setStretchLastSection(false);
     m_blackList->header()->setSectionResizeMode(0, QHeaderView::Stretch);
     m_blackList->header()->setSectionResizeMode(1, QHeaderView::Fixed);
-    m_blackList->header()->resizeSection(1, 50);
+    m_blackList->header()->setMinimumSectionSize(5);
+    m_blackList->header()->resizeSection(1, 28);
     m_blackList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     m_blackList->setRootIsDecorated(false);
     m_blackList->setSortingEnabled(true);
