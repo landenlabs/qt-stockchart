@@ -152,29 +152,29 @@ void StockGroupManager::addStockToGroup(QTreeWidgetItem *groupItem, const QStrin
                                         int star, double purPrice, const QString &purDate)
 {
     auto *item = new QTreeWidgetItem(groupItem);
-    item->setData(0, StarRole, star);
-    item->setIcon(0, makeStarIcon(star));
+    item->setData(1, StarRole, star);
+    item->setIcon(1, makeStarIcon(star));
 
     if (m_symbolErrors.contains(symbol))
-        item->setIcon(1, makeErrorIcon());
+        item->setIcon(2, makeErrorIcon());
     else if (m_cache->symbolTypes().contains(symbol))
-        item->setIcon(1, makeTypeIcon(m_cache->symbolTypes()[symbol]));
+        item->setIcon(2, makeTypeIcon(m_cache->symbolTypes()[symbol]));
 
-    item->setText(2, symbol);
-    item->setText(3, m_cache->ageString(symbol));
+    item->setText(3, symbol);
+    item->setText(4, m_cache->ageString(symbol));
     if (m_cache->cache().contains(symbol) && !m_cache->cache()[symbol].isEmpty())
-        item->setText(4, QString("$%1").arg(m_cache->cache()[symbol].last().price, 0, 'f', 2));
+        item->setText(5, QString("$%1").arg(m_cache->cache()[symbol].last().price, 0, 'f', 2));
     const QBrush ageBrush = ageBgBrush(m_cache, symbol);
-    item->setBackground(2, ageBrush);
     item->setBackground(3, ageBrush);
     item->setBackground(4, ageBrush);
-    item->setData(5, PurPriceRole, purPrice);
-    if (purPrice > 0) item->setText(5, QString::number(purPrice, 'f', 2));
-    item->setData(6, PurDateRole, purDate);
-    item->setText(6, purDate);
+    item->setBackground(5, ageBrush);
+    item->setData(6, PurPriceRole, purPrice);
+    if (purPrice > 0) item->setText(6, QString::number(purPrice, 'f', 2));
+    item->setData(7, PurDateRole, purDate);
+    item->setText(7, purDate);
 
-    item->setTextAlignment(4, Qt::AlignRight | Qt::AlignVCenter);
     item->setTextAlignment(5, Qt::AlignRight | Qt::AlignVCenter);
+    item->setTextAlignment(6, Qt::AlignRight | Qt::AlignVCenter);
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }
 
@@ -212,7 +212,7 @@ void StockGroupManager::showAddStockDialog(QTreeWidgetItem *groupItem)
             if (sym.isEmpty()) continue;
             bool exists = false;
             for (int i = 0; i < groupItem->childCount(); ++i)
-                if (groupItem->child(i)->text(2) == sym) { exists = true; break; }
+                if (groupItem->child(i)->text(3) == sym) { exists = true; break; }
             if (exists) skipped << sym;
             else { addStockToGroup(groupItem, sym); added << sym; }
         }
@@ -292,11 +292,11 @@ void StockGroupManager::onTreeContextMenu(const QPoint &pos)
 void StockGroupManager::onEditStockDetails(QTreeWidgetItem *item)
 {
     QDialog dlg(m_dialogParent);
-    dlg.setWindowTitle("Edit Details: " + item->text(2));
+    dlg.setWindowTitle("Edit Details: " + item->text(3));
     QFormLayout *form = new QFormLayout(&dlg);
 
-    QLineEdit *priceEdit = new QLineEdit(item->text(5), &dlg);
-    QLineEdit *dateEdit  = new QLineEdit(item->text(6), &dlg);
+    QLineEdit *priceEdit = new QLineEdit(item->text(6), &dlg);
+    QLineEdit *dateEdit  = new QLineEdit(item->text(7), &dlg);
     dateEdit->setPlaceholderText("mm/dd/yyyy");
     form->addRow("Purchase Price:", priceEdit);
     form->addRow("Purchase Date:", dateEdit);
@@ -307,12 +307,12 @@ void StockGroupManager::onEditStockDetails(QTreeWidgetItem *item)
     connect(btns, &QDialogButtonBox::rejected, &dlg, &QDialog::reject);
 
     if (dlg.exec() == QDialog::Accepted) {
-        item->setText(5, priceEdit->text());
-        item->setText(6, dateEdit->text());
-        item->setData(5, PurPriceRole, priceEdit->text().toDouble());
-        item->setData(6, PurDateRole, dateEdit->text());
+        item->setText(6, priceEdit->text());
+        item->setText(7, dateEdit->text());
+        item->setData(6, PurPriceRole, priceEdit->text().toDouble());
+        item->setData(7, PurDateRole, dateEdit->text());
         saveGroups();
-        emit stockDetailsChanged(item->text(2));
+        emit stockDetailsChanged(item->text(3));
     }
 }
 
@@ -328,11 +328,11 @@ QPair<double, QDate> StockGroupManager::purchaseInfoForSymbol(const QString &sym
         auto *group = m_tree->topLevelItem(i);
         for (int j = 0; j < group->childCount(); ++j) {
             auto *child = group->child(j);
-            if (child->text(2) != symbol) continue;
+            if (child->text(3) != symbol) continue;
 
-            double price = child->data(5, PurPriceRole).toDouble();
+            double price = child->data(6, PurPriceRole).toDouble();
             QDate  date;
-            const QString dateStr = child->data(6, PurDateRole).toString();
+            const QString dateStr = child->data(7, PurDateRole).toString();
             for (const QString &fmt : {"MM/dd/yyyy", "M/d/yyyy", "MM/d/yyyy", "M/dd/yyyy"}) {
                 date = QDate::fromString(dateStr, fmt);
                 if (date.isValid()) break;
@@ -352,19 +352,19 @@ QPair<double, QDate> StockGroupManager::purchaseInfoForSymbol(const QString &sym
 
 void StockGroupManager::onClearCache(QTreeWidgetItem *item)
 {
-    const QString sym = item->text(2);
+    const QString sym = item->text(3);
     m_cache->clearSymbolCache(sym);
     updateTreeItemIcon(sym);
 }
 
 void StockGroupManager::onForceReload(QTreeWidgetItem *item)
 {
-    emit forceReloadRequested(item->text(2));
+    emit forceReloadRequested(item->text(3));
 }
 
 void StockGroupManager::onListHistorical(QTreeWidgetItem *item)
 {
-    const QString sym = item->text(2);
+    const QString sym = item->text(3);
     const QVector<StockDataPoint> &data = m_cache->cache()[sym];
 
     QDialog dlg(m_dialogParent);
@@ -405,30 +405,104 @@ void StockGroupManager::onListHistorical(QTreeWidgetItem *item)
 
 void StockGroupManager::onSetStar(QTreeWidgetItem *item, int starIndex)
 {
-    item->setData(0, StarRole, starIndex);
-    item->setIcon(0, makeStarIcon(starIndex));
+    item->setData(1, StarRole, starIndex);
+    item->setIcon(1, makeStarIcon(starIndex));
     saveGroups();
 }
 
-void StockGroupManager::sortBySymbol()
+void StockGroupManager::sortByColumn(int col)
 {
-    const Qt::SortOrder order = m_sortAscending ? Qt::AscendingOrder : Qt::DescendingOrder;
+    if (col == m_sortCol)
+        m_sortAscending = !m_sortAscending;
+    else {
+        m_sortCol = col;
+        m_sortAscending = true;
+    }
+    const bool asc = m_sortAscending;
+
+    static const QStringList dateFmts = {"MM/dd/yyyy", "M/d/yyyy", "MM/d/yyyy", "M/dd/yyyy"};
+    auto parseDate = [&](const QString &s) {
+        for (const QString &fmt : dateFmts) {
+            QDate d = QDate::fromString(s, fmt);
+            if (d.isValid()) return d;
+        }
+        return QDate{};
+    };
+
+    auto comparator = [&](QTreeWidgetItem *a, QTreeWidgetItem *b) -> bool {
+        const QString symA = a->text(3);
+        const QString symB = b->text(3);
+        switch (col) {
+        case 1: { // Star
+            int sa = a->data(1, StarRole).toInt();
+            int sb = b->data(1, StarRole).toInt();
+            if (sa != sb) return asc ? sa < sb : sa > sb;
+            break;
+        }
+        case 2: { // Type
+            int ta = static_cast<int>(m_cache->symbolTypes().value(symA));
+            int tb = static_cast<int>(m_cache->symbolTypes().value(symB));
+            if (ta != tb) return asc ? ta < tb : ta > tb;
+            break;
+        }
+        case 3: // Symbol
+            if (symA != symB) return asc ? symA < symB : symA > symB;
+            break;
+        case 4: { // Age (seconds since newest data; -1 = no data → always last)
+            qint64 sa = m_cache->dataSecs(symA);
+            qint64 sb = m_cache->dataSecs(symB);
+            if (sa < 0 && sb < 0) break;
+            if (sa < 0) return false;
+            if (sb < 0) return true;
+            if (sa != sb) return asc ? sa < sb : sa > sb;
+            break;
+        }
+        case 5: { // Current price (text "$NNN.NN"; empty = no data → always last)
+            QString ta = a->text(5); if (ta.startsWith('$')) ta.remove(0, 1);
+            QString tb = b->text(5); if (tb.startsWith('$')) tb.remove(0, 1);
+            bool okA, okB;
+            double da = ta.toDouble(&okA);
+            double db = tb.toDouble(&okB);
+            if (!okA && !okB) break;
+            if (!okA) return false;
+            if (!okB) return true;
+            if (da != db) return asc ? da < db : da > db;
+            break;
+        }
+        case 6: { // Purchase price (0 = not set → always last)
+            double da = a->data(6, PurPriceRole).toDouble();
+            double db = b->data(6, PurPriceRole).toDouble();
+            if (da == 0 && db == 0) break;
+            if (da == 0) return false;
+            if (db == 0) return true;
+            if (da != db) return asc ? da < db : da > db;
+            break;
+        }
+        case 7: { // Purchase date (invalid = not set → always last)
+            QDate da = parseDate(a->data(7, PurDateRole).toString());
+            QDate db = parseDate(b->data(7, PurDateRole).toString());
+            if (!da.isValid() && !db.isValid()) break;
+            if (!da.isValid()) return false;
+            if (!db.isValid()) return true;
+            if (da != db) return asc ? da < db : da > db;
+            break;
+        }
+        default: break;
+        }
+        return symA < symB; // tiebreak by symbol
+    };
+
     for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
         QTreeWidgetItem *group = m_tree->topLevelItem(i);
         QList<QTreeWidgetItem *> children;
         children.reserve(group->childCount());
         while (group->childCount() > 0)
             children.append(group->takeChild(0));
-        std::sort(children.begin(), children.end(),
-                  [this](QTreeWidgetItem *a, QTreeWidgetItem *b) {
-                      return m_sortAscending ? a->text(2) < b->text(2)
-                                             : a->text(2) > b->text(2);
-                  });
+        std::sort(children.begin(), children.end(), comparator);
         for (auto *child : children)
             group->addChild(child);
     }
-    m_tree->header()->setSortIndicator(2, order);
-    m_sortAscending = !m_sortAscending;
+    m_tree->header()->setSortIndicator(col, asc ? Qt::AscendingOrder : Qt::DescendingOrder);
     saveGroups();
 }
 
@@ -479,10 +553,10 @@ void StockGroupManager::saveGroups()
         for (int j = 0; j < group->childCount(); ++j) {
             s.setArrayIndex(j);
             QTreeWidgetItem *child = group->child(j);
-            s.setValue("sym",      child->text(2));
-            s.setValue("star",     child->data(0, StarRole).toInt());
-            s.setValue("purPrice", child->data(5, PurPriceRole).toDouble());
-            s.setValue("purDate",  child->data(6, PurDateRole).toString());
+            s.setValue("sym",      child->text(3));
+            s.setValue("star",     child->data(1, StarRole).toInt());
+            s.setValue("purPrice", child->data(6, PurPriceRole).toDouble());
+            s.setValue("purDate",  child->data(7, PurDateRole).toString());
         }
         s.endArray();
     }
@@ -503,17 +577,17 @@ void StockGroupManager::updateTreeItemIcon(const QString &symbol)
         QTreeWidgetItem *group = m_tree->topLevelItem(i);
         for (int j = 0; j < group->childCount(); ++j) {
             QTreeWidgetItem *child = group->child(j);
-            if (child->text(2) == symbol) {
-                child->setIcon(1, icon);
-                child->setText(3, m_cache->ageString(symbol));
+            if (child->text(3) == symbol) {
+                child->setIcon(2, icon);
+                child->setText(4, m_cache->ageString(symbol));
                 if (m_cache->cache().contains(symbol) && !m_cache->cache()[symbol].isEmpty())
-                    child->setText(4, QString("$%1").arg(m_cache->cache()[symbol].last().price, 0, 'f', 2));
+                    child->setText(5, QString("$%1").arg(m_cache->cache()[symbol].last().price, 0, 'f', 2));
                 else
-                    child->setText(4, QString());
+                    child->setText(5, QString());
                 const QBrush ageBrush = ageBgBrush(m_cache, symbol);
-                child->setBackground(2, ageBrush);
                 child->setBackground(3, ageBrush);
                 child->setBackground(4, ageBrush);
+                child->setBackground(5, ageBrush);
             }
         }
     }
@@ -525,16 +599,16 @@ void StockGroupManager::refreshAllStockCacheVisuals()
         QTreeWidgetItem *group = m_tree->topLevelItem(i);
         for (int j = 0; j < group->childCount(); ++j) {
             QTreeWidgetItem *child = group->child(j);
-            const QString sym = child->text(2);
-            child->setText(3, m_cache->ageString(sym));
+            const QString sym = child->text(3);
+            child->setText(4, m_cache->ageString(sym));
             if (m_cache->cache().contains(sym) && !m_cache->cache()[sym].isEmpty())
-                child->setText(4, QString("$%1").arg(m_cache->cache()[sym].last().price, 0, 'f', 2));
+                child->setText(5, QString("$%1").arg(m_cache->cache()[sym].last().price, 0, 'f', 2));
             else
-                child->setText(4, QString());
+                child->setText(5, QString());
             const QBrush ageBrush = ageBgBrush(m_cache, sym);
-            child->setBackground(2, ageBrush);
             child->setBackground(3, ageBrush);
             child->setBackground(4, ageBrush);
+            child->setBackground(5, ageBrush);
         }
     }
 }
@@ -546,7 +620,7 @@ QStringList StockGroupManager::selectedSymbols() const
     QStringList syms;
     for (const QTreeWidgetItem *item : m_tree->selectedItems())
         if (item->parent())
-            syms << item->text(2);
+            syms << item->text(3);
     return syms;
 }
 
@@ -559,7 +633,7 @@ void StockGroupManager::selectSymbols(const QStringList &symbols)
         QTreeWidgetItem *group = m_tree->topLevelItem(i);
         for (int j = 0; j < group->childCount(); ++j) {
             QTreeWidgetItem *child = group->child(j);
-            if (symbols.contains(child->text(2)))
+            if (symbols.contains(child->text(3)))
                 child->setSelected(true);
         }
     }

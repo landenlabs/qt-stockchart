@@ -35,6 +35,7 @@
 #include <QAbstractButton>
 #include <QStackedWidget>
 #include <QListWidget>
+#include <QMovie>
 #include <QPixmap>
 #include <QDialogButtonBox>
 
@@ -127,8 +128,8 @@ void MainWindow::setupUI()
 #ifdef Q_OS_MACOS
     m_stockTree->setStyle(QStyleFactory::create("Fusion"));
 #endif
-    m_stockTree->setColumnCount(7);
-    m_stockTree->setHeaderLabels({"*", "Type", "Symbol", "Age", "Price", "Pur. $", "Pur. Date"});
+    m_stockTree->setColumnCount(8);
+    m_stockTree->setHeaderLabels({"", "*", "Type", "Symbol", "Age", "Price", "Pur. $", "Pur. Date"});
     m_stockTree->setHeaderHidden(false);
     m_stockTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
     m_stockTree->setIndentation(12);
@@ -137,13 +138,14 @@ void MainWindow::setupUI()
     m_stockTree->header()->setSectionResizeMode(QHeaderView::Fixed);
     m_stockTree->header()->setSectionsClickable(true);
     m_stockTree->header()->setSortIndicatorShown(true);
-    m_stockTree->header()->resizeSection(0, 32);
-    m_stockTree->header()->resizeSection(1, 24);
-    m_stockTree->header()->resizeSection(2, 80);
-    m_stockTree->header()->resizeSection(3, 50);
-    m_stockTree->header()->resizeSection(4, 70);
+    m_stockTree->header()->resizeSection(0, 16);
+    m_stockTree->header()->resizeSection(1, 32);
+    m_stockTree->header()->resizeSection(2, 24);
+    m_stockTree->header()->resizeSection(3, 80);
+    m_stockTree->header()->resizeSection(4, 50);
     m_stockTree->header()->resizeSection(5, 70);
-    m_stockTree->header()->resizeSection(6, 100);
+    m_stockTree->header()->resizeSection(6, 70);
+    m_stockTree->header()->resizeSection(7, 100);
 
     connect(m_stockTree, &QTreeWidget::itemSelectionChanged,
             this, &MainWindow::onStockSelectionChanged);
@@ -214,7 +216,7 @@ void MainWindow::setupUI()
     });
     connect(m_stockTree->header(), &QHeaderView::sectionClicked,
             this, [this](int col) {
-                if (col == 2) m_groupManager->sortBySymbol();
+                if (col >= 1) m_groupManager->sortByColumn(col);
             });
 
     // ── Right panel ──────────────────────────────────────────────────────────
@@ -1017,11 +1019,18 @@ void MainWindow::showHelp()
         appName->setAlignment(Qt::AlignCenter);
         vl->addWidget(appName);
 
-        QPixmap logo(":/landenlabs.png");
         auto *logoLabel = new QLabel(page);
-        if (!logo.isNull())
-            logoLabel->setPixmap(logo.scaled(80, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         logoLabel->setAlignment(Qt::AlignCenter);
+        auto *logoMovie = new QMovie(":/landenlabs.webp", QByteArray(), logoLabel);
+        if (logoMovie->isValid()) {
+            logoMovie->setScaledSize(QSize(80, 80));
+            logoLabel->setMovie(logoMovie);
+            logoMovie->start();
+        } else {
+            QPixmap logo(":/landenlabs.png");
+            if (!logo.isNull())
+                logoLabel->setPixmap(logo.scaled(80, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
         vl->addWidget(logoLabel);
 
         auto *ghLink = new QLabel(

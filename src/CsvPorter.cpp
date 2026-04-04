@@ -84,7 +84,7 @@ void CsvPorter::exportGroups(QLabel *statusLabel)
         QStringList row;
         row << csvQuote(groupName);
         for (int j = 0; j < group->childCount(); ++j)
-            row << group->child(j)->text(2);
+            row << group->child(j)->text(3);
 
         out << row.join(", ") << "\n";
     }
@@ -139,7 +139,7 @@ void CsvPorter::importGroups(QLabel *statusLabel)
 
         QSet<QString> existing;
         for (int j = 0; j < groupItem->childCount(); ++j)
-            existing.insert(groupItem->child(j)->text(2));
+            existing.insert(groupItem->child(j)->text(3));
 
         for (const QString &sym : std::as_const(fields)) {
             const QString upper = sym.toUpper();
