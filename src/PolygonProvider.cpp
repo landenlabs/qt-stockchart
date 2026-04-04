@@ -7,6 +7,8 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDate>
+#include <QTime>
+#include <QTimeZone>
 
 PolygonProvider::PolygonProvider(QObject *parent)
     : StockDataProvider(parent)
@@ -115,6 +117,38 @@ void PolygonProvider::onReplyFinished(QNetworkReply *reply)
     }
 
     emit dataReady(symbol, points);
+}
+
+void PolygonProvider::fetchLatestQuote(const QString &symbol)
+{
+    QUrl url("https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers/" + symbol);
+    QUrlQuery query;
+    query.addQueryItem("apiKey", m_credentials.value("apiKey").trimmed());
+    url.setQuery(query);
+
+    QNetworkRequest request{url};
+    request.setRawHeader("User-Agent", "StockChart/1.0");
+    request.setRawHeader("Authorization",
+        ("Bearer " + m_credentials.value("apiKey").trimmed()).toUtf8());
+
+    QNetworkReply *reply = m_manager->get(request);
+    Logger::instance().append(QString("Polygon [%1] GET %2 (quote)").arg(symbol, url.toString()));
+    connect(reply, &QNetworkReply::finished, this, [this, reply, symbol]() {
+        reply->deleteLater();
+        const int st = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        Logger::instance().append(QString("Polygon [%1] HTTP %2 (quote)").arg(symbol).arg(st));
+        if (reply->error() != QNetworkReply::NoError) {
+            emit errorOccurred(symbol, "Polygon.io (quote): " + reply->errorString());
+            return;
+        }
+        QJsonObject ticker = QJsonDocument::fromJson(reply->readAll()).object()["ticker"].toObject();
+        const double price = ticker["day"].toObject()["c"].toDouble();
+        if (price <= 0.0) return;
+        // Use today at 16:00 ET as the canonical timestamp for the day's close
+        QDateTime dt = QDateTime(QDate::currentDate(), QTime(16, 0, 0),
+                                 QTimeZone("America/New_York")).toUTC();
+        emit dataReady(symbol, QVector<StockDataPoint>{{dt, price}});
+    });
 }
 
 void PolygonProvider::fetchSymbolType(const QString &symbol)

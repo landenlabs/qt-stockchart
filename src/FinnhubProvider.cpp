@@ -7,6 +7,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDateTime>
+#include <QTimeZone>
 
 FinnhubProvider::FinnhubProvider(QObject *parent)
     : StockDataProvider(parent)
@@ -83,6 +84,43 @@ void FinnhubProvider::onReplyFinished(QNetworkReply *reply)
     }
 
     emit dataReady(symbol, points);
+}
+
+void FinnhubProvider::fetchLatestQuote(const QString &symbol)
+{
+    QUrl url("https://finnhub.io/api/v1/quote");
+    QUrlQuery query;
+    query.addQueryItem("symbol", symbol);
+    query.addQueryItem("token",  m_credentials.value("token").trimmed());
+    url.setQuery(query);
+
+    QNetworkRequest request{url};
+    request.setRawHeader("User-Agent", "StockChart/1.0");
+
+    QNetworkReply *reply = m_manager->get(request);
+    Logger::instance().append(QString("Finnhub [%1] GET %2 (quote)").arg(symbol, url.toString()));
+    connect(reply, &QNetworkReply::finished, this, [this, reply, symbol]() {
+        reply->deleteLater();
+        const int st = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        Logger::instance().append(QString("Finnhub [%1] HTTP %2 (quote)").arg(symbol).arg(st));
+        if (reply->error() != QNetworkReply::NoError) {
+            emit errorOccurred(symbol, "Finnhub (quote): " + reply->errorString());
+            return;
+        }
+        QJsonObject root = QJsonDocument::fromJson(reply->readAll()).object();
+        const double price = root["c"].toDouble(); // current price
+        if (price <= 0.0) return;
+        // "t" is the Unix timestamp of the last trade; fall back to today 16:00 ET
+        const qint64 t = root["t"].toVariant().toLongLong();
+        QDateTime dt;
+        if (t > 0) {
+            dt = QDateTime::fromSecsSinceEpoch(t);
+        } else {
+            dt = QDateTime(QDate::currentDate(), QTime(16, 0, 0),
+                           QTimeZone("America/New_York")).toUTC();
+        }
+        emit dataReady(symbol, QVector<StockDataPoint>{{dt, price}});
+    });
 }
 
 void FinnhubProvider::fetchSymbolType(const QString &symbol)

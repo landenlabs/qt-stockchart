@@ -70,6 +70,7 @@ private:
 
     // ── State ─────────────────────────────────────────────────────────────────
     QSet<QString>  m_inFlightSymbols; // symbols with an active network request
+    QSet<QString>  m_quoteInFlight;   // symbols with an active fetchLatestQuote request
 
     // ── Helpers ───────────────────────────────────────────────────────────────
     StockCacheManager *m_cacheManager  = nullptr;

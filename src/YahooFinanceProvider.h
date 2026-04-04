@@ -22,6 +22,7 @@ public:
 
     void fetchData(const QString &symbol, const QString &range = "3mo") override;
     void fetchSymbolType(const QString &symbol) override;
+    void fetchLatestQuote(const QString &symbol) override;
 
 private slots:
     void onReplyFinished(QNetworkReply *reply);

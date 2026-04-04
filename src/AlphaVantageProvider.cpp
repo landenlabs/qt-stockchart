@@ -97,6 +97,42 @@ void AlphaVantageProvider::onReplyFinished(QNetworkReply *reply)
     emit dataReady(symbol, points);
 }
 
+void AlphaVantageProvider::fetchLatestQuote(const QString &symbol)
+{
+    QUrl url("https://www.alphavantage.co/query");
+    QUrlQuery query;
+    query.addQueryItem("function", "GLOBAL_QUOTE");
+    query.addQueryItem("symbol",   symbol);
+    query.addQueryItem("apikey",   m_credentials.value("apiKey").trimmed());
+    url.setQuery(query);
+
+    QNetworkRequest request{url};
+    request.setRawHeader("User-Agent", "StockChart/1.0");
+
+    QNetworkReply *reply = m_manager->get(request);
+    Logger::instance().append(QString("AlphaVantage [%1] GET %2 (quote)").arg(symbol, url.toString()));
+    connect(reply, &QNetworkReply::finished, this, [this, reply, symbol]() {
+        reply->deleteLater();
+        const int st = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        Logger::instance().append(QString("AlphaVantage [%1] HTTP %2 (quote)").arg(symbol).arg(st));
+        if (reply->error() != QNetworkReply::NoError) {
+            emit errorOccurred(symbol, "Alpha Vantage (quote): " + reply->errorString());
+            return;
+        }
+        QJsonObject root = QJsonDocument::fromJson(reply->readAll()).object();
+        if (root.contains("Information") || root.contains("Note")) return; // rate-limited; skip silently
+        QJsonObject quote = root["Global Quote"].toObject();
+        if (quote.isEmpty()) return;
+        const double price    = quote["05. price"].toString().toDouble();
+        const QString dateStr = quote["07. latest trading day"].toString();
+        if (price <= 0.0 || dateStr.isEmpty()) return;
+        QDateTime dt = QDateTime::fromString(dateStr, "yyyy-MM-dd");
+        dt.setTimeZone(QTimeZone::utc());
+        if (!dt.isValid()) return;
+        emit dataReady(symbol, QVector<StockDataPoint>{{dt, price}});
+    });
+}
+
 void AlphaVantageProvider::fetchSymbolType(const QString &symbol)
 {
     QUrl url("https://www.alphavantage.co/query");

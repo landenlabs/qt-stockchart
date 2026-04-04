@@ -32,6 +32,8 @@ public:
 
     virtual void fetchData(const QString &symbol, const QString &range = "3mo") = 0;
     virtual void fetchSymbolType(const QString &symbol) { Q_UNUSED(symbol); }
+    // Fetches the latest available price (today's close or intraday) and emits dataReady.
+    virtual void fetchLatestQuote(const QString &symbol) { Q_UNUSED(symbol); }
 
 signals:
     void dataReady(const QString &symbol, const QVector<StockDataPoint> &data);

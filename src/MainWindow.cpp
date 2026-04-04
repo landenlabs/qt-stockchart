@@ -591,6 +591,10 @@ void MainWindow::onStockSelectionChanged()
 void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint> &data)
 {
     m_inFlightSymbols.remove(symbol);
+    // Track whether this arrival is from a fetchLatestQuote call (not a regular fetchData).
+    // We only trigger a quote fetch from regular data — never from quote data — to prevent loops.
+    const bool wasQuoteFetch = m_quoteInFlight.remove(symbol);
+
     if (data.isEmpty()) return;
     auto &existing = m_cacheManager->cache()[symbol];
     if (existing.isEmpty()) {
@@ -617,6 +621,20 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
 
     const QStringList selected = m_groupManager->selectedSymbols();
     if (!selected.contains(symbol)) return;
+
+    // After regular data arrives, check if today's close is still missing.
+    // If so, fire a lightweight quote endpoint to fill in the current day.
+    if (!wasQuoteFetch) {
+        const QDate today = QDate::currentDate();
+        const int dow = today.dayOfWeek(); // 1=Mon…5=Fri, 6=Sat, 7=Sun
+        if (dow >= 1 && dow <= 5 && !existing.isEmpty()) {
+            if (existing.last().timestamp.date() < today && !m_quoteInFlight.contains(symbol)) {
+                m_quoteInFlight.insert(symbol);
+                if (StockDataProvider *p = activeProvider())
+                    p->fetchLatestQuote(symbol);
+            }
+        }
+    }
 
     m_chartManager->updateChart(selected);
     m_tableManager->setSeriesColors(m_chartManager->seriesColors());
@@ -648,6 +666,7 @@ void MainWindow::onForceReload(const QString &symbol)
 void MainWindow::onError(const QString &symbol, const QString &message)
 {
     m_inFlightSymbols.remove(symbol);
+    m_quoteInFlight.remove(symbol);
     QApplication::beep();
     m_statusLabel->setText("Error: " + message);
     const QString logMsg = symbol.isEmpty() ? message : symbol + ": " + message;

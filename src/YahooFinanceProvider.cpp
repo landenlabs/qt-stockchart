@@ -198,6 +198,15 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
     emit dataReady(symbol, points);
 }
 
+// ── Latest quote ──────────────────────────────────────────────────────────────
+
+void YahooFinanceProvider::fetchLatestQuote(const QString &symbol)
+{
+    // Reuse the existing chart API with a short range — "5d" is sufficient to
+    // include today's bar and avoid extra crumb/endpoint complexity.
+    ensureCrumb([this, symbol]() { doFetch(symbol, "5d"); });
+}
+
 // ── Symbol type ───────────────────────────────────────────────────────────────
 
 void YahooFinanceProvider::fetchSymbolType(const QString &symbol)
