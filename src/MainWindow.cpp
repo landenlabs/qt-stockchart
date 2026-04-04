@@ -56,6 +56,9 @@ MainWindow::MainWindow(QWidget *parent)
     setupUI(); // creates widgets; helper managers allocated below after widgets exist
     setupMenu();
     loadSettings();
+    // Allow the window to be resized freely — without this, QMainWindow enforces the
+    // aggregate minimumSizeHint of all children, which grows as chart content changes.
+    setMinimumSize(0, 0);
 }
 
 // ── UI setup ──────────────────────────────────────────────────────────────────
@@ -199,6 +202,7 @@ void MainWindow::setupUI()
 
     // ── Right panel ──────────────────────────────────────────────────────────
     QWidget *rightPanel = new QWidget(m_splitter);
+    rightPanel->setMinimumWidth(0); // don't let chart content floor-lock the splitter width
     auto *rightLayout = new QVBoxLayout(rightPanel);
     rightLayout->setContentsMargins(0, 0, 0, 0);
     rightLayout->setSpacing(0);
@@ -297,7 +301,7 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
         "QSplitter::handle:vertical:hover { background-color: #5588cc; }";
 
     auto *vertSplitter = new QSplitter(Qt::Vertical, parent);
-    vertSplitter->setHandleWidth(20);
+    vertSplitter->setHandleWidth(16);
     vertSplitter->setChildrenCollapsible(true);
     vertSplitter->setStyleSheet(kVertSplitterStyle);
 
@@ -315,10 +319,14 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     chart->setMargins(QMargins(4, 4, 4, 4));
     chart->legend()->setAlignment(Qt::AlignBottom);
     chart->legend()->setVisible(true);
+    // QChart (a QGraphicsWidget) computes a minimum size from its axis labels, legend, and
+    // margins. Without this override it grows over time and locks the window at a large minimum.
+    chart->setMinimumSize(QSizeF(1, 1));
 
     auto *chartView = new QChartView(chart, vertSplitter);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->viewport()->installEventFilter(this);
+    chartView->setMinimumSize(0, 0);
 
     auto *stockTable = new QTableWidget(vertSplitter);
     stockTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -339,6 +347,8 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     tableToggleBtn->setAutoRaise(true);
     tableToggleBtn->setCursor(Qt::ArrowCursor); // keep arrow cursor over button, not resize
     handleLayout->addWidget(tableToggleBtn);
+    // Bottom margin creates a visible gap between the Table handle and the Log handle when collapsed
+    vertSplitter->setContentsMargins(0, 0, 0, 8);
 
     // ── Outer vertical splitter: chart+table (top) | log pane (bottom) ──────
     m_outerSplitter = new QSplitter(Qt::Vertical, parent);
@@ -352,18 +362,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     auto *logLayout = new QVBoxLayout(logPane);
     logLayout->setContentsMargins(0, 0, 0, 0);
     logLayout->setSpacing(0);
-
-    auto *logHeader = new QWidget(logPane);
-    logHeader->setFixedHeight(24);
-    auto *logHeaderLayout = new QHBoxLayout(logHeader);
-    logHeaderLayout->setContentsMargins(6, 2, 6, 2);
-    logHeaderLayout->setSpacing(6);
-    auto *logClearBtn = new QPushButton("Clear", logHeader);
-    logClearBtn->setFixedHeight(20);
-    logClearBtn->setFixedWidth(50);
-    logHeaderLayout->addStretch();
-    logHeaderLayout->addWidget(logClearBtn);
-    logLayout->addWidget(logHeader);
 
     m_logEdit = new QTextEdit(logPane);
     m_logEdit->setReadOnly(true);
@@ -387,6 +385,15 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     logHandleLayout->addWidget(m_logToggleBtn);
     connect(m_logToggleBtn, &QToolButton::clicked, this, &MainWindow::onLogToggle);
 
+    // Clear button on the right edge of the Log handle
+    auto *logClearBtn = new QToolButton(logHandle);
+    logClearBtn->setText("Clear");
+    logClearBtn->setAutoRaise(true);
+    logClearBtn->setCursor(Qt::ArrowCursor);
+    logHandleLayout->addStretch();
+    logHandleLayout->addWidget(logClearBtn);
+    connect(logClearBtn, &QToolButton::clicked, this, []() { Logger::instance().clear(); });
+
     connect(&Logger::instance(), &Logger::messageLogged, this, [this](const QString &htmlLine) {
         m_logEdit->append(htmlLine);
         m_logEdit->moveCursor(QTextCursor::End);
@@ -394,10 +401,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     connect(&Logger::instance(), &Logger::cleared, this, [this]() {
         m_logEdit->clear();
     });
-    connect(logClearBtn, &QPushButton::clicked, this, []() {
-        Logger::instance().clear();
-    });
-
     layout->addWidget(m_outerSplitter, 1);
 
     // ── Allocate chart + table managers ──────────────────────────────────────
@@ -801,6 +804,8 @@ void MainWindow::loadSettings()
     m_tableManager->loadSettings();
 
     m_autoRefreshCheck->setChecked(s.value("autoRefresh", true).toBool());
+    if (m_yScaleCombo)
+        m_yScaleCombo->setCurrentIndex(s.value("yScaleIndex", 2).toInt());
 
     m_logExpanded = s.value("logExpanded", true).toBool();
     if (m_logToggleBtn)
@@ -839,6 +844,7 @@ void MainWindow::saveSettings()
     s.setValue("autoRefresh",           m_autoRefreshCheck->isChecked());
     s.setValue("activeProvider",        m_activeProviderId);
     s.setValue("logExpanded",           m_logExpanded);
+    s.setValue("yScaleIndex",           m_yScaleCombo ? m_yScaleCombo->currentIndex() : 2);
     s.setValue("mainSplitterState",     m_splitter->saveState());
     s.setValue("outerSplitterState",    m_outerSplitter->saveState());
     if (m_groupManager)
