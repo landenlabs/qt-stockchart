@@ -1,5 +1,5 @@
 #include "StockCacheManager.h"
-#include <QSettings>
+#include "AppSettings.h"
 #include <QDataStream>
 #include <QTime>
 #include <limits>
@@ -93,7 +93,7 @@ void StockCacheManager::normalizeCache(QVector<StockDataPoint> &points)
 
 void StockCacheManager::saveCache()
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.beginGroup("historyCache");
     for (auto it = m_cache.cbegin(); it != m_cache.cend(); ++it) {
         QByteArray data;
@@ -108,7 +108,7 @@ void StockCacheManager::saveCache()
 
 void StockCacheManager::loadCache()
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.beginGroup("historyCache");
     for (const QString &sym : s.childKeys()) {
         QByteArray data = s.value(sym).toByteArray();
@@ -134,7 +134,7 @@ void StockCacheManager::loadCache()
 
 void StockCacheManager::loadSymbolTypeCache()
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.beginGroup("symbolTypes");
     for (const QString &sym : s.childKeys())
         m_symbolTypes[sym] = static_cast<SymbolType>(s.value(sym).toInt());
@@ -143,7 +143,7 @@ void StockCacheManager::loadSymbolTypeCache()
 
 void StockCacheManager::saveSymbolType(const QString &symbol, SymbolType type)
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.beginGroup("symbolTypes");
     s.setValue(symbol, static_cast<int>(type));
     s.endGroup();
@@ -152,7 +152,7 @@ void StockCacheManager::saveSymbolType(const QString &symbol, SymbolType type)
 void StockCacheManager::clearSymbolCache(const QString &symbol)
 {
     m_cache.remove(symbol);
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.beginGroup("historyCache");
     s.remove(symbol);
     s.endGroup();

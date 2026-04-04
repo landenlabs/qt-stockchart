@@ -1,5 +1,5 @@
 #include "ApiCallTracker.h"
-#include <QSettings>
+#include "AppSettings.h"
 #include <QFrame>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -112,26 +112,22 @@ void ApiCallTracker::incrementCallCount(const QString &providerId)
 
 void ApiCallTracker::loadDailyCallCounts()
 {
-    QSettings s("StockChart", "StockChart");
-    s.beginGroup("dailyCalls");
+    auto &as = AppSettings::instance();
     const QDate today    = QDate::currentDate();
-    const QDate savedDay = QDate::fromString(s.value("date").toString(), "yyyy-MM-dd");
+    const QDate savedDay = QDate::fromString(as.dailyCallDate(), "yyyy-MM-dd");
     m_currentDay = today;
     if (savedDay != today) {
         for (StockDataProvider *p : m_providers) m_dailyCallCounts[p->id()] = 0;
     } else {
         for (StockDataProvider *p : m_providers)
-            m_dailyCallCounts[p->id()] = s.value(p->id(), 0).toInt();
+            m_dailyCallCounts[p->id()] = as.dailyCallCount(p->id());
     }
-    s.endGroup();
 }
 
 void ApiCallTracker::saveDailyCallCounts()
 {
-    QSettings s("StockChart", "StockChart");
-    s.beginGroup("dailyCalls");
-    s.setValue("date", m_currentDay.toString("yyyy-MM-dd"));
+    auto &as = AppSettings::instance();
+    as.setDailyCallDate(m_currentDay.toString("yyyy-MM-dd"));
     for (StockDataProvider *p : m_providers)
-        s.setValue(p->id(), m_dailyCallCounts.value(p->id(), 0));
-    s.endGroup();
+        as.setDailyCallCount(p->id(), m_dailyCallCounts.value(p->id(), 0));
 }

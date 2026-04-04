@@ -529,7 +529,7 @@ void ChartManager::updateYAxisLabels()
         const double th = m_yAxisTitle->boundingRect().height();
         // pos.x=3 puts visual left edge at x=3 (well left of the tick labels).
         // pos.y = plotCenter.y + tw/2 centers the rotated text vertically.
-        m_yAxisTitle->setPos(3.0, plotRect.center().y() + tw / 2.0);
+        m_yAxisTitle->setPos(26.0, plotRect.center().y() + tw / 2.0);
         Q_UNUSED(th);
     }
     m_yAxisTitle->setVisible(true);

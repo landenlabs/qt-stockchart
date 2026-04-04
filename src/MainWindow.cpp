@@ -5,7 +5,10 @@
 #include "PolygonProvider.h"
 #include "TwelveDataProvider.h"
 #include "YahooFinanceProvider.h"
+#include "FmpProvider.h"
+#include "YahooPageProvider.h"
 #include "Logger.h"
+#include "AppSettings.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -14,7 +17,6 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
-#include <QSettings>
 #include <QMessageBox>
 #include <QHeaderView>
 #include <QChart>
@@ -43,7 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
         new FinnhubProvider(this),
         new PolygonProvider(this),
         new TwelveDataProvider(this),
-        new YahooFinanceProvider(this)
+        new YahooFinanceProvider(this),
+        new FmpProvider(this),
+        new YahooPageProvider(this)
     };
 
     for (StockDataProvider *p : m_providers) {
@@ -256,7 +260,7 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     tbLayout->addWidget(m_periodBtnsContainer);
 
     connect(m_chartRangeBtnGroup, &QButtonGroup::idClicked, this, [this](int days) {
-        QSettings("StockChart", "StockChart").setValue("lastChartRangeDays", days);
+        AppSettings::instance().setLastChartRangeDays(days);
         m_chartManager->setRangeDays(days);
         const QStringList sel = m_groupManager->selectedSymbols();
         m_chartManager->updateChart(sel);
@@ -771,8 +775,7 @@ void MainWindow::rebuildPeriodButtons(const QList<int> &periods)
     }
 
     // Restore the previously selected range (default 60 days)
-    const int savedId = QSettings("StockChart", "StockChart")
-                            .value("lastChartRangeDays", 60).toInt();
+    const int savedId = AppSettings::instance().lastChartRangeDays();
 
     auto periodLabel = [](int p) -> QString {
         if (p == 0) return "Today";
@@ -825,15 +828,13 @@ void MainWindow::rebuildPeriodButtons(const QList<int> &periods)
 
 void MainWindow::loadSettings()
 {
-    QSettings s("StockChart", "StockChart");
+    auto &as = AppSettings::instance();
 
     for (StockDataProvider *p : m_providers) {
-        s.beginGroup(p->id());
         QMap<QString,QString> creds;
         for (const auto &field : p->credentialFields())
-            creds[field.first] = s.value(field.first).toString();
+            creds[field.first] = as.providerCredential(p->id(), field.first);
         p->setCredentials(creds);
-        s.endGroup();
     }
 
     // Build the API info panel now that the left layout is complete.
@@ -850,22 +851,28 @@ void MainWindow::loadSettings()
 
     m_tableManager->loadSettings();
 
-    m_autoRefreshCheck->setChecked(s.value("autoRefresh", true).toBool());
+    m_autoRefreshCheck->setChecked(as.autoRefresh());
     if (m_yScaleCombo)
-        m_yScaleCombo->setCurrentIndex(s.value("yScaleIndex", 2).toInt());
+        m_yScaleCombo->setCurrentIndex(as.yScaleIndex());
 
-    m_logExpanded = s.value("logExpanded", true).toBool();
+    m_logExpanded = as.logExpanded();
     if (m_logToggleBtn)
         m_logToggleBtn->setText(m_logExpanded ? "▲ Log" : "▼ Log");
 
-    if (s.contains("mainSplitterState"))
-        m_splitter->restoreState(s.value("mainSplitterState").toByteArray());
-    if (s.contains("outerSplitterState"))
-        m_outerSplitter->restoreState(s.value("outerSplitterState").toByteArray());
+    const QByteArray mainState  = as.mainSplitterState();
+    const QByteArray outerState = as.outerSplitterState();
+    if (!mainState.isEmpty())  m_splitter->restoreState(mainState);
+    if (!outerState.isEmpty()) m_outerSplitter->restoreState(outerState);
+
+    // Load the ad-block blacklist into the interceptor BEFORE setActiveProvider(),
+    // because setActiveProvider() calls saveSettings() which would otherwise
+    // overwrite the saved blacklist with an empty one.
+    if (m_webBrowser) m_webBrowser->loadBlacklist();
 
     // setActiveProvider clears m_cache but immediately reloads it from QSettings,
     // so the cache is populated before loadGroups() runs below.
-    setActiveProvider(s.value("activeProvider", m_providers.first()->id()).toString());
+    const QString savedProvider = as.activeProvider();
+    setActiveProvider(savedProvider.isEmpty() ? m_providers.first()->id() : savedProvider);
     m_cacheManager->loadCache();         // second load is harmless; ensures cache is fresh
     m_cacheManager->loadSymbolTypeCache();
 
@@ -875,7 +882,7 @@ void MainWindow::loadSettings()
 
     // Restore previously selected symbols (signals are blocked inside selectSymbols,
     // so we trigger onStockSelectionChanged manually afterward).
-    const QStringList lastSelected = s.value("selectedSymbols").toStringList();
+    const QStringList lastSelected = as.selectedSymbols();
     if (!lastSelected.isEmpty()) {
         m_groupManager->selectSymbols(lastSelected);
         onStockSelectionChanged();
@@ -883,28 +890,26 @@ void MainWindow::loadSettings()
 
     // Build CSV porter now that group manager is ready
     m_csvPorter = new CsvPorter(m_stockTree, m_groupManager, this);
-    if (m_webBrowser) m_webBrowser->loadBlacklist(s);
 }
 
 void MainWindow::saveSettings()
 {
-    QSettings s("StockChart", "StockChart");
-    s.setValue("autoRefresh",           m_autoRefreshCheck->isChecked());
-    s.setValue("activeProvider",        m_activeProviderId);
-    s.setValue("logExpanded",           m_logExpanded);
-    s.setValue("yScaleIndex",           m_yScaleCombo ? m_yScaleCombo->currentIndex() : 2);
-    s.setValue("mainSplitterState",     m_splitter->saveState());
-    s.setValue("outerSplitterState",    m_outerSplitter->saveState());
+    auto &as = AppSettings::instance();
+    as.setAutoRefresh(m_autoRefreshCheck->isChecked());
+    as.setActiveProvider(m_activeProviderId);
+    as.setLogExpanded(m_logExpanded);
+    as.setYScaleIndex(m_yScaleCombo ? m_yScaleCombo->currentIndex() : 2);
+    as.setMainSplitterState(m_splitter->saveState());
+    as.setOuterSplitterState(m_outerSplitter->saveState());
     if (m_groupManager)
-        s.setValue("selectedSymbols", m_groupManager->selectedSymbols());
+        as.setSelectedSymbols(m_groupManager->selectedSymbols());
     m_cacheManager->saveCache();
     if (m_tableManager) m_tableManager->saveSettings();
-    if (m_webBrowser)   m_webBrowser->saveBlacklist(s);
+    if (m_webBrowser)   m_webBrowser->saveBlacklist();
     for (StockDataProvider *p : m_providers) {
-        s.beginGroup(p->id());
         for (const auto &field : p->credentialFields())
-            s.setValue(field.first, p->credentials().value(field.first));
-        s.endGroup();
+            as.setProviderCredential(p->id(), field.first,
+                                     p->credentials().value(field.first));
     }
 }
 
@@ -929,6 +934,7 @@ void MainWindow::showEvent(QShowEvent *event)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     saveSettings();
+    AppSettings::instance().sync();
     QMainWindow::closeEvent(event);
 }
 
@@ -975,7 +981,9 @@ void MainWindow::showHelp()
         { "Polygon.io",     "Yes (delayed)", "5 req/min",              "15-min delayed on free; real-time needs $29/mo" },
         { "Twelve Data",    "Yes",           "800 req/day, 8 req/min", "Generous free tier; good historical data" },
         { "Tiingo",         "Yes",           "500 req/hour",           "End-of-day historical; very good for casual use" },
-        { "Yahoo Finance",  "Yes (no key)",  "—",                      "Unofficial API only; no key required but can break without warning" },
+        { "Yahoo Finance",       "Yes (no key)",  "—",                      "Unofficial API; no key required but can break without warning" },
+        { "Fin. Modeling Prep",  "Yes",           "250 req/day",            "Full historical data; free API key required; reliable JSON API" },
+        { "Yahoo Finance (page)", "Yes (no key)",  "—",                      "Current price scraped from page HTML; no key; merges into cached historical data" },
     };
 
     auto *table = new QTableWidget(providers.size(), 4, &dlg);
@@ -990,7 +998,7 @@ void MainWindow::showHelp()
     table->setShowGrid(true);
     table->setAlternatingRowColors(true);
 
-    const QStringList integrated = { "Alpha Vantage", "Finnhub", "Polygon.io", "Twelve Data" };
+    const QStringList integrated = { "Alpha Vantage", "Finnhub", "Polygon.io", "Twelve Data", "Yahoo Finance", "Fin. Modeling Prep", "Yahoo Finance (page)" };
     const QColor integratedBg(230, 245, 230);
 
     for (int r = 0; r < providers.size(); ++r) {

@@ -1,30 +1,26 @@
 #include "WebBrowserWidget.h"
 #include "RequestInterceptor.h"
+#include "AppSettings.h"
 #include "Logger.h"
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebEngineProfile>
 #include <QWebEngineLoadingInfo>
-#include <QSettings>
 #include <QUrl>
-
-// URL patterns:  {upper} = symbol uppercase,  {lower} = symbol lowercase.
-// Morningstar requires an exchange prefix in the URL path that we don't have
-// per-symbol, so fall back to their search page.
-// TradingView resolves the exchange automatically from the ticker alone.
-const QList<WebBrowserWidget::TabInfo> WebBrowserWidget::kTabs = {
-    { "Morningstar",  "https://www.morningstar.com/search?query={upper}"  },
-    { "TradingView",  "https://www.tradingview.com/symbols/{upper}/"      },
-    { "StockCharts",  "https://stockcharts.com/sc3/ui/?s={upper}"         },
-    { "Zacks",        "https://www.zacks.com/stock/quote/{upper}?q={lower}" },
-};
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QCoreApplication>
 
 WebBrowserWidget::WebBrowserWidget(QWidget *parent)
     : QWidget(parent)
 {
+    loadTabDefinitions();
+
     // ── Profile + interceptor ─────────────────────────────────────────────────
-    // Use a persistent named profile so cookies/sessions survive restarts.
     m_profile     = new QWebEngineProfile("StockChartBrowser", this);
     m_interceptor = new RequestInterceptor(this);
     m_profile->setUrlRequestInterceptor(m_interceptor);
@@ -34,20 +30,56 @@ WebBrowserWidget::WebBrowserWidget(QWidget *parent)
     m_webView = new QWebEngineView(this);
     m_webView->setPage(page);
 
-    // ── Tab bar ───────────────────────────────────────────────────────────────
-    auto *layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(0);
+    // ── Tab bar row (tabs + "+" button) ───────────────────────────────────────
+    auto *tabRow = new QHBoxLayout;
+    tabRow->setContentsMargins(0, 0, 0, 0);
+    tabRow->setSpacing(0);
 
     m_tabBar = new QTabBar(this);
     m_tabBar->setExpanding(false);
-    for (const auto &tab : kTabs)
-        m_tabBar->addTab(tab.name);
+    for (const auto &tab : m_tabs) {
+        const int idx = m_tabBar->addTab(tab.name);
+        if (!tab.comment.isEmpty())
+            m_tabBar->setTabToolTip(idx, tab.comment);
+    }
 
-    layout->addWidget(m_tabBar);
+    m_addTabBtn = new QToolButton(this);
+    m_addTabBtn->setText("+");
+    m_addTabBtn->setToolTip("Open new browser tab");
+    m_addTabBtn->setAutoRaise(true);
+    m_addTabBtn->setFixedSize(24, m_tabBar->sizeHint().height());
+
+    tabRow->addWidget(m_tabBar);
+    tabRow->addWidget(m_addTabBtn);
+    tabRow->addStretch();
+
+    // ── URL bar ───────────────────────────────────────────────────────────────
+    m_urlBar = new QLineEdit(this);
+    m_urlBar->setPlaceholderText("Enter URL or search…");
+    m_urlBar->setClearButtonEnabled(true);
+
+    // ── Assemble layout ───────────────────────────────────────────────────────
+    auto *layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->addLayout(tabRow);
+    layout->addWidget(m_urlBar);
     layout->addWidget(m_webView, 1);
 
-    connect(m_tabBar, &QTabBar::currentChanged, this, &WebBrowserWidget::onTabChanged);
+    // ── Signals ───────────────────────────────────────────────────────────────
+    connect(m_tabBar,    &QTabBar::currentChanged,    this, &WebBrowserWidget::onTabChanged);
+    connect(m_addTabBtn, &QToolButton::clicked,       this, &WebBrowserWidget::onAddTab);
+    connect(m_urlBar,    &QLineEdit::returnPressed,   this, &WebBrowserWidget::onUrlBarReturnPressed);
+
+    // Keep URL bar in sync with actual page URL (redirects, JS navigation, etc.)
+    connect(m_webView, &QWebEngineView::urlChanged, this, [this](const QUrl &url) {
+        if (url.isEmpty() || url == QUrl("about:blank")) return;
+        m_urlBar->setText(url.toString());
+        // Persist the current URL for generic tabs so we can restore it on tab switch.
+        const int idx = m_tabBar->currentIndex();
+        if (idx >= 0 && idx < m_tabs.size() && !m_tabs[idx].fixed)
+            m_tabs[idx].lastUrl = url.toString();
+    });
 
     // ── Loading log ───────────────────────────────────────────────────────────
     connect(page, &QWebEnginePage::loadingChanged,
@@ -82,13 +114,9 @@ void WebBrowserWidget::setSymbol(const QString &symbol)
 void WebBrowserWidget::openAdBlockDialog()
 {
     if (!m_adBlockDialog) {
-        // Parent to the top-level window so the dialog floats above the whole app.
         m_adBlockDialog = new AdBlockDialog(m_interceptor, window());
         m_adBlockDialog->setAttribute(Qt::WA_DeleteOnClose);
-        connect(m_adBlockDialog, &QDialog::finished, this, [this]() {
-            QSettings s("StockChart", "StockChart");
-            saveBlacklist(s);
-        });
+        connect(m_adBlockDialog, &QDialog::finished, this, [this]() { saveBlacklist(); });
         connect(m_adBlockDialog, &AdBlockDialog::reloadRequested, this, [this]() { m_webView->reload(); });
     }
     m_adBlockDialog->show();
@@ -96,39 +124,119 @@ void WebBrowserWidget::openAdBlockDialog()
     m_adBlockDialog->activateWindow();
 }
 
-void WebBrowserWidget::saveBlacklist(QSettings &s) const
+void WebBrowserWidget::saveBlacklist() const
 {
     const QSet<QString> bl = m_interceptor->blacklist();
-    s.setValue("adBlockBlacklist", QStringList(bl.cbegin(), bl.cend()));
+    AppSettings::instance().setAdBlockBlacklist(QStringList(bl.cbegin(), bl.cend()));
 }
 
-void WebBrowserWidget::loadBlacklist(QSettings &s)
+void WebBrowserWidget::loadBlacklist()
 {
-    const QStringList list = s.value("adBlockBlacklist").toStringList();
+    const QStringList list = AppSettings::instance().adBlockBlacklist();
     m_interceptor->setBlacklist(QSet<QString>(list.cbegin(), list.cend()));
 }
 
-// ── Private ───────────────────────────────────────────────────────────────────
+// ── Private slots ─────────────────────────────────────────────────────────────
 
-void WebBrowserWidget::onTabChanged(int)
+void WebBrowserWidget::onTabChanged(int idx)
 {
-    loadCurrentTab();
+    if (idx < 0 || idx >= m_tabs.size()) return;
+
+    if (m_tabs[idx].fixed) {
+        // Financial tab: reload from current symbol.
+        loadCurrentTab();
+    } else {
+        // Generic tab: restore last URL, or show blank.
+        m_interceptor->clearTracking();
+        if (!m_tabs[idx].lastUrl.isEmpty()) {
+            m_urlBar->setText(m_tabs[idx].lastUrl);
+            m_webView->load(QUrl(m_tabs[idx].lastUrl));
+        } else {
+            m_urlBar->clear();
+            m_webView->load(QUrl("about:blank"));
+            m_urlBar->setFocus();
+        }
+    }
 }
+
+void WebBrowserWidget::onAddTab()
+{
+    m_tabs.append({ "New Tab", "", "", false, "" });
+    const int idx = m_tabBar->addTab("New Tab");
+    m_tabBar->setCurrentIndex(idx);
+    // onTabChanged fires and handles the blank-page / URL-bar-focus logic.
+}
+
+void WebBrowserWidget::onUrlBarReturnPressed()
+{
+    const QString text = m_urlBar->text().trimmed();
+    if (text.isEmpty()) return;
+    m_interceptor->clearTracking();
+    m_webView->load(QUrl::fromUserInput(text));
+}
+
+// ── Private helpers ───────────────────────────────────────────────────────────
 
 void WebBrowserWidget::loadCurrentTab()
 {
+    const int idx = m_tabBar->currentIndex();
+    if (idx < 0 || idx >= m_tabs.size()) return;
+    if (!m_tabs[idx].fixed) return; // generic tab — URL bar drives navigation
     if (m_symbol.isEmpty()) return;
-    m_interceptor->clearTracking(); // fresh domain list for this navigation
-    const QString url = buildUrl(m_tabBar->currentIndex());
-    if (!url.isEmpty())
+    m_interceptor->clearTracking();
+    const QString url = buildUrl(idx);
+    if (!url.isEmpty()) {
+        m_urlBar->setText(url);
         m_webView->load(QUrl(url));
+    }
 }
 
 QString WebBrowserWidget::buildUrl(int tabIndex) const
 {
-    if (tabIndex < 0 || tabIndex >= kTabs.size()) return {};
-    QString url = kTabs[tabIndex].urlPattern;
+    if (tabIndex < 0 || tabIndex >= m_tabs.size()) return {};
+    QString url = m_tabs[tabIndex].urlPattern;
     url.replace("{upper}", m_symbol.toUpper());
     url.replace("{lower}", m_symbol.toLower());
     return url;
+}
+
+void WebBrowserWidget::loadTabDefinitions()
+{
+    // User override: a web-pages.json next to the executable takes priority.
+    const QString userPath = QCoreApplication::applicationDirPath() + "/web-pages.json";
+    QByteArray raw;
+
+    if (QFile::exists(userPath)) {
+        QFile f(userPath);
+        if (f.open(QIODevice::ReadOnly))
+            raw = f.readAll();
+    }
+
+    if (raw.isEmpty()) {
+        QFile f(":/web-pages.json");
+        if (f.open(QIODevice::ReadOnly))
+            raw = f.readAll();
+    }
+
+    if (!raw.isEmpty()) {
+        const QJsonDocument doc = QJsonDocument::fromJson(raw);
+        const QJsonArray tabs = doc.object().value("tabs").toArray();
+        for (const QJsonValue &v : tabs) {
+            const QJsonObject obj = v.toObject();
+            if (!obj.value("enabled").toBool(true)) continue;
+            m_tabs.append({ obj.value("name").toString(),
+                            obj.value("url").toString(),
+                            obj.value("comment").toString(),
+                            true, "" });
+        }
+    }
+
+    if (m_tabs.isEmpty()) {
+        m_tabs = {
+            { "Morningstar", "https://www.morningstar.com/search?query={upper}",    "", true, "" },
+            { "TradingView", "https://www.tradingview.com/symbols/{upper}/",        "", true, "" },
+            { "StockCharts", "https://stockcharts.com/sc3/ui/?s={upper}",           "", true, "" },
+            { "Zacks",       "https://www.zacks.com/stock/quote/{upper}?q={lower}", "", true, "" },
+        };
+    }
 }

@@ -1,5 +1,5 @@
 #include "StockGroupManager.h"
-#include <QSettings>
+#include "AppSettings.h"
 #include <algorithm>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -400,7 +400,7 @@ void StockGroupManager::sortBySymbol()
 
 void StockGroupManager::loadGroups()
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     int count = s.beginReadArray("stockGroups");
 
     if (count == 0) {
@@ -431,7 +431,7 @@ void StockGroupManager::loadGroups()
 
 void StockGroupManager::saveGroups()
 {
-    QSettings s("StockChart", "StockChart");
+    QSettings &s = AppSettings::instance().raw();
     s.remove("stockGroups");
     s.beginWriteArray("stockGroups");
     for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {

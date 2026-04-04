@@ -1,10 +1,11 @@
 #pragma once
 #include <QWidget>
 #include <QTabBar>
+#include <QLineEdit>
+#include <QToolButton>
 #include <QPointer>
 #include <QString>
 #include <QList>
-#include <QSettings>
 #include "AdBlockDialog.h"
 
 class QWebEngineView;
@@ -20,19 +21,22 @@ public:
     void setSymbol(const QString &symbol);
     void openAdBlockDialog();
 
-    // Use the caller's QSettings object so there is never a nested instance
-    // that can be overwritten when the outer instance syncs on destruction.
-    void saveBlacklist(QSettings &s) const;
-    void loadBlacklist(QSettings &s);
+    void saveBlacklist() const;
+    void loadBlacklist();
 
 private slots:
     void onTabChanged(int index);
+    void onAddTab();
+    void onUrlBarReturnPressed();
 
 private:
+    void loadTabDefinitions();
     void loadCurrentTab();
     QString buildUrl(int tabIndex) const;
 
     QTabBar            *m_tabBar      = nullptr;
+    QToolButton        *m_addTabBtn   = nullptr;
+    QLineEdit          *m_urlBar      = nullptr;
     QWebEngineView     *m_webView     = nullptr;
     QWebEngineProfile  *m_profile     = nullptr;
     RequestInterceptor *m_interceptor = nullptr;
@@ -40,6 +44,12 @@ private:
 
     QPointer<AdBlockDialog> m_adBlockDialog;
 
-    struct TabInfo { QString name; QString urlPattern; };
-    static const QList<TabInfo> kTabs;
+    struct TabInfo {
+        QString name;
+        QString urlPattern;   // empty for generic tabs
+        QString comment;
+        bool    fixed = true; // false = user-added generic tab
+        QString lastUrl;      // restored when switching back to a generic tab
+    };
+    QList<TabInfo> m_tabs;
 };

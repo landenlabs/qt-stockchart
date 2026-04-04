@@ -1,5 +1,5 @@
 #include "TableManager.h"
-#include <QSettings>
+#include "AppSettings.h"
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -49,9 +49,9 @@ TableManager::TableManager(QTableWidget *table, QSplitter *vertSplitter,
 
 void TableManager::loadSettings()
 {
-    QSettings s("StockChart", "StockChart");
+    auto &as = AppSettings::instance();
 
-    QVariantList vl = s.value("tablePeriods").toList();
+    QVariantList vl = as.tablePeriods();
     if (vl.isEmpty()) {
         m_periods = kDefaultPeriods;
     } else {
@@ -61,30 +61,30 @@ void TableManager::loadSettings()
 
     emit periodsChanged(m_periods);
 
-    m_showPercentChange = s.value("tableShowPercent", false).toBool();
+    m_showPercentChange = as.tableShowPercent();
     m_displayModeBtn->setChecked(m_showPercentChange);
     m_displayModeBtn->setText(m_showPercentChange ? "% Change" : "Price");
 
     // Table open/closed state — sizes are applied by restoreTableSplitter() from showEvent,
     // once the window is fully laid out and the splitter has a real height.
-    m_savedTableHeight   = s.value("tableHeight", -1).toInt();
-    m_savedSplitterState = s.value("vertSplitterState").toByteArray();
-    m_tableExpanded = s.value("tableExpanded", false).toBool();
+    m_savedTableHeight   = as.tableHeight();
+    m_savedSplitterState = as.vertSplitterState();
+    m_tableExpanded      = as.tableExpanded();
     m_toggleBtn->setText(m_tableExpanded ? "▲ Table" : "▼ Table");
 }
 
 void TableManager::saveSettings()
 {
-    QSettings s("StockChart", "StockChart");
+    auto &as = AppSettings::instance();
     QVariantList vl;
     for (int p : m_periods) vl << p;
-    s.setValue("tablePeriods",    vl);
-    s.setValue("tableShowPercent", m_showPercentChange);
-    s.setValue("tableExpanded",   m_tableExpanded);
-    s.setValue("tableHeight",     m_savedTableHeight);
+    as.setTablePeriods(vl);
+    as.setTableShowPercent(m_showPercentChange);
+    as.setTableExpanded(m_tableExpanded);
+    as.setTableHeight(m_savedTableHeight);
     // Save splitter state only when the table is open so the stored state is meaningful
     if (m_tableExpanded)
-        s.setValue("vertSplitterState", m_vertSplitter->saveState());
+        as.setVertSplitterState(m_vertSplitter->saveState());
 }
 
 // ── Expand / collapse ─────────────────────────────────────────────────────────

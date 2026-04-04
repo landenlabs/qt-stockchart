@@ -24,6 +24,8 @@ set(SOURCES
     src/PolygonProvider.cpp
     src/TwelveDataProvider.cpp
     src/YahooFinanceProvider.cpp
+    src/FmpProvider.cpp
+    src/YahooPageProvider.cpp
     src/StockCacheManager.cpp
     src/StockGroupManager.cpp
     src/ApiCallTracker.cpp
@@ -35,6 +37,7 @@ set(SOURCES
     src/WebBrowserWidget.cpp
     src/RequestInterceptor.cpp
     src/AdBlockDialog.cpp
+    src/AppSettings.cpp
 )
 
 set(HEADERS
@@ -46,6 +49,8 @@ set(HEADERS
     src/PolygonProvider.h
     src/TwelveDataProvider.h
     src/YahooFinanceProvider.h
+    src/FmpProvider.h
+    src/YahooPageProvider.h
     src/StockCacheManager.h
     src/StockGroupManager.h
     src/ApiCallTracker.h
@@ -57,6 +62,7 @@ set(HEADERS
     src/WebBrowserWidget.h
     src/RequestInterceptor.h
     src/AdBlockDialog.h
+    src/AppSettings.h
 )
 
 option(BUILD_AS_BUNDLE "Build as a macOS App Bundle" ON)
@@ -97,5 +103,7 @@ endif()
 
 qt_add_resources(StockChart "app_resources"
     PREFIX "/"
-    FILES bg_graph.jpg
+    FILES
+        bg_graph.jpg
+        web-pages.json
 )

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "comment": "Tab definitions for the built-in financial website browser.\nCopy this file next to the application executable to override these defaults.\nURL placeholders: {upper} = symbol in UPPER CASE (e.g. IBM), {lower} = lower case (e.g. ibm).",
+  "tabs": [
+    {
+      "name": "Morningstar",
+      "url": "https://www.morningstar.com/search?query={upper}",
+      "comment": "Search Morningstar for quotes, ratings, and analyst research.\n(A direct quote URL requires the exchange code, so search is used instead.)",
+      "enabled": true
+    },
+    {
+      "name": "TradingView",
+      "url": "https://www.tradingview.com/symbols/{upper}/",
+      "comment": "Interactive TradingView chart.\nThe exchange is resolved automatically from the ticker symbol.",
+      "enabled": true
+    },
+    {
+      "name": "StockCharts",
+      "url": "https://stockcharts.com/sc3/ui/?s={upper}",
+      "comment": "Technical analysis chart on StockCharts.com.",
+      "enabled": true
+    },
+    {
+      "name": "Zacks",
+      "url": "https://www.zacks.com/stock/quote/{upper}?q={lower}",
+      "comment": "Stock analysis, earnings estimates, and ratings on Zacks.com.",
+      "enabled": true
+    },
+    {
+      "name": "NYSE Hours",
+      "url": "https://www.nyse.com/markets/hours-calendars",
+      "comment": "Official NYSE market hours and holiday calendar.\nURL is not symbol-specific — the {upper} placeholder is unused.",
+      "enabled": true
+    }
+  ]
+}

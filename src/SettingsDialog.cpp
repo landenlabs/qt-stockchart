@@ -13,6 +13,7 @@ static QString signupUrl(const QString &id)
     if (id == "finnhub")      return "https://finnhub.io/register";
     if (id == "polygon")      return "https://polygon.io/dashboard/signup";
     if (id == "twelvedata")   return "https://twelvedata.com/";
+    if (id == "fmp")          return "https://financialmodelingprep.com/developer/docs/";
     return {};
 }
 
@@ -22,6 +23,7 @@ static QString accountUrl(const QString &id)
     if (id == "finnhub")      return "https://finnhub.io/dashboard";
     if (id == "polygon")      return "https://polygon.io/dashboard/billing";
     if (id == "twelvedata")   return "https://twelvedata.com/account";
+    if (id == "fmp")          return "https://financialmodelingprep.com/developer/docs/";
     return {};
 }
 
