@@ -37,10 +37,14 @@ WebBrowserWidget::WebBrowserWidget(QWidget *parent)
 
     m_tabBar = new QTabBar(this);
     m_tabBar->setExpanding(false);
+    m_tabBar->setTabsClosable(true);
     for (const auto &tab : m_tabs) {
         const int idx = m_tabBar->addTab(tab.name);
         if (!tab.comment.isEmpty())
             m_tabBar->setTabToolTip(idx, tab.comment);
+        // Fixed (configured) tabs have no close button.
+        if (tab.fixed)
+            m_tabBar->setTabButton(idx, QTabBar::RightSide, nullptr);
     }
 
     m_addTabBtn = new QToolButton(this);
@@ -68,6 +72,7 @@ WebBrowserWidget::WebBrowserWidget(QWidget *parent)
 
     // ── Signals ───────────────────────────────────────────────────────────────
     connect(m_tabBar,    &QTabBar::currentChanged,    this, &WebBrowserWidget::onTabChanged);
+    connect(m_tabBar,    &QTabBar::tabCloseRequested, this, &WebBrowserWidget::onCloseTab);
     connect(m_addTabBtn, &QToolButton::clicked,       this, &WebBrowserWidget::onAddTab);
     connect(m_urlBar,    &QLineEdit::returnPressed,   this, &WebBrowserWidget::onUrlBarReturnPressed);
 
@@ -171,6 +176,14 @@ void WebBrowserWidget::onAddTab()
     const int idx = m_tabBar->addTab("New Tab");
     m_tabBar->setCurrentIndex(idx);
     // onTabChanged fires and handles the blank-page / URL-bar-focus logic.
+}
+
+void WebBrowserWidget::onCloseTab(int idx)
+{
+    if (idx < 0 || idx >= m_tabs.size()) return;
+    if (m_tabs[idx].fixed) return; // configured tabs cannot be removed
+    m_tabs.removeAt(idx);
+    m_tabBar->removeTab(idx);
 }
 
 void WebBrowserWidget::onUrlBarReturnPressed()

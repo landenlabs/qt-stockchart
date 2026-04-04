@@ -27,6 +27,7 @@ public:
 private slots:
     void onTabChanged(int index);
     void onAddTab();
+    void onCloseTab(int index);
     void onUrlBarReturnPressed();
 
 private:
