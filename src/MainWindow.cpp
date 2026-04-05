@@ -41,6 +41,7 @@
 #include <QLineEdit>
 #include <QSlider>
 #include <QStyle>
+#include <QFileDialog>
 
 // ── Construction ──────────────────────────────────────────────────────────────
 
@@ -1257,6 +1258,34 @@ void MainWindow::showHelp()
             sizeLabel->setText(QString("%1 pt").arg(v));
             applyFontSize(v);
             AppSettings::instance().setFontPointSize(v);
+        });
+
+        // ── Cache directory ───────────────────────────────────────────────────
+        auto *sep2 = new QFrame(page);
+        sep2->setFrameShape(QFrame::HLine);
+        sep2->setFrameShadow(QFrame::Sunken);
+        vl->addWidget(sep2);
+
+        vl->addWidget(new QLabel("Cache Directory", page));
+
+        auto *cacheRow = new QHBoxLayout();
+        cacheRow->setSpacing(8);
+        auto *cacheEdit = new QLineEdit(AppSettings::instance().cacheDirPath(), page);
+        auto *browseBtn = new QPushButton("Browse...", page);
+        cacheRow->addWidget(cacheEdit, 1);
+        cacheRow->addWidget(browseBtn);
+        vl->addLayout(cacheRow);
+
+        connect(browseBtn, &QPushButton::clicked, this, [this, cacheEdit]() {
+            const QString path = QFileDialog::getExistingDirectory(
+                this, "Select Cache Directory", cacheEdit->text());
+            if (!path.isEmpty()) {
+                cacheEdit->setText(path);
+                AppSettings::instance().setCacheDirPath(path);
+            }
+        });
+        connect(cacheEdit, &QLineEdit::editingFinished, cacheEdit, [cacheEdit]() {
+            AppSettings::instance().setCacheDirPath(cacheEdit->text());
         });
 
         vl->addStretch();

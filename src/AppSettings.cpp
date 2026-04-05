@@ -1,4 +1,5 @@
 #include "AppSettings.h"
+#include <QStandardPaths>
 
 static constexpr char kOrg[] = "StockChart";
 static constexpr char kApp[] = "StockChart";
@@ -102,6 +103,16 @@ int AppSettings::fontPointSize() const
     { return m_settings.value("fontPointSize", 0).toInt(); }
 void AppSettings::setFontPointSize(int v)
     { m_settings.setValue("fontPointSize", v); }
+
+// ── Cache storage ─────────────────────────────────────────────────────────
+
+QString AppSettings::cacheDirPath() const
+{
+    const QString def = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/cache";
+    return m_settings.value("cacheDirPath", def).toString();
+}
+void AppSettings::setCacheDirPath(const QString &path)
+    { m_settings.setValue("cacheDirPath", path); }
 
 // ── Ad blocker ────────────────────────────────────────────────────────────────
 

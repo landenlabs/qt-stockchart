@@ -18,6 +18,7 @@ static void qtMessageHandler(QtMsgType type, const QMessageLogContext &, const Q
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setOrganizationName("StockChart");
     app.setApplicationName("StockChart");
     app.setApplicationVersion("1.1.0");
 

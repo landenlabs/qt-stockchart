@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QVariantList>
+#include <QStandardPaths>
 
 // Singleton that owns the single QSettings instance for the whole application.
 // All persistent state must be read and written through this class — never
@@ -80,6 +81,10 @@ public:
     // ── Appearance ────────────────────────────────────────────────────────────
     int  fontPointSize() const;        // 0 = use system default
     void setFontPointSize(int v);
+
+    // ── Cache storage ─────────────────────────────────────────────────────────
+    QString cacheDirPath() const;   // defaults to AppDataLocation/cache
+    void    setCacheDirPath(const QString &path);
 
     // ── Ad blocker ────────────────────────────────────────────────────────────
     QStringList  adBlockBlacklist() const;

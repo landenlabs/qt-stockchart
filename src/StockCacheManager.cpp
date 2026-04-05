@@ -1,6 +1,10 @@
 #include "StockCacheManager.h"
 #include "AppSettings.h"
-#include <QDataStream>
+#include "Logger.h"
+#include <QDir>
+#include <QFile>
+#include <QTextStream>
+#include <QLocale>
 #include <QTime>
 #include <limits>
 #include <cmath>
@@ -91,72 +95,188 @@ void StockCacheManager::normalizeCache(QVector<StockDataPoint> &points)
     points = std::move(result);
 }
 
+// ── File helpers ──────────────────────────────────────────────────────────────
+
+// Sanitize a symbol name into a valid filename (no extension).
+// Replaces characters invalid on Windows or confusing on any platform.
+static QString symbolToFilename(const QString &symbol)
+{
+    QString name = symbol;
+    // Characters invalid in Windows filenames, plus ^ and . for clarity
+    for (QChar c : QString(R"(^./\:*?"<>|)"))
+        name.replace(c, '_');
+    return name + ".csv";
+}
+
+static QString typeToString(SymbolType t)
+{
+    switch (t) {
+    case SymbolType::Stock:      return "stock";
+    case SymbolType::ETF:        return "etf";
+    case SymbolType::Index:      return "index";
+    case SymbolType::MutualFund: return "mutualfund";
+    case SymbolType::Crypto:     return "crypto";
+    default:                     return "unknown";
+    }
+}
+
+static SymbolType stringToType(const QString &s)
+{
+    if (s == "stock")      return SymbolType::Stock;
+    if (s == "etf")        return SymbolType::ETF;
+    if (s == "index")      return SymbolType::Index;
+    if (s == "mutualfund") return SymbolType::MutualFund;
+    if (s == "crypto")     return SymbolType::Crypto;
+    return SymbolType::Unknown;
+}
+
+// ── Persistence ───────────────────────────────────────────────────────────────
+
 void StockCacheManager::saveCache()
 {
-    QSettings &s = AppSettings::instance().raw();
-    s.beginGroup("historyCache");
-    for (auto it = m_cache.cbegin(); it != m_cache.cend(); ++it) {
-        QByteArray data;
-        QDataStream out(&data, QIODevice::WriteOnly);
-        out << (qint32)it.value().size();
-        for (const auto &pt : it.value())
-            out << pt.timestamp << pt.price;
-        s.setValue(it.key(), data);
+    // Don't overwrite disk data before we've done a first load.
+    // setActiveProvider() calls saveCache() at startup when m_cache is still empty.
+    if (!m_cacheLoaded) {
+        Logger::instance().append("Cache: saveCache() skipped — not yet loaded");
+        return;
     }
-    s.endGroup();
+
+    const QString dir = AppSettings::instance().cacheDirPath();
+    if (!QDir().mkpath(dir)) {
+        Logger::instance().append("Cache: ERROR — cannot create cache directory: " + dir);
+        return;
+    }
+
+    Logger::instance().append(QString("Cache: saving %1 symbol(s) to %2")
+                               .arg(m_cache.size()).arg(dir));
+
+    // Write per-symbol CSV files (epoch seconds, price).
+    // Use C locale so decimal point is always '.' regardless of system locale.
+    int savedFiles = 0;
+    for (auto it = m_cache.cbegin(); it != m_cache.cend(); ++it) {
+        const QString path = dir + "/" + symbolToFilename(it.key());
+        QFile f(path);
+        if (!f.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            Logger::instance().append("Cache: ERROR writing " + path + " — " + f.errorString());
+            continue;
+        }
+        QTextStream out(&f);
+        out.setLocale(QLocale::c());
+        for (const auto &pt : it.value())
+            out << pt.timestamp.toSecsSinceEpoch() << ',' << pt.price << '\n';
+        ++savedFiles;
+    }
+
+    // Write index.csv: symbol, filename, type.
+    const QString idxPath = dir + "/index.csv";
+    QFile idx(idxPath);
+    if (!idx.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        Logger::instance().append("Cache: ERROR writing index.csv — " + idx.errorString());
+        return;
+    }
+    QTextStream out(&idx);
+    out << "symbol,filename,type\n";
+    for (auto it = m_cache.cbegin(); it != m_cache.cend(); ++it) {
+        const QString &sym = it.key();
+        out << sym << ','
+            << symbolToFilename(sym) << ','
+            << typeToString(m_symbolTypes.value(sym, SymbolType::Unknown)) << '\n';
+    }
+    Logger::instance().append(QString("Cache: saved %1 file(s) + index.csv").arg(savedFiles));
 }
 
 void StockCacheManager::loadCache()
 {
-    QSettings &s = AppSettings::instance().raw();
-    s.beginGroup("historyCache");
-    for (const QString &sym : s.childKeys()) {
-        QByteArray data = s.value(sym).toByteArray();
-        QDataStream in(&data, QIODevice::ReadOnly);
-        qint32 size;
-        in >> size;
-        QVector<StockDataPoint> points;
-        points.reserve(size);
-        for (int i = 0; i < size; ++i) {
-            QDateTime dt;
-            double p;
-            in >> dt >> p;
-            if (!dt.isNull())
-                points.append({dt, p});
+    const QString dir = AppSettings::instance().cacheDirPath();
+    Logger::instance().append("Cache: loadCache() from " + dir);
+
+    // Mark as loaded regardless — even a missing index.csv is a valid empty cache.
+    m_cacheLoaded = true;
+
+    const QString idxPath = dir + "/index.csv";
+    QFile idx(idxPath);
+    if (!idx.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        Logger::instance().append("Cache: index.csv not found — " + idxPath);
+        return;
+    }
+
+    QTextStream idxIn(&idx);
+    idxIn.readLine(); // skip header: "symbol,filename,type"
+
+    QMap<QString, QString> symbolFiles; // symbol → filename
+    while (!idxIn.atEnd()) {
+        const QString line = idxIn.readLine().trimmed();
+        if (line.isEmpty()) continue;
+        const QStringList parts = line.split(',');
+        if (parts.size() < 3) continue;
+        symbolFiles[parts[0]]  = parts[1];
+        m_symbolTypes[parts[0]] = stringToType(parts[2]);
+    }
+    Logger::instance().append(QString("Cache: index has %1 symbol(s)").arg(symbolFiles.size()));
+
+    // Load each per-symbol CSV file.
+    int loadedSymbols = 0;
+    for (auto it = symbolFiles.cbegin(); it != symbolFiles.cend(); ++it) {
+        const QString filePath = dir + "/" + it.value();
+        QFile f(filePath);
+        if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            Logger::instance().append("Cache: missing data file — " + filePath);
+            continue;
         }
+        QTextStream fin(&f);
+        fin.setLocale(QLocale::c());
+        QVector<StockDataPoint> points;
+        int parseErrors = 0;
+        while (!fin.atEnd()) {
+            const QString line = fin.readLine().trimmed();
+            if (line.isEmpty()) continue;
+            const int comma = line.indexOf(',');
+            if (comma < 0) { ++parseErrors; continue; }
+            bool epochOk, priceOk;
+            const qint64 epoch = line.left(comma).toLongLong(&epochOk);
+            const double price = line.mid(comma + 1).toDouble(&priceOk);
+            if (epochOk && priceOk)
+                points.append({QDateTime::fromSecsSinceEpoch(epoch), price});
+            else
+                ++parseErrors;
+        }
+        if (parseErrors > 0)
+            Logger::instance().append(QString("Cache: %1 — %2 parse error(s)")
+                                       .arg(it.key()).arg(parseErrors));
         if (!points.isEmpty()) {
             normalizeCache(points);
-            m_cache[sym] = points;
+            m_cache[it.key()] = points;
+            ++loadedSymbols;
+        } else {
+            Logger::instance().append("Cache: " + it.key() + " — no valid points after normalize");
         }
     }
-    s.endGroup();
+    Logger::instance().append(QString("Cache: loaded %1/%2 symbol(s)")
+                               .arg(loadedSymbols).arg(symbolFiles.size()));
 }
 
 void StockCacheManager::loadSymbolTypeCache()
 {
-    QSettings &s = AppSettings::instance().raw();
-    s.beginGroup("symbolTypes");
-    for (const QString &sym : s.childKeys())
-        m_symbolTypes[sym] = static_cast<SymbolType>(s.value(sym).toInt());
-    s.endGroup();
+    // Types are loaded as part of loadCache() via index.csv — no-op here.
 }
 
 void StockCacheManager::saveSymbolType(const QString &symbol, SymbolType type)
 {
-    QSettings &s = AppSettings::instance().raw();
-    s.beginGroup("symbolTypes");
-    s.setValue(symbol, static_cast<int>(type));
-    s.endGroup();
+    // Update in-memory only; index.csv is written at app close via saveCache().
+    m_symbolTypes[symbol] = type;
 }
 
 void StockCacheManager::clearSymbolCache(const QString &symbol)
 {
     m_cache.remove(symbol);
-    QSettings &s = AppSettings::instance().raw();
-    s.beginGroup("historyCache");
-    s.remove(symbol);
-    s.endGroup();
+    m_symbolTypes.remove(symbol);
+    const QString path = AppSettings::instance().cacheDirPath() + "/" + symbolToFilename(symbol);
+    if (QFile::remove(path))
+        Logger::instance().append("Cache: removed " + path);
+    // index.csv is rebuilt on the next saveCache() call.
 }
+
+// ── Freshness ─────────────────────────────────────────────────────────────────
 
 qint64 StockCacheManager::dataSecs(const QString &sym) const
 {

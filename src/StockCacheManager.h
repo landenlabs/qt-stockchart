@@ -51,4 +51,5 @@ public:
 private:
     QMap<QString, QVector<StockDataPoint>> m_cache;
     QMap<QString, SymbolType>              m_symbolTypes;
+    bool                                   m_cacheLoaded = false;
 };
