@@ -115,7 +115,6 @@ QTreeWidgetItem *StockGroupManager::addGroup(const QString &name, bool expanded)
     auto *item = new QTreeWidgetItem(m_tree);
     item->setFlags(Qt::ItemIsEnabled);
     item->setData(0, Qt::UserRole, name);
-    m_tree->setFirstColumnSpanned(m_tree->indexOfTopLevelItem(item), QModelIndex(), true);
 
     auto *container = new QWidget;
     container->setStyleSheet("background: transparent;");
@@ -139,6 +138,9 @@ QTreeWidgetItem *StockGroupManager::addGroup(const QString &name, bool expanded)
     hl->addStretch();
 
     m_tree->setItemWidget(item, 0, container);
+    // Must be called AFTER setItemWidget: Qt sizes the persistent widget during a
+    // delayed layout pass, so spanning set before the widget is installed is ignored.
+    m_tree->setFirstColumnSpanned(m_tree->indexOfTopLevelItem(item), QModelIndex(), true);
 
     connect(addBtn, &QPushButton::clicked, this, [this, item]() {
         showAddStockDialog(item);
