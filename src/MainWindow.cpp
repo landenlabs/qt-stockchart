@@ -42,6 +42,9 @@
 #include <QSlider>
 #include <QStyle>
 #include <QFileDialog>
+#include <QDir>
+#include <QTextStream>
+#include <QDesktopServices>
 
 // ── Construction ──────────────────────────────────────────────────────────────
 
@@ -1124,7 +1127,7 @@ void MainWindow::showHelp()
 {
     QDialog dlg(this);
     dlg.setWindowTitle("About StockChart");
-    dlg.setMinimumSize(700, 480);
+    dlg.setMinimumSize(700, 580);
 
     auto *outerLayout = new QVBoxLayout(&dlg);
     outerLayout->setSpacing(0);
@@ -1157,7 +1160,7 @@ void MainWindow::showHelp()
         "  font-weight: bold;"
         "  border-left: 3px solid #1a73e8;"
         "}");
-    navList->addItems({ "About", "Appearance / Behavior", "Licenses" });
+    navList->addItems({ "About", "Appearance / Data", "Licenses" });
 
     // ── Right stacked pages ─────────────────────────────────────────────────
     auto *stack = new QStackedWidget(contentWidget);
@@ -1211,7 +1214,7 @@ void MainWindow::showHelp()
         stack->addWidget(page);
     }
 
-    // Page 1 ── Appearance / Behavior ────────────────────────────────────────
+    // Page 1 ── Appearance / Data ─────────────────────────────────────────────
     {
         auto *page = new QWidget();
         auto *vl = new QVBoxLayout(page);
@@ -1271,7 +1274,7 @@ void MainWindow::showHelp()
         auto *cacheRow = new QHBoxLayout();
         cacheRow->setSpacing(8);
         auto *cacheEdit = new QLineEdit(AppSettings::instance().cacheDirPath(), page);
-        auto *browseBtn = new QPushButton("Browse...", page);
+        auto *browseBtn = new QPushButton("Find...", page);
         cacheRow->addWidget(cacheEdit, 1);
         cacheRow->addWidget(browseBtn);
         vl->addLayout(cacheRow);
@@ -1288,7 +1291,88 @@ void MainWindow::showHelp()
             AppSettings::instance().setCacheDirPath(cacheEdit->text());
         });
 
-        vl->addStretch();
+        // ── Cache summary table ───────────────────────────────────────────────
+        auto *sep3 = new QFrame(page);
+        sep3->setFrameShape(QFrame::HLine);
+        sep3->setFrameShadow(QFrame::Sunken);
+        vl->addWidget(sep3);
+
+        auto *cacheHeaderRow = new QHBoxLayout();
+        cacheHeaderRow->setSpacing(8);
+        cacheHeaderRow->addWidget(new QLabel("Cache Files (up to 30)", page));
+        auto *exploreBtn = new QPushButton("Explore", page);
+        exploreBtn->setToolTip("Open cache directory in file manager");
+        connect(exploreBtn, &QPushButton::clicked, this, [cacheEdit]() {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(cacheEdit->text()));
+        });
+        cacheHeaderRow->addWidget(exploreBtn);
+        cacheHeaderRow->addStretch();
+        vl->addLayout(cacheHeaderRow);
+
+        auto *cacheTable = new QTableWidget(0, 4, page);
+        cacheTable->setHorizontalHeaderLabels({ "File", "Start Date", "End Date", "#Rows" });
+        cacheTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        cacheTable->setSelectionMode(QAbstractItemView::NoSelection);
+        cacheTable->verticalHeader()->setVisible(false);
+        cacheTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        cacheTable->setShowGrid(true);
+        cacheTable->setAlternatingRowColors(true);
+
+        {
+            const QString cacheDir = AppSettings::instance().cacheDirPath();
+            QDir dir(cacheDir);
+            QStringList csvFiles = dir.entryList({ "*.csv" }, QDir::Files, QDir::Name);
+            csvFiles.removeAll("index.csv");
+            if (csvFiles.size() > 30)
+                csvFiles = csvFiles.mid(0, 30);
+
+            cacheTable->setRowCount(csvFiles.size());
+
+            for (int r = 0; r < csvFiles.size(); ++r) {
+                QFile f(cacheDir + "/" + csvFiles[r]);
+                QString startStr, endStr;
+                int rowCount = 0;
+
+                if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                    QTextStream in(&f);
+                    in.setLocale(QLocale::c());
+                    QString firstLine, lastLine;
+                    while (!in.atEnd()) {
+                        const QString line = in.readLine().trimmed();
+                        if (line.isEmpty()) continue;
+                        if (firstLine.isEmpty()) firstLine = line;
+                        lastLine = line;
+                        ++rowCount;
+                    }
+
+                    auto epochFromLine = [](const QString &line) -> qint64 {
+                        const int comma = line.indexOf(',');
+                        if (comma < 0) return -1;
+                        bool ok;
+                        const qint64 v = line.left(comma).toLongLong(&ok);
+                        return ok ? v : -1;
+                    };
+
+                    const qint64 s = epochFromLine(firstLine);
+                    const qint64 e = epochFromLine(lastLine);
+                    if (s >= 0)
+                        startStr = QDateTime::fromSecsSinceEpoch(s).toLocalTime()
+                                       .toString("dd-MMM-yyyy hh:mm");
+                    if (e >= 0)
+                        endStr = QDateTime::fromSecsSinceEpoch(e).toLocalTime()
+                                     .toString("dd-MMM-yyyy hh:mm");
+                }
+
+                cacheTable->setItem(r, 0, new QTableWidgetItem(csvFiles[r]));
+                cacheTable->setItem(r, 1, new QTableWidgetItem(startStr));
+                cacheTable->setItem(r, 2, new QTableWidgetItem(endStr));
+                auto *rowsItem = new QTableWidgetItem(QString::number(rowCount));
+                rowsItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+                cacheTable->setItem(r, 3, rowsItem);
+            }
+        }
+
+        vl->addWidget(cacheTable, 1);
         stack->addWidget(page);
     }
 
