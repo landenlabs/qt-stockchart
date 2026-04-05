@@ -99,27 +99,69 @@ void MainWindow::setupUI()
     auto *topControls = new QWidget(leftPanel);
     auto *topLayout = new QHBoxLayout(topControls);
     topLayout->setContentsMargins(4, 6, 4, 4);
-    topLayout->setSpacing(4);
+    topLayout->setSpacing(8);
 
-    auto *exportBtn = new QToolButton(topControls);
-    exportBtn->setText("⬇");
-    exportBtn->setAutoRaise(true);
-    exportBtn->setFixedSize(26, 24);
-    exportBtn->setToolTip("Export Stock groups to CSV file");
+    // ── Star filter button ───────────────────────────────────────────────────
+    m_starFilterBtn = new QToolButton(topControls);
+    m_starFilterBtn->setText("\u2605"); // ★
+    m_starFilterBtn->setAutoRaise(true);
+    m_starFilterBtn->setFixedSize(26, 24);
+    m_starFilterBtn->setToolTip("Filter rows by star color");
+    m_starFilterBtn->setPopupMode(QToolButton::InstantPopup);
 
-    auto *importBtn = new QToolButton(topControls);
-    importBtn->setText("⬆");
-    importBtn->setAutoRaise(true);
-    importBtn->setFixedSize(26, 24);
-    importBtn->setToolTip("Import stocks and groups from CSV file");
+    auto *starFilterMenu = new QMenu(m_starFilterBtn);
+    const QStringList starFilterNames = {"None", "Gold", "Blue", "Green", "Red", "Purple"};
+    QAction *noneAct = starFilterMenu->addAction(StockGroupManager::makeStarIcon(0), "None");
+    noneAct->setCheckable(true);
+    noneAct->setChecked(true);
+
+    QList<QAction*> colorActs;
+    for (int i = 1; i < starFilterNames.size(); ++i) {
+        QAction *act = starFilterMenu->addAction(StockGroupManager::makeStarIcon(i), starFilterNames[i]);
+        act->setCheckable(true);
+        colorActs.append(act);
+    }
+    m_starFilterBtn->setMenu(starFilterMenu);
+
+    connect(noneAct, &QAction::triggered, this, [this, noneAct, colorActs]() {
+        m_starFilterIndices.clear();
+        for (QAction *a : colorActs) a->setChecked(false);
+        noneAct->setChecked(true);
+        applyStarFilter();
+    });
+    for (int i = 0; i < colorActs.size(); ++i) {
+        QAction *act = colorActs[i];
+        const int starIdx = i + 1;
+        connect(act, &QAction::triggered, this, [this, noneAct, act, starIdx](bool checked) {
+            if (checked)
+                m_starFilterIndices.insert(starIdx);
+            else
+                m_starFilterIndices.remove(starIdx);
+            noneAct->setChecked(m_starFilterIndices.isEmpty());
+            applyStarFilter();
+        });
+    }
 
     m_autoRefreshCheck = new QCheckBox("Auto", topControls);
     m_autoRefreshCheck->setChecked(true);
     m_autoRefreshCheck->setToolTip("Automatically fetch data once a minute when market is open");
 
+    auto *exportBtn = new QToolButton(topControls);
+    exportBtn->setText("\u2B06"); // ⬆ up = export out
+    exportBtn->setAutoRaise(true);
+    exportBtn->setFixedSize(26, 24);
+    exportBtn->setToolTip("Export Stock groups to CSV file");
+
+    auto *importBtn = new QToolButton(topControls);
+    importBtn->setText("\u2B07"); // ⬇ down = import in
+    importBtn->setAutoRaise(true);
+    importBtn->setFixedSize(26, 24);
+    importBtn->setToolTip("Import stocks and groups from CSV file");
+
+    topLayout->addWidget(m_starFilterBtn);
+    topLayout->addWidget(m_autoRefreshCheck);
     topLayout->addWidget(exportBtn);
     topLayout->addWidget(importBtn);
-    topLayout->addWidget(m_autoRefreshCheck);
     topLayout->addStretch();
 
     leftLayout->addWidget(topControls);
@@ -790,6 +832,29 @@ void MainWindow::refreshChart(const QStringList &symbols)
     }
     m_chartManager->setPurchaseInfo(purInfo);
     m_chartManager->updateChart(symbols);
+}
+
+void MainWindow::applyStarFilter()
+{
+    if (m_starFilterBtn) {
+        if (m_starFilterIndices.isEmpty()) {
+            m_starFilterBtn->setStyleSheet("");
+        } else {
+            m_starFilterBtn->setStyleSheet(
+                "QToolButton { background-color: palette(highlight); "
+                "color: palette(highlighted-text); border-radius: 3px; }");
+        }
+    }
+
+    if (!m_stockTree) return;
+    for (int g = 0; g < m_stockTree->topLevelItemCount(); ++g) {
+        QTreeWidgetItem *group = m_stockTree->topLevelItem(g);
+        for (int s = 0; s < group->childCount(); ++s) {
+            QTreeWidgetItem *stock = group->child(s);
+            const int starIdx = stock->data(1, StockGroupManager::StarRole).toInt();
+            stock->setHidden(!m_starFilterIndices.isEmpty() && !m_starFilterIndices.contains(starIdx));
+        }
+    }
 }
 
 void MainWindow::rebuildPeriodButtons(const QList<int> &periods)

@@ -60,6 +60,7 @@ private:
 
     void rebuildPeriodButtons(const QList<int> &periods);
     void refreshChart(const QStringList &symbols);
+    void applyStarFilter();
 
     // ── Widgets ──────────────────────────────────────────────────────────────
     QSplitter     *m_splitter    = nullptr;
@@ -72,6 +73,8 @@ private:
     QSplitter     *m_outerSplitter        = nullptr; // chart+table (top) | log pane (bottom)
     QTextEdit     *m_logEdit              = nullptr;
     QCheckBox     *m_autoRefreshCheck     = nullptr;
+    QToolButton   *m_starFilterBtn        = nullptr;
+    QSet<int>      m_starFilterIndices;
     QToolButton      *m_logToggleBtn         = nullptr;
     bool              m_logExpanded          = true;
     QStackedWidget   *m_contentStack         = nullptr;
