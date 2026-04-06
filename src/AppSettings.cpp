@@ -1,12 +1,20 @@
 #include "AppSettings.h"
 #include <QStandardPaths>
 
-static constexpr char kOrg[] = "StockChart";
-static constexpr char kApp[] = "StockChart";
+static QString settingsPath()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + "/settings.json";
+}
 
 AppSettings::AppSettings()
-    : m_settings(kOrg, kApp)
+    : m_settings(settingsPath())
 {}
+
+QString AppSettings::settingsFilePath() const
+{
+    return settingsPath();
+}
 
 AppSettings &AppSettings::instance()
 {
@@ -17,7 +25,7 @@ AppSettings &AppSettings::instance()
 // ── UI / layout ───────────────────────────────────────────────────────────────
 
 bool AppSettings::autoRefresh() const
-    { return m_settings.value("autoRefresh", true).toBool(); }
+    { return m_settings.value("autoRefresh", false).toBool(); }
 void AppSettings::setAutoRefresh(bool v)
     { m_settings.setValue("autoRefresh", v); }
 
@@ -27,41 +35,39 @@ void AppSettings::setLogExpanded(bool v)
     { m_settings.setValue("logExpanded", v); }
 
 int AppSettings::yScaleIndex() const
-    { return m_settings.value("yScaleIndex", 2).toInt(); }
+    { return m_settings.value("yScaleIndex", 0).toInt(); } // 0=auto,10%,20%,30%,40%,50%
 void AppSettings::setYScaleIndex(int v)
     { m_settings.setValue("yScaleIndex", v); }
 
-QByteArray AppSettings::mainSplitterState() const
-    { return m_settings.value("mainSplitterState").toByteArray(); }
-void AppSettings::setMainSplitterState(const QByteArray &v)
-    { m_settings.setValue("mainSplitterState", v); }
+int AppSettings::mainSplitterPos() const
+    { return m_settings.value("mainSplitterPos", 0).toInt(); }
+void AppSettings::setMainSplitterPos(int v)
+    { m_settings.setValue("mainSplitterPos", v); }
 
-QByteArray AppSettings::outerSplitterState() const
-    { return m_settings.value("outerSplitterState").toByteArray(); }
-void AppSettings::setOuterSplitterState(const QByteArray &v)
-    { m_settings.setValue("outerSplitterState", v); }
+int AppSettings::outerSplitterPos() const
+    { return m_settings.value("outerSplitterPos", 0).toInt(); }
+void AppSettings::setOuterSplitterPos(int v)
+    { m_settings.setValue("outerSplitterPos", v); }
 
 // ── Provider ──────────────────────────────────────────────────────────────────
 
 QString AppSettings::activeProvider() const
-    { return m_settings.value("activeProvider").toString(); }
+    { return m_settings.value("providers/activeProvider").toString(); }
 void AppSettings::setActiveProvider(const QString &v)
-    { m_settings.setValue("activeProvider", v); }
+    { m_settings.setValue("providers/activeProvider", v); }
 
 QStringList AppSettings::selectedSymbols() const
-    { return m_settings.value("selectedSymbols").toStringList(); }
+    { return m_settings.value("providers/selectedSymbols").toStringList(); }
 void AppSettings::setSelectedSymbols(const QStringList &v)
-    { m_settings.setValue("selectedSymbols", v); }
+    { m_settings.setValue("providers/selectedSymbols", v); }
 
-// Credentials use the path "<providerId>/<fieldName>" which is equivalent to
-// beginGroup(providerId) + value/setValue(fieldName) — same storage location.
 QString AppSettings::providerCredential(const QString &providerId,
                                          const QString &field) const
-    { return m_settings.value(providerId + "/" + field).toString(); }
+    { return m_settings.value("providers/" + providerId + "/" + field).toString(); }
 void AppSettings::setProviderCredential(const QString &providerId,
                                          const QString &field,
                                          const QString &value)
-    { m_settings.setValue(providerId + "/" + field, value); }
+    { m_settings.setValue("providers/" + providerId + "/" + field, value); }
 
 // ── Chart ─────────────────────────────────────────────────────────────────────
 
@@ -87,15 +93,12 @@ int AppSettings::tableHeight() const
 void AppSettings::setTableHeight(int v)
     { m_settings.setValue("tableHeight", v); }
 
-QByteArray AppSettings::vertSplitterState() const
-    { return m_settings.value("vertSplitterState").toByteArray(); }
-void AppSettings::setVertSplitterState(const QByteArray &v)
-    { m_settings.setValue("vertSplitterState", v); }
-
+/*
 bool AppSettings::tableExpanded() const
     { return m_settings.value("tableExpanded", false).toBool(); }
 void AppSettings::setTableExpanded(bool v)
     { m_settings.setValue("tableExpanded", v); }
+*/
 
 // ── Appearance ────────────────────────────────────────────────────────────────
 
@@ -104,7 +107,7 @@ int AppSettings::fontPointSize() const
 void AppSettings::setFontPointSize(int v)
     { m_settings.setValue("fontPointSize", v); }
 
-// ── Cache storage ─────────────────────────────────────────────────────────
+// ── Cache storage ─────────────────────────────────────────────────────────────
 
 QString AppSettings::cacheDirPath() const
 {
@@ -128,15 +131,20 @@ void AppSettings::setAdBlockAdRegex(const QString &v)
     { m_settings.setValue("adBlockAdRegex", v); }
 
 // ── API call tracking ─────────────────────────────────────────────────────────
-// Stored as "dailyCalls/date" and "dailyCalls/<providerId>" — equivalent to the
-// old beginGroup("dailyCalls") + value("date") / value(providerId) pattern.
 
 QString AppSettings::dailyCallDate() const
-    { return m_settings.value("dailyCalls/date").toString(); }
+    { return m_settings.value("providers/dailyCalls/date").toString(); }
 void AppSettings::setDailyCallDate(const QString &date)
-    { m_settings.setValue("dailyCalls/date", date); }
+    { m_settings.setValue("providers/dailyCalls/date", date); }
 
 int AppSettings::dailyCallCount(const QString &providerId) const
-    { return m_settings.value("dailyCalls/" + providerId, 0).toInt(); }
+    { return m_settings.value("providers/dailyCalls/" + providerId, 0).toInt(); }
 void AppSettings::setDailyCallCount(const QString &providerId, int count)
-    { m_settings.setValue("dailyCalls/" + providerId, count); }
+    { m_settings.setValue("providers/dailyCalls/" + providerId, count); }
+
+// ── Stock groups ──────────────────────────────────────────────────────────────
+
+QJsonArray AppSettings::stockGroups() const
+    { return m_settings.jsonValue("stockGroups").toArray(); }
+void AppSettings::setStockGroups(const QJsonArray &v)
+    { m_settings.setJsonValue("stockGroups", v); }

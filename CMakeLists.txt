@@ -38,6 +38,7 @@ set(SOURCES
     src/RequestInterceptor.cpp
     src/AdBlockDialog.cpp
     src/AppSettings.cpp
+    src/JSettings.cpp
 )
 
 set(HEADERS
@@ -63,6 +64,7 @@ set(HEADERS
     src/RequestInterceptor.h
     src/AdBlockDialog.h
     src/AppSettings.h
+    src/JSettings.h
 )
 
 option(BUILD_AS_BUNDLE "Build as a macOS App Bundle" ON)

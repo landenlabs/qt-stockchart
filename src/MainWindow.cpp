@@ -42,9 +42,14 @@
 #include <QSlider>
 #include <QStyle>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QDir>
 #include <QTextStream>
 #include <QDesktopServices>
+
+const QStringList SymbolHeaderLabels = {
+        "", "*", "Type", "Symbol", "Age", "Price", "Pur. $", "Pur. Date"
+};
 
 // ── Construction ──────────────────────────────────────────────────────────────
 
@@ -165,10 +170,16 @@ void MainWindow::setupUI()
     importBtn->setFixedSize(26, 24);
     importBtn->setToolTip("Import stocks and groups from CSV file");
 
+    auto *addGroupBtn = new QToolButton(topControls);
+    addGroupBtn->setText("+");
+    addGroupBtn->setFixedSize(26, 24);
+    addGroupBtn->setToolTip("Add a new group");
+
     topLayout->addWidget(m_starFilterBtn);
     topLayout->addWidget(m_autoRefreshCheck);
     topLayout->addWidget(exportBtn);
     topLayout->addWidget(importBtn);
+    topLayout->addWidget(addGroupBtn);
     topLayout->addStretch();
 
     leftLayout->addWidget(topControls);
@@ -178,7 +189,7 @@ void MainWindow::setupUI()
     m_stockTree->setStyle(QStyleFactory::create("Fusion"));
 #endif
     m_stockTree->setColumnCount(8);
-    m_stockTree->setHeaderLabels({"", "*", "Type", "Symbol", "Age", "Price", "Pur. $", "Pur. Date"});
+    m_stockTree->setHeaderLabels(SymbolHeaderLabels);
     m_stockTree->setHeaderHidden(false);
     m_stockTree->setSelectionMode(QAbstractItemView::ExtendedSelection);
     m_stockTree->setIndentation(12);
@@ -214,10 +225,10 @@ void MainWindow::setupUI()
         }
     });
 
-    auto *addGroupBtn = new QPushButton("+ Add Group", leftPanel);
+    // auto *addGroupBtn = new QPushButton("+ Add Group", leftPanel);
 
     leftLayout->addWidget(m_stockTree, 1);
-    leftLayout->addWidget(addGroupBtn);
+    // leftLayout->addWidget(addGroupBtn);
 
     // Create StockGroupManager before setupRightPanel: the yScaleCombo and range
     // buttons connect to lambdas that call m_groupManager->selectedSymbols(), so
@@ -245,10 +256,10 @@ void MainWindow::setupUI()
 
     connect(addGroupBtn, &QPushButton::clicked, m_groupManager, &StockGroupManager::onAddGroupClicked);
     connect(exportBtn, &QPushButton::clicked, this, [this]() {
-        m_csvPorter->exportGroups(m_statusLabel);
+        m_csvPorter->exportGroups(m_statusLabel, SymbolHeaderLabels);
     });
     connect(importBtn, &QPushButton::clicked, this, [this]() {
-        m_csvPorter->importGroups(m_statusLabel);
+        m_csvPorter->importGroups(m_statusLabel, SymbolHeaderLabels);
     });
     connect(m_stockTree, &QTreeWidget::customContextMenuRequested,
             m_groupManager, &StockGroupManager::onTreeContextMenu);
@@ -607,10 +618,10 @@ void MainWindow::setupMenu()
 {
     QMenu *fileMenu = menuBar()->addMenu("File");
     fileMenu->addAction("Export Groups...", this, [this]() {
-        m_csvPorter->exportGroups(m_statusLabel);
+        m_csvPorter->exportGroups(m_statusLabel, SymbolHeaderLabels);
     });
     fileMenu->addAction("Import Groups...", this, [this]() {
-        m_csvPorter->importGroups(m_statusLabel);
+        m_csvPorter->importGroups(m_statusLabel, SymbolHeaderLabels);
     });
 
     QMenu *provMenu = menuBar()->addMenu("Providers");
@@ -1041,11 +1052,6 @@ void MainWindow::loadSettings()
     if (m_logToggleBtn)
         m_logToggleBtn->setText(m_logExpanded ? "▲ Log" : "▼ Log");
 
-    const QByteArray mainState  = as.mainSplitterState();
-    const QByteArray outerState = as.outerSplitterState();
-    if (!mainState.isEmpty())  m_splitter->restoreState(mainState);
-    if (!outerState.isEmpty()) m_outerSplitter->restoreState(outerState);
-
     // Load the ad-block blacklist into the interceptor BEFORE setActiveProvider(),
     // because setActiveProvider() calls saveSettings() which would otherwise
     // overwrite the saved blacklist with an empty one.
@@ -1082,8 +1088,8 @@ void MainWindow::saveSettings()
     as.setActiveProvider(m_activeProviderId);
     as.setLogExpanded(m_logExpanded);
     as.setYScaleIndex(m_yScaleCombo ? m_yScaleCombo->currentIndex() : 2);
-    as.setMainSplitterState(m_splitter->saveState());
-    as.setOuterSplitterState(m_outerSplitter->saveState());
+    as.setMainSplitterPos(m_splitter->sizes().value(0, 0));
+    as.setOuterSplitterPos(m_outerSplitter->sizes().value(1, 0));
     if (m_groupManager)
         as.setSelectedSymbols(m_groupManager->selectedSymbols());
     m_cacheManager->saveCache();
@@ -1106,10 +1112,29 @@ void MainWindow::showEvent(QShowEvent *event)
     if (!m_tableRestored) {
         m_tableRestored = true;
         QTimer::singleShot(0, this, [this]() {
+            auto &as = AppSettings::instance();
+
             if (m_tableManager) m_tableManager->restoreTableSplitter();
-            // If log was saved as collapsed, apply after layout is complete
-            if (!m_logExpanded)
+
+            // Main horizontal splitter (left panel | chart+table).
+            const int leftW = as.mainSplitterPos();
+            if (leftW > 0) {
+                const int total = m_splitter->width();
+                if (total > 0)
+                    m_splitter->setSizes({leftW, total - leftW});
+            }
+
+            // Outer vertical splitter (chart+table | log).
+            if (!m_logExpanded) {
                 m_outerSplitter->setSizes({ m_outerSplitter->height(), 0 });
+            } else {
+                const int logH = as.outerSplitterPos();
+                if (logH > 0) {
+                    const int total = m_outerSplitter->height();
+                    if (total > 0)
+                        m_outerSplitter->setSizes({total - logH, logH});
+                }
+            }
         });
     }
 }
@@ -1263,11 +1288,36 @@ void MainWindow::showHelp()
             AppSettings::instance().setFontPointSize(v);
         });
 
-        // ── Cache directory ───────────────────────────────────────────────────
+        // ── Settings file ─────────────────────────────────────────────────────
         auto *sep2 = new QFrame(page);
         sep2->setFrameShape(QFrame::HLine);
         sep2->setFrameShadow(QFrame::Sunken);
         vl->addWidget(sep2);
+
+        vl->addWidget(new QLabel("Settings File", page));
+
+        {
+            const QString settingsPath = AppSettings::instance().settingsFilePath();
+            auto *settingsRow = new QHBoxLayout();
+            settingsRow->setSpacing(8);
+            auto *settingsEdit = new QLineEdit(settingsPath, page);
+            settingsEdit->setReadOnly(true);
+            auto *settingsExploreBtn = new QPushButton("Explore", page);
+            settingsExploreBtn->setToolTip("Open settings directory in file manager");
+            connect(settingsExploreBtn, &QPushButton::clicked, this, [settingsPath]() {
+                QDesktopServices::openUrl(
+                    QUrl::fromLocalFile(QFileInfo(settingsPath).absolutePath()));
+            });
+            settingsRow->addWidget(settingsEdit, 1);
+            settingsRow->addWidget(settingsExploreBtn);
+            vl->addLayout(settingsRow);
+        }
+
+        // ── Cache directory ───────────────────────────────────────────────────
+        auto *sep2b = new QFrame(page);
+        sep2b->setFrameShape(QFrame::HLine);
+        sep2b->setFrameShadow(QFrame::Sunken);
+        vl->addWidget(sep2b);
 
         vl->addWidget(new QLabel("Cache Directory", page));
 

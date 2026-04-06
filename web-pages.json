@@ -27,6 +27,13 @@
       "enabled": true
     },
     {
+      "name": "Yahoo",
+      "url": "https://finance.yahoo.com/quote/{upper}/",
+      "comment": "Yahoo Finance stock data.",
+      "enabled": true
+    },
+
+    {
       "name": "NYSE Hours",
       "url": "https://www.nyse.com/markets/hours-calendars",
       "comment": "Official NYSE market hours and holiday calendar.\nURL is not symbol-specific — the {upper} placeholder is unused.",

@@ -55,7 +55,6 @@ private:
 
     bool       m_tableExpanded     = false;
     int        m_savedTableHeight  = -1;
-    QByteArray m_savedSplitterState;
     bool       m_showPercentChange = false;
     bool       m_purPctMode        = false;
     QList<int> m_periods;

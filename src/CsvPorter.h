@@ -13,8 +13,8 @@ class CsvPorter
 public:
     explicit CsvPorter(QTreeWidget *tree, StockGroupManager *groupManager, QWidget *dialogParent);
 
-    void exportGroups(QLabel *statusLabel);
-    void importGroups(QLabel *statusLabel);
+    void exportGroups(QLabel *statusLabel, const QStringList& labels);
+    void importGroups(QLabel *statusLabel, const QStringList& labels);
 
     static QString     csvQuote(const QString &s);
     static QStringList csvParseLine(const QString &line);

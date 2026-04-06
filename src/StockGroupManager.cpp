@@ -109,15 +109,13 @@ QIcon StockGroupManager::makeStarIcon(int index)
 QTreeWidgetItem *StockGroupManager::addGroup(const QString &name, bool expanded)
 {
     QString displayName = name;
-    if (displayName.length() > 15)
-        displayName = displayName.left(12) + "...";
 
     auto *item = new QTreeWidgetItem(m_tree);
     item->setFlags(Qt::ItemIsEnabled);
     item->setData(0, Qt::UserRole, name);
 
     auto *container = new QWidget;
-    container->setStyleSheet("background: transparent;");
+    container->setStyleSheet("background: #f0f0f0;");
     auto *hl = new QHBoxLayout(container);
     hl->setContentsMargins(0, 1, 4, 1);
     hl->setSpacing(2);
@@ -132,10 +130,14 @@ QTreeWidgetItem *StockGroupManager::addGroup(const QString &name, bool expanded)
     addBtn->setFlat(true);
     addBtn->setCursor(Qt::PointingHandCursor);
     addBtn->setToolTip("Add stock to " + name);
+    addBtn->setStyleSheet(
+            "QPushButton { border: none; font-weight: bold; color: #333; }"
+            "QPushButton:hover { background-color: #e0e0e0; border-radius: 2px; }"
+            );
 
-    hl->addWidget(nameLabel);
+    hl->addWidget(nameLabel, 0);    // 0=use its width
     hl->addWidget(addBtn);
-    hl->addStretch();
+    hl->addStretch(1);              // fill remainder to push others to left.
 
     m_tree->setItemWidget(item, 0, container);
     // Must be called AFTER setItemWidget: Qt sizes the persistent widget during a
@@ -512,57 +514,50 @@ void StockGroupManager::sortByColumn(int col)
 
 void StockGroupManager::loadGroups()
 {
-    QSettings &s = AppSettings::instance().raw();
-    int count = s.beginReadArray("stockGroups");
-
-    if (count == 0) {
-        s.endArray();
+    const QJsonArray groups = AppSettings::instance().stockGroups();
+    if (groups.isEmpty()) {
         QTreeWidgetItem *fav = addGroup("Favorites", true);
         for (const QString &sym : kDefaultStocks) addStockToGroup(fav, sym);
         saveGroups();
         return;
     }
-
-    for (int i = 0; i < count; ++i) {
-        s.setArrayIndex(i);
-        QTreeWidgetItem *group = addGroup(s.value("name").toString(),
-                                          s.value("expanded", true).toBool());
-        int stockCount = s.beginReadArray("stocks");
-        for (int j = 0; j < stockCount; ++j) {
-            s.setArrayIndex(j);
+    for (const QJsonValue &gv : groups) {
+        const QJsonObject g = gv.toObject();
+        QTreeWidgetItem *group = addGroup(g["name"].toString(),
+                                          g["expanded"].toBool(true));
+        for (const QJsonValue &sv : g["stocks"].toArray()) {
+            const QJsonObject s = sv.toObject();
             addStockToGroup(group,
-                            s.value("sym").toString(),
-                            s.value("star").toInt(),
-                            s.value("purPrice").toDouble(),
-                            s.value("purDate").toString());
+                            s["sym"].toString(),
+                            s["star"].toInt(),
+                            s["purPrice"].toDouble(),
+                            s["purDate"].toString());
         }
-        s.endArray();
     }
-    s.endArray();
 }
 
 void StockGroupManager::saveGroups()
 {
-    QSettings &s = AppSettings::instance().raw();
-    s.remove("stockGroups");
-    s.beginWriteArray("stockGroups");
+    QJsonArray groups;
     for (int i = 0; i < m_tree->topLevelItemCount(); ++i) {
-        s.setArrayIndex(i);
         QTreeWidgetItem *group = m_tree->topLevelItem(i);
-        s.setValue("name",     group->data(0, Qt::UserRole).toString());
-        s.setValue("expanded", group->isExpanded());
-        s.beginWriteArray("stocks");
+        QJsonObject g;
+        g["name"]     = group->data(0, Qt::UserRole).toString();
+        g["expanded"] = group->isExpanded();
+        QJsonArray stocks;
         for (int j = 0; j < group->childCount(); ++j) {
-            s.setArrayIndex(j);
             QTreeWidgetItem *child = group->child(j);
-            s.setValue("sym",      child->text(3));
-            s.setValue("star",     child->data(1, StarRole).toInt());
-            s.setValue("purPrice", child->data(6, PurPriceRole).toDouble());
-            s.setValue("purDate",  child->data(7, PurDateRole).toString());
+            QJsonObject s;
+            s["sym"]      = child->text(3);
+            s["star"]     = child->data(1, StarRole).toInt();
+            s["purPrice"] = child->data(6, PurPriceRole).toDouble();
+            s["purDate"]  = child->data(7, PurDateRole).toString();
+            stocks.append(s);
         }
-        s.endArray();
+        g["stocks"] = stocks;
+        groups.append(g);
     }
-    s.endArray();
+    AppSettings::instance().setStockGroups(groups);
 }
 
 // ── Visual updates ────────────────────────────────────────────────────────────
@@ -639,4 +634,15 @@ void StockGroupManager::selectSymbols(const QStringList &symbols)
                 child->setSelected(true);
         }
     }
+}
+
+
+const QTreeWidgetItem* StockGroupManager::findSymbol(const QTreeWidgetItem& group, const QString& symbol) const
+{
+    for (int j = 0; j < group.childCount(); ++j) {
+        QTreeWidgetItem *child = group.child(j);
+        if (symbol == child->text(3))
+            return child;
+    }
+    return nullptr;
 }

@@ -70,10 +70,10 @@ void TableManager::loadSettings()
 
     // Table open/closed state — sizes are applied by restoreTableSplitter() from showEvent,
     // once the window is fully laid out and the splitter has a real height.
-    m_savedTableHeight   = as.tableHeight();
-    m_savedSplitterState = as.vertSplitterState();
-    m_tableExpanded      = as.tableExpanded();
-    m_toggleBtn->setText(m_tableExpanded ? "▲ Table" : "▼ Table");
+    m_savedTableHeight = as.tableHeight();
+    m_tableExpanded    = m_savedTableHeight > 0; // as.tableExpanded();
+    // m_toggleBtn->setText(m_tableExpanded ? "▲ Table" : "▼ Table");
+    // setExpanded(m_tableExpanded);
 }
 
 void TableManager::saveSettings()
@@ -83,11 +83,8 @@ void TableManager::saveSettings()
     for (int p : m_periods) vl << p;
     as.setTablePeriods(vl);
     as.setTableShowPercent(m_showPercentChange);
-    as.setTableExpanded(m_tableExpanded);
+    // as.setTableExpanded(m_tableExpanded);
     as.setTableHeight(m_savedTableHeight);
-    // Save splitter state only when the table is open so the stored state is meaningful
-    if (m_tableExpanded)
-        as.setVertSplitterState(m_vertSplitter->saveState());
 }
 
 // ── Expand / collapse ─────────────────────────────────────────────────────────
@@ -113,6 +110,7 @@ void TableManager::setExpanded(bool expanded)
             m_vertSplitter->setSizes({ total, 0 });
         }
     }
+    m_savedTableHeight = m_vertSplitter->sizes()[1];
     saveSettings();
 }
 
@@ -125,12 +123,7 @@ void TableManager::restoreTableSplitter()
         return;
     }
 
-    // Prefer the full saved state (proportionally scaled to current height).
-    if (!m_savedSplitterState.isEmpty()) {
-        m_vertSplitter->restoreState(m_savedSplitterState);
-        return;
-    }
-    // Fallback: use saved height or default to 25% of available space.
+    // Use saved height or default to 25% of available space.
     if (total > 0) {
         const int defaultH = qMax(50, total / 4);
         const int tableH   = qBound(50, (m_savedTableHeight > 0) ? m_savedTableHeight : defaultH, total - 50);
@@ -168,7 +161,7 @@ void TableManager::onToggleDisplayMode(bool checked)
     m_displayModeBtn->setToolTip(checked
         ? "Graph shows normalized % change"
         : "Graph shows stock price");
-    saveSettings();
+    // saveSettings();
     if (m_tableExpanded)
         refresh(m_lastSymbols, m_clickedDate);
 }

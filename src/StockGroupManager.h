@@ -42,6 +42,7 @@ public:
     // Selection
     QStringList selectedSymbols() const;
     void selectSymbols(const QStringList &symbols);
+    const QTreeWidgetItem* findSymbol(const QTreeWidgetItem& group, const QString& symbol) const;
 
     // Purchase data (price=0 or invalid date means not set)
     QPair<double, QDate> purchaseInfoForSymbol(const QString &symbol) const;

@@ -1,31 +1,24 @@
 #pragma once
-#include <QSettings>
+#include "JSettings.h"
+#include <QJsonArray>
 #include <QString>
 #include <QStringList>
-#include <QByteArray>
 #include <QVariantList>
 #include <QStandardPaths>
 
-// Singleton that owns the single QSettings instance for the whole application.
-// All persistent state must be read and written through this class — never
-// construct QSettings("StockChart","StockChart") anywhere else.
-//
-// For operations that require QSettings group/array APIs (StockCacheManager,
-// StockGroupManager), call raw() to obtain the shared instance.  Those callers
-// are responsible for correctly pairing every beginGroup/beginArray with the
-// matching end call.
+// Singleton that owns the single JSettings instance for the whole application.
+// All persistent state must be read and written through this class.
 class AppSettings
 {
 public:
     static AppSettings &instance();
 
-    // Gives callers that need group/array operations direct access to the
-    // underlying instance.  Never store the returned reference beyond the
-    // immediately enclosing scope.
-    QSettings &raw() { return m_settings; }
-
     // Force a synchronous write to disk (call before quit).
     void sync() { m_settings.sync(); }
+
+    // Path of the JSON settings file on disk.
+    QString settingsFilePath() const;
+
 
     // ── UI / layout ───────────────────────────────────────────────────────────
     bool       autoRefresh() const;
@@ -37,11 +30,12 @@ public:
     int        yScaleIndex() const;
     void       setYScaleIndex(int v);
 
-    QByteArray mainSplitterState() const;
-    void       setMainSplitterState(const QByteArray &v);
+    // Splitter positions (single int per splitter; QByteArray state removed).
+    int        mainSplitterPos() const;   // left-panel width
+    void       setMainSplitterPos(int v);
 
-    QByteArray outerSplitterState() const;
-    void       setOuterSplitterState(const QByteArray &v);
+    int        outerSplitterPos() const;  // log-pane height
+    void       setOuterSplitterPos(int v);
 
     // ── Provider ──────────────────────────────────────────────────────────────
     QString     activeProvider() const;
@@ -50,8 +44,7 @@ public:
     QStringList selectedSymbols() const;
     void        setSelectedSymbols(const QStringList &v);
 
-    // Credentials are stored at "<providerId>/<fieldName>" — equivalent to
-    // beginGroup(providerId) + setValue(fieldName) used by the old code.
+    // Credentials are stored at "<providerId>/<fieldName>".
     QString     providerCredential(const QString &providerId,
                                    const QString &field) const;
     void        setProviderCredential(const QString &providerId,
@@ -72,11 +65,10 @@ public:
     int          tableHeight() const;
     void         setTableHeight(int v);
 
-    QByteArray   vertSplitterState() const;
-    void         setVertSplitterState(const QByteArray &v);
-
+    /*
     bool         tableExpanded() const;
     void         setTableExpanded(bool v);
+    */
 
     // ── Appearance ────────────────────────────────────────────────────────────
     int  fontPointSize() const;        // 0 = use system default
@@ -94,12 +86,15 @@ public:
     void         setAdBlockAdRegex(const QString &v);
 
     // ── API call tracking ─────────────────────────────────────────────────────
-    // Stored under the "dailyCalls" group.
     QString dailyCallDate() const;
     void    setDailyCallDate(const QString &date);
 
     int     dailyCallCount(const QString &providerId) const;
     void    setDailyCallCount(const QString &providerId, int count);
+
+    // ── Stock groups (structured JSON) ────────────────────────────────────────
+    QJsonArray stockGroups() const;
+    void       setStockGroups(const QJsonArray &v);
 
 private:
     AppSettings();
@@ -107,5 +102,5 @@ private:
     AppSettings(const AppSettings &)            = delete;
     AppSettings &operator=(const AppSettings &) = delete;
 
-    QSettings m_settings;
+    JSettings m_settings;
 };
