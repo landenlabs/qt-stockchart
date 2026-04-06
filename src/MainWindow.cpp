@@ -313,6 +313,8 @@ void MainWindow::setupUI()
     m_statusLabel->setAlignment(Qt::AlignCenter);
     m_statusLabel->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
     m_statusLabel->setCursor(Qt::IBeamCursor);
+    m_statusLabel->setMinimumWidth(0);
+    m_statusLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
 
     mainLayout->addWidget(m_splitter, 1);
     mainLayout->addWidget(m_statusLabel);
