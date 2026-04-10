@@ -1449,15 +1449,17 @@ void MainWindow::showHelp()
         auto *vl = new QVBoxLayout(page);
         vl->setContentsMargins(20, 20, 20, 20);
 
-        auto *table = new QTableWidget(m_providers.size(), 4, page);
-        table->setHorizontalHeaderLabels({ "", "Provider", "API Key", "URL" });
+        auto *table = new QTableWidget(m_providers.size(), 5, page);
+        table->setHorizontalHeaderLabels({ "", "", "Provider", "API Key", "URL" });
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
         table->setSelectionMode(QAbstractItemView::NoSelection);
         table->verticalHeader()->setVisible(false);
         table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
         table->horizontalHeader()->resizeSection(0, 28);
-        table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+        table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
+        table->horizontalHeader()->resizeSection(1, 28);
         table->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+        table->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
         table->horizontalHeader()->setStretchLastSection(true);
         table->setShowGrid(true);
         table->setAlternatingRowColors(true);
@@ -1479,7 +1481,7 @@ void MainWindow::showHelp()
                     creds[field.first] = QString();
                 p->setCredentials(creds);
                 saveSettings();
-                if (auto *le = qobject_cast<QLineEdit*>(table->cellWidget(r, 2)))
+                if (auto *le = qobject_cast<QLineEdit*>(table->cellWidget(r, 3)))
                     le->setText(QString());
             });
             auto *trashCell = new QWidget(page);
@@ -1489,12 +1491,37 @@ void MainWindow::showHelp()
             trashLayout->addWidget(trashBtn);
             table->setCellWidget(r, 0, trashCell);
 
-            // Column 1: provider name (read-only)
+            // Column 1: gear button — opens provider configuration dialog
+            auto *gearBtn = new QToolButton(page);
+            gearBtn->setText("\u2699");
+            gearBtn->setAutoRaise(true);
+            gearBtn->setToolTip("Configure " + ProviderRegistry::instance().label(p->id()));
+            connect(gearBtn, &QToolButton::clicked, this, [this, p]() {
+                SettingsDialog dlg(m_providers, p->id(), this);
+                if (dlg.exec() != QDialog::Accepted) return;
+                const auto allCreds = dlg.allCredentials();
+                for (StockDataProvider *pr : m_providers)
+                    if (allCreds.contains(pr->id()))
+                        pr->setCredentials(allCreds[pr->id()]);
+                const auto flags = dlg.limitedFlags();
+                for (auto it = flags.cbegin(); it != flags.cend(); ++it)
+                    AppSettings::instance().setProviderLimited(it.key(), it.value());
+                setActiveProvider(dlg.selectedProviderId());
+                saveSettings();
+            });
+            auto *gearCell = new QWidget(page);
+            auto *gearLayout = new QHBoxLayout(gearCell);
+            gearLayout->setContentsMargins(2, 0, 2, 0);
+            gearLayout->setAlignment(Qt::AlignCenter);
+            gearLayout->addWidget(gearBtn);
+            table->setCellWidget(r, 1, gearCell);
+
+            // Column 2: provider name (read-only)
             auto *nameItem = new QTableWidgetItem(ProviderRegistry::instance().label(p->id()));
             nameItem->setFlags(Qt::ItemIsEnabled);
-            table->setItem(r, 1, nameItem);
+            table->setItem(r, 2, nameItem);
 
-            // Column 2: API key — editable QLineEdit
+            // Column 3: API key — editable QLineEdit
             const auto fields = p->credentialFields();
             QString keyVal;
             if (!fields.isEmpty())
@@ -1510,20 +1537,20 @@ void MainWindow::showHelp()
                 p->setCredentials(creds);
                 saveSettings();
             });
-            table->setCellWidget(r, 2, keyEdit);
+            table->setCellWidget(r, 3, keyEdit);
 
-            // Column 3: signup URL
+            // Column 4: signup URL
             const QString url = ProviderRegistry::instance().url(p->id());
             if (!url.isEmpty()) {
                 auto *urlLabel = new QLabel(
                     QString("<a href='%1'>%1</a>").arg(url), page);
                 urlLabel->setOpenExternalLinks(true);
                 urlLabel->setContentsMargins(4, 0, 4, 0);
-                table->setCellWidget(r, 3, urlLabel);
+                table->setCellWidget(r, 4, urlLabel);
             } else {
                 auto *urlItem = new QTableWidgetItem(QString());
                 urlItem->setFlags(Qt::ItemIsEnabled);
-                table->setItem(r, 3, urlItem);
+                table->setItem(r, 4, urlItem);
             }
         }
         table->resizeRowsToContents();
