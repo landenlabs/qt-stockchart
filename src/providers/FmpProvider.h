@@ -12,8 +12,6 @@ public:
     explicit FmpProvider(QObject *parent = nullptr);
 
     QString id() const override { return "fmp"; }
-    QString displayName() const override { return "Fin. Modeling Prep"; }
-    QString signupUrl() const override { return "https://financialmodelingprep.com/developer/docs/"; }
     QList<QPair<QString,QString>> credentialFields() const override {
         return {{"apiKey", "API Key"}};
     }

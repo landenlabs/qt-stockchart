@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "SettingsDialog.h"
+#include "ProviderRegistry.h"
 #include "AlphaVantageProvider.h"
 #include "FinnhubProvider.h"
 #include "PolygonProvider.h"
@@ -65,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent)
         new FmpProvider(this),
         new YahooPageProvider(this)
     };
+
+    ProviderRegistry::instance().validate(m_providers);
 
     for (StockDataProvider *p : m_providers) {
         connect(p, &StockDataProvider::dataReady,       this, &MainWindow::onDataReady);
@@ -632,7 +635,7 @@ void MainWindow::setupMenu()
     m_providerActionGroup->setExclusive(true);
 
     for (StockDataProvider *p : m_providers) {
-        QAction *action = new QAction(p->displayName(), this);
+        QAction *action = new QAction(ProviderRegistry::instance().label(p->id()), this);
         action->setCheckable(true);
         action->setData(p->id());
         m_providerActionGroup->addAction(action);
@@ -701,12 +704,12 @@ void MainWindow::setActiveProvider(const QString &id)
     StockDataProvider *p = activeProvider();
     if (!p) return;
 
-    setWindowTitle("StockChart v" + kAppVersion + " — " + p->displayName());
+    setWindowTitle("StockChart v" + kAppVersion + " — " + ProviderRegistry::instance().label(p->id()));
 
     if (!p->hasCredentials())
-        m_statusLabel->setText(p->displayName() + ": API key not set. Use Providers > Configure API Keys...");
+        m_statusLabel->setText(ProviderRegistry::instance().label(p->id()) + ": API key not set. Use Providers > Configure API Keys...");
     else
-        m_statusLabel->setText("Provider: " + p->displayName() + " — Select stocks to load data.");
+        m_statusLabel->setText("Provider: " + ProviderRegistry::instance().label(p->id()) + " — Select stocks to load data.");
 
     if (m_apiTracker) m_apiTracker->updatePanel(id);
     saveSettings();
@@ -733,6 +736,10 @@ void MainWindow::openSettings()
     for (StockDataProvider *p : m_providers)
         if (allCreds.contains(p->id()))
             p->setCredentials(allCreds[p->id()]);
+
+    const auto flags = dlg.limitedFlags();
+    for (auto it = flags.cbegin(); it != flags.cend(); ++it)
+        AppSettings::instance().setProviderLimited(it.key(), it.value());
 
     setActiveProvider(dlg.selectedProviderId());
     saveSettings();
@@ -1454,10 +1461,10 @@ void MainWindow::showHelp()
             auto *trashBtn = new QToolButton(page);
             trashBtn->setIcon(QApplication::style()->standardIcon(QStyle::SP_TrashIcon));
             trashBtn->setAutoRaise(true);
-            trashBtn->setToolTip("Clear API key for " + p->displayName());
+            trashBtn->setToolTip("Clear API key for " + ProviderRegistry::instance().label(p->id()));
             connect(trashBtn, &QToolButton::clicked, this, [this, p, r, table]() {
                 if (QMessageBox::question(this, "Clear Credentials",
-                        QString("Clear API key for %1?").arg(p->displayName()))
+                        QString("Clear API key for %1?").arg(ProviderRegistry::instance().label(p->id())))
                         != QMessageBox::Yes) return;
                 QMap<QString,QString> creds = p->credentials();
                 for (const auto &field : p->credentialFields())
@@ -1475,7 +1482,7 @@ void MainWindow::showHelp()
             table->setCellWidget(r, 0, trashCell);
 
             // Column 1: provider name (read-only)
-            auto *nameItem = new QTableWidgetItem(p->displayName());
+            auto *nameItem = new QTableWidgetItem(ProviderRegistry::instance().label(p->id()));
             nameItem->setFlags(Qt::ItemIsEnabled);
             table->setItem(r, 1, nameItem);
 
@@ -1498,7 +1505,7 @@ void MainWindow::showHelp()
             table->setCellWidget(r, 2, keyEdit);
 
             // Column 3: signup URL
-            const QString url = p->signupUrl();
+            const QString url = ProviderRegistry::instance().url(p->id());
             if (!url.isEmpty()) {
                 auto *urlLabel = new QLabel(
                     QString("<a href='%1'>%1</a>").arg(url), page);

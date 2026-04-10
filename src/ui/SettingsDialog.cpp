@@ -1,4 +1,6 @@
 #include "SettingsDialog.h"
+#include "ProviderRegistry.h"
+#include "AppSettings.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFormLayout>
@@ -6,16 +8,6 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QDialogButtonBox>
-
-static QString accountUrl(const QString &id)
-{
-    if (id == "alphavantage") return "https://www.alphavantage.co/premium/";
-    if (id == "finnhub")      return "https://finnhub.io/dashboard";
-    if (id == "polygon")      return "https://polygon.io/dashboard/billing";
-    if (id == "twelvedata")   return "https://twelvedata.com/account";
-    if (id == "fmp")          return "https://financialmodelingprep.com/developer/docs/";
-    return {};
-}
 
 SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
                                const QString &activeProviderId,
@@ -28,14 +20,16 @@ SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
 
     auto *layout = new QVBoxLayout(this);
 
-    // --- Provider selection ---
+    // ── Active provider selection ─────────────────────────────────────────────
     auto *providerBox    = new QGroupBox("Active Provider", this);
     auto *providerLayout = new QHBoxLayout(providerBox);
     m_providerGroup = new QButtonGroup(this);
 
     for (int i = 0; i < providers.size(); ++i) {
-        auto *radio = new QRadioButton(providers[i]->displayName(), providerBox);
-        m_providerGroup->addButton(radio, i);   // button id == tab index
+        const QString lbl = ProviderRegistry::instance().label(providers[i]->id());
+        auto *radio = new QRadioButton(lbl, providerBox);
+        radio->setToolTip(ProviderRegistry::instance().comment(providers[i]->id()));
+        m_providerGroup->addButton(radio, i);
         providerLayout->addWidget(radio);
         if (providers[i]->id() == activeProviderId)
             radio->setChecked(true);
@@ -43,11 +37,12 @@ SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
 
     layout->addWidget(providerBox);
 
-    // --- Credential tabs (one per provider) ---
+    // ── Credential tabs (one per provider) ───────────────────────────────────
     m_tabs = new QTabWidget(this);
 
     for (int i = 0; i < providers.size(); ++i) {
         StockDataProvider *p = providers[i];
+        const ProviderInfo pi = ProviderRegistry::instance().info(p->id());
 
         auto *page = new QWidget();
         auto *form = new QFormLayout(page);
@@ -73,32 +68,39 @@ SettingsDialog::SettingsDialog(const QList<StockDataProvider*> &providers,
                 fieldMap[field.first] = edit;
             }
 
-            // Sign-up link
-            QString url = p->signupUrl();
-            if (!url.isEmpty()) {
+            // Sign-up link (from registry)
+            if (!pi.url.isEmpty()) {
                 auto *link = new QLabel(
-                    QString("<a href='%1'>Get a free key at %2</a>").arg(url, url), page);
+                    QString("<a href='%1'>Get a free key at %2</a>").arg(pi.url, pi.url), page);
                 link->setOpenExternalLinks(true);
                 form->addRow(link);
             }
 
-            // Account / plan link
-            QString aUrl = accountUrl(p->id());
-            if (!aUrl.isEmpty()) {
+            // Account / plan link (from registry, shown only when distinct from signup url)
+            if (!pi.accountUrl.isEmpty() && pi.accountUrl != pi.url) {
                 auto *aLink = new QLabel(
-                    QString("<a href='%1'>Account / Plan info</a>").arg(aUrl), page);
+                    QString("<a href='%1'>Account / Plan info</a>").arg(pi.accountUrl), page);
                 aLink->setOpenExternalLinks(true);
                 form->addRow(aLink);
             }
+
+            // Limited / trial account checkbox
+            auto *limitedCheck = new QCheckBox("Trial / free-tier account (limited API calls)", page);
+            limitedCheck->setChecked(AppSettings::instance().providerLimited(p->id()));
+            limitedCheck->setToolTip(
+                "Check this if you are on a free or trial plan. "
+                "The app can use this to warn when approaching rate limits.");
+            form->addRow(limitedCheck);
+            m_limitedChecks[p->id()] = limitedCheck;
         }
 
         m_fields[p->id()] = fieldMap;
-        m_tabs->addTab(page, p->displayName());
+        m_tabs->addTab(page, pi.label);
     }
 
     layout->addWidget(m_tabs);
 
-    // --- Buttons ---
+    // ── Buttons ───────────────────────────────────────────────────────────────
     auto *buttons = new QDialogButtonBox(
         QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
@@ -134,5 +136,13 @@ QMap<QString, QMap<QString,QString>> SettingsDialog::allCredentials() const
             creds[jt.key()] = jt.value()->text().trimmed();
         result[it.key()] = creds;
     }
+    return result;
+}
+
+QMap<QString, bool> SettingsDialog::limitedFlags() const
+{
+    QMap<QString, bool> result;
+    for (auto it = m_limitedChecks.cbegin(); it != m_limitedChecks.cend(); ++it)
+        result[it.key()] = it.value()->isChecked();
     return result;
 }

@@ -19,6 +19,7 @@ set(SOURCES
     src/main.cpp
     src/MainWindow.cpp
     # providers/ — data provider implementations
+    src/providers/ProviderRegistry.cpp
     src/providers/StockDataProvider.cpp
     src/providers/AlphaVantageProvider.cpp
     src/providers/FinnhubProvider.cpp
@@ -52,6 +53,7 @@ set(HEADERS
     # Top-level
     src/MainWindow.h
     # providers/
+    src/providers/ProviderRegistry.h
     src/providers/StockDataProvider.h
     src/providers/AlphaVantageProvider.h
     src/providers/FinnhubProvider.h
@@ -135,4 +137,5 @@ qt_add_resources(StockChart "app_resources"
         web-pages.json
         landenlabs.png
         landenlabs.webp
+        providers.json
 )

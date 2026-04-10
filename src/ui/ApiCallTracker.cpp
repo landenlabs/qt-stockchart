@@ -1,6 +1,7 @@
 #include "ApiCallTracker.h"
 #include "AppSettings.h"
 #include "JsonViewerDialog.h"
+#include "ProviderRegistry.h"
 #include <QFrame>
 #include <QLabel>
 #include <QPushButton>
@@ -88,7 +89,7 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
         hl->setContentsMargins(2, 1, 2, 1);
         hl->setSpacing(4);
 
-        auto *nameLabel = new QLabel(p->displayName(), row);
+        auto *nameLabel = new QLabel(ProviderRegistry::instance().label(p->id()), row);
         nameLabel->setFont(sf);
         nameLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
@@ -143,7 +144,7 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
             const QByteArray data = p->lastHistoryJson();
             if (data.isEmpty()) return;
             auto *dlg = new JsonViewerDialog(
-                p->displayName() + " — History (fetchData) Response",
+                ProviderRegistry::instance().label(p->id()) + " — History (fetchData) Response",
                 data, m_panelParent ? m_panelParent->window() : nullptr);
             dlg->setAttribute(Qt::WA_DeleteOnClose);
             dlg->show();
@@ -152,7 +153,7 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
             const QByteArray data = p->lastQuoteJson();
             if (data.isEmpty()) return;
             auto *dlg = new JsonViewerDialog(
-                p->displayName() + " — Quote (fetchLatestQuote) Response",
+                ProviderRegistry::instance().label(p->id()) + " — Quote (fetchLatestQuote) Response",
                 data, m_panelParent ? m_panelParent->window() : nullptr);
             dlg->setAttribute(Qt::WA_DeleteOnClose);
             dlg->show();

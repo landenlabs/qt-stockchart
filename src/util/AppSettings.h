@@ -51,6 +51,10 @@ public:
                                       const QString &field,
                                       const QString &value);
 
+    // Limited/trial account flag — user-configurable per provider in SettingsDialog.
+    bool        providerLimited(const QString &providerId) const;
+    void        setProviderLimited(const QString &providerId, bool limited);
+
     // ── Chart ─────────────────────────────────────────────────────────────────
     int  lastChartRangeDays() const;
     void setLastChartRangeDays(int v);

@@ -16,7 +16,6 @@ public:
     explicit YahooPageProvider(QObject *parent = nullptr);
 
     QString id() const override { return "yahoopage"; }
-    QString displayName() const override { return "Yahoo Finance (page)"; }
     QList<QPair<QString,QString>> credentialFields() const override { return {}; }
 
     void fetchData(const QString &symbol, const QString &range = "3mo") override;

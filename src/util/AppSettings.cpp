@@ -69,6 +69,11 @@ void AppSettings::setProviderCredential(const QString &providerId,
                                          const QString &value)
     { m_settings.setValue("providers/" + providerId + "/" + field, value); }
 
+bool AppSettings::providerLimited(const QString &providerId) const
+    { return m_settings.value("providers/" + providerId + "/limited", false).toBool(); }
+void AppSettings::setProviderLimited(const QString &providerId, bool limited)
+    { m_settings.setValue("providers/" + providerId + "/limited", limited); }
+
 // ── Chart ─────────────────────────────────────────────────────────────────────
 
 int AppSettings::lastChartRangeDays() const

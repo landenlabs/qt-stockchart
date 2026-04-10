@@ -15,7 +15,6 @@ public:
     explicit YahooFinanceProvider(QObject *parent = nullptr);
 
     QString id() const override { return "yahoo"; }
-    QString displayName() const override { return "Yahoo Finance (legacy)"; }
 
     // No credentials needed — hasCredentials() returns true for empty lists.
     QList<QPair<QString,QString>> credentialFields() const override { return {}; }

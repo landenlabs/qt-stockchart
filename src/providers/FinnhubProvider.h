@@ -9,8 +9,6 @@ public:
     explicit FinnhubProvider(QObject *parent = nullptr);
 
     QString id() const override { return "finnhub"; }
-    QString displayName() const override { return "Finnhub"; }
-    QString signupUrl() const override { return "https://finnhub.io/register"; }
     QList<QPair<QString,QString>> credentialFields() const override;
 
     void fetchData(const QString &symbol, const QString &range = "3mo") override;

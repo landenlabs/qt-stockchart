@@ -9,8 +9,6 @@ public:
     explicit TwelveDataProvider(QObject *parent = nullptr);
 
     QString id() const override { return "twelvedata"; }
-    QString displayName() const override { return "Twelve Data"; }
-    QString signupUrl() const override { return "https://twelvedata.com/"; }
     QList<QPair<QString,QString>> credentialFields() const override;
 
     void fetchData(const QString &symbol, const QString &range = "3mo") override;

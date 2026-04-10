@@ -1,0 +1,58 @@
+[
+  {
+    "id":         "alphavantage",
+    "label":      "Alpha Vantage",
+    "comment":    "Free tier: 25 requests/day. US stocks, no intraday data.",
+    "enable":     true,
+    "url":        "https://www.alphavantage.co/support/#api-key",
+    "accountUrl": "https://www.alphavantage.co/premium/"
+  },
+  {
+    "id":         "finnhub",
+    "label":      "Finnhub",
+    "comment":    "Free tier: 60 calls/min. US stocks and some international markets.",
+    "enable":     true,
+    "url":        "https://finnhub.io/register",
+    "accountUrl": "https://finnhub.io/dashboard"
+  },
+  {
+    "id":         "polygon",
+    "label":      "Polygon.io",
+    "comment":    "Free tier: 15-min delayed data. Paid plans for real-time US stocks.",
+    "enable":     true,
+    "url":        "https://polygon.io/dashboard/signup",
+    "accountUrl": "https://polygon.io/dashboard/billing"
+  },
+  {
+    "id":         "twelvedata",
+    "label":      "Twelve Data",
+    "comment":    "Free tier: 800 requests/day, 8/min. Global stocks and ETFs.",
+    "enable":     true,
+    "url":        "https://twelvedata.com/",
+    "accountUrl": "https://twelvedata.com/account"
+  },
+  {
+    "id":         "yahoo",
+    "label":      "Yahoo Finance",
+    "comment":    "Unofficial v8 API — no key required. May be rate-limited or break without warning.",
+    "enable":     true,
+    "url":        "",
+    "accountUrl": ""
+  },
+  {
+    "id":         "fmp",
+    "label":      "Fin. Modeling Prep",
+    "comment":    "Free tier: 250 requests/day, 5/min. US stocks and ETFs.",
+    "enable":     true,
+    "url":        "https://financialmodelingprep.com/developer/docs/",
+    "accountUrl": "https://financialmodelingprep.com/developer/docs/"
+  },
+  {
+    "id":         "yahoopage",
+    "label":      "Yahoo Finance (page)",
+    "comment":    "Page scraper — no key required. Returns current price only, no history.",
+    "enable":     true,
+    "url":        "",
+    "accountUrl": ""
+  }
+]

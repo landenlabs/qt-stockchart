@@ -23,8 +23,6 @@ public:
     virtual ~StockDataProvider() = default;
 
     virtual QString id() const = 0;
-    virtual QString displayName() const = 0;
-    virtual QString signupUrl() const { return {}; }
     // Returns list of {fieldKey, displayLabel} pairs
     virtual QList<QPair<QString,QString>> credentialFields() const = 0;
 
