@@ -24,12 +24,13 @@ ProviderRegistry::ProviderRegistry()
     for (const QJsonValue &v : doc.array()) {
         const QJsonObject obj = v.toObject();
         ProviderInfo pi;
-        pi.id         = obj["id"].toString();
-        pi.label      = obj["label"].toString();
-        pi.comment    = obj["comment"].toString();
-        pi.url        = obj["url"].toString();
-        pi.accountUrl = obj["accountUrl"].toString();
-        pi.enabled    = obj["enable"].toBool(true);
+        pi.id          = obj["id"].toString();
+        pi.label       = obj["label"].toString();
+        pi.comment     = obj["comment"].toString();
+        pi.url         = obj["url"].toString();
+        pi.accountUrl  = obj["accountUrl"].toString();
+        pi.quoteFromId = obj["quote_from_id"].toString();
+        pi.enabled     = obj["enable"].toBool(true);
 
         if (pi.id.isEmpty()) {
             qWarning() << "ProviderRegistry: skipping entry with empty id";

@@ -856,8 +856,16 @@ void MainWindow::onDataReady(const QString &symbol, const QVector<StockDataPoint
         if (dow >= 1 && dow <= 5 && !existing.isEmpty()) {
             if (existing.last().timestamp.date() < today && !m_quoteInFlight.contains(symbol)) {
                 m_quoteInFlight.insert(symbol);
-                if (StockDataProvider *p = activeProvider())
-                    p->fetchLatestQuote(symbol);
+                if (StockDataProvider *active = activeProvider()) {
+                    const QString quoteId = ProviderRegistry::instance().quoteFromId(active->id());
+                    StockDataProvider *quoteProvider = active;
+                    if (!quoteId.isEmpty() && quoteId != active->id()) {
+                        for (StockDataProvider *p : m_providers) {
+                            if (p->id() == quoteId) { quoteProvider = p; break; }
+                        }
+                    }
+                    quoteProvider->fetchLatestQuote(symbol);
+                }
             }
         }
     }

@@ -8,10 +8,11 @@ class StockDataProvider;
 // Metadata for a single provider, loaded from providers.json
 struct ProviderInfo {
     QString id;
-    QString label;      // display name shown in all UI
-    QString comment;    // tooltip / hover text
-    QString url;        // signup / API-key URL
-    QString accountUrl; // account dashboard URL (may be empty)
+    QString label;       // display name shown in all UI
+    QString comment;     // tooltip / hover text
+    QString url;         // signup / API-key URL
+    QString accountUrl;  // account dashboard URL (may be empty)
+    QString quoteFromId; // if non-empty, delegate fetchLatestQuote to this provider id
     bool    enabled = true;
 };
 
@@ -31,11 +32,12 @@ public:
     ProviderInfo info(const QString &id) const;
 
     // Convenience single-field accessors
-    QString label(const QString &id) const      { return info(id).label; }
-    QString comment(const QString &id) const    { return info(id).comment; }
-    QString url(const QString &id) const        { return info(id).url; }
-    QString accountUrl(const QString &id) const { return info(id).accountUrl; }
-    bool    enabled(const QString &id) const    { return info(id).enabled; }
+    QString label(const QString &id) const       { return info(id).label; }
+    QString comment(const QString &id) const     { return info(id).comment; }
+    QString url(const QString &id) const         { return info(id).url; }
+    QString accountUrl(const QString &id) const  { return info(id).accountUrl; }
+    QString quoteFromId(const QString &id) const { return info(id).quoteFromId; }
+    bool    enabled(const QString &id) const     { return info(id).enabled; }
 
     // All provider infos in the order they appear in providers.json
     QList<ProviderInfo> all() const { return m_ordered; }
