@@ -27,8 +27,11 @@ brew upgrade
 
 mkdir build_exe
 cd build_exe
+rm -rf CMakeFiles/ CMakeCache.txt
 cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF
+
 make -j10
+  or
 cmake --build . --clean-first
 
 

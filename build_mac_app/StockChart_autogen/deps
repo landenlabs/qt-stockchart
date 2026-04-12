@@ -5,21 +5,46 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/___wctype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/__wctype.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/__xlocale.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_abort.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_assert.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_bounds.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_ctermid.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_ctype.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_locale.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_locale_posix2008.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_mb_cur_max.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_printf.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdio.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdlib.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_string.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_strings.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_time.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_intmax_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_locale_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uint16_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uint32_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uint64_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uint8_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uintmax_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_wctrans_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_wctype_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_wchar.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_wctype.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_xlocale.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/alloca.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/_endian.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/_limits.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/_mcontext.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/_types.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/endian.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/limits.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/signal.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/arm/types.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/assert.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/adjacent_find.h \
@@ -317,24 +342,13 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__log_hardening_failure \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/abs.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/copysign.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/error_functions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/exponential_functions.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/fdim.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/fma.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/gamma.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/hyperbolic_functions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/hypot.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/inverse_hyperbolic_functions.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/inverse_trigonometric_functions.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/logarithms.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/min_max.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/modulo.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/remainder.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/roots.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/rounding_functions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/special_functions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/traits.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/trigonometric_functions.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__mbstate_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/addressof.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/align.h \
@@ -608,10 +622,8 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdlib \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cstring \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ctime \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ctype.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cwchar \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/cwctype \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/errno.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/exception \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/execution \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
@@ -624,7 +636,6 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/list \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/locale \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/math.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/mutex \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/new \
@@ -633,14 +644,9 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/set \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stdbool.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stddef.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stdexcept \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stdint.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stdio.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/stdlib.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/streambuf \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/system_error \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/tuple \
@@ -652,20 +658,36 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/variant \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/version \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/wchar.h \
-	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/wctype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/ctype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/errno.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/limits.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/locale.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/mach/arm/_structs.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/mach/machine/_structs.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/_endian.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/_mcontext.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/_types.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/endian.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/limits.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/signal.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/types.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/malloc/_malloc.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/malloc/_malloc_type.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/malloc/_ptrcheck.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/math.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/nl_types.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/pthread/pthread.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/pthread/pthread_impl.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/pthread/qos.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/pthread/sched.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/runetype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stddef.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdint.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdio.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdlib.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/string.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/__endian.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_endian.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_posix_availability.h \
@@ -686,6 +708,7 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_blksize_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_caddr_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_clock_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_ct_rune_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_errno_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_clr.h \
@@ -715,14 +738,20 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_nlink_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_null.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_off_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_offsetof.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_pid_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_ptrdiff_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_rsize_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_rune_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_seek_set.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigaltstack.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_size_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_ssize_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_suseconds_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_time_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_timespec.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_timeval.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_char.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int16_t.h \
@@ -730,44 +759,99 @@ StockChart_autogen/timestamp: \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int64_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int8_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_short.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_ucontext.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_uid_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_uintptr_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_useconds_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_va_list.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_wchar_t.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_wint_t.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/appleapiopts.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/errno.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/qos.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/resource.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/signal.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/stdio.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/syslimits.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/types.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/wait.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/time.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/wchar.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/wctype.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/___wctype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_ctype.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_stdio.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_stdlib.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_string.h \
 	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_time.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_wchar.h \
+	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/xlocale/_wctype.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___gnuc_va_list.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg___va_copy.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_header_macro.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_arg.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_copy.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stdarg_va_list.h \
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/limits.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/ptrcheck.h \
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdarg.h \
 	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/CMakeLists.txt \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app/CMakeFiles/4.3.0/CMakeCXXCompiler.cmake \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app/CMakeFiles/4.3.0/CMakeSystem.cmake \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app/StockChart_autogen/moc_predefs.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/AlphaVantageProvider.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/AlphaVantageProvider.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/FinnhubProvider.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/FinnhubProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app/CMakeFiles/4.3.1/CMakeCXXCompiler.cmake \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app/CMakeFiles/4.3.1/CMakeSystem.cmake \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app/StockChart_autogen/moc_predefs.h \
 	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/MainWindow.cpp \
 	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/MainWindow.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/PolygonProvider.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/PolygonProvider.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/SettingsDialog.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/SettingsDialog.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/StockDataProvider.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/StockDataProvider.h \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/TwelveDataProvider.cpp \
-	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/TwelveDataProvider.h \
 	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/main.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/AlphaVantageProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/AlphaVantageProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/FinnhubProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/FinnhubProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/FmpProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/FmpProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/PolygonProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/PolygonProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/ProviderRegistry.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/ProviderRegistry.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/StockDataProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/StockDataProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/TwelveDataProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/TwelveDataProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/YahooFinanceProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/YahooFinanceProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/YahooPageProvider.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/providers/YahooPageProvider.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/CsvPorter.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/CsvPorter.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/StockCacheManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/StockCacheManager.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/StockGroupManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/stock/StockGroupManager.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/ApiCallTracker.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/ApiCallTracker.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/ChartManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/ChartManager.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/JsonViewerDialog.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/JsonViewerDialog.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/SettingsDialog.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/SettingsDialog.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/TableManager.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/ui/TableManager.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/AppSettings.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/AppSettings.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/CrashHandler.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/CrashHandler.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/JSettings.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/JSettings.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/Logger.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/util/Logger.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/AdBlockDialog.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/AdBlockDialog.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/RequestInterceptor.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/RequestInterceptor.h \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/WebBrowserWidget.cpp \
+	/Users/dennislang/opt/projects/qt-projects/qt-stockchart/src/web/WebBrowserWidget.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QByteArray \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QDate \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QDateTime \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QFlags \
@@ -778,12 +862,18 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QMetaType \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QObject \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QPair \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QPointF \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QPointer \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QReadWriteLock \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QRect \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QRegularExpression \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSet \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSharedDataPointer \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSize \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QSizeF \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QString \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QStringList \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QTimeZone \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QUrl \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QVariant \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/QVector \
@@ -878,7 +968,9 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qoverload.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qpair.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qpoint.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qpointer.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qreadwritelock.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qrect.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qrefcount.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qregularexpression.h \
@@ -917,10 +1009,12 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtenvironmentvariables.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtextstream.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtformat_impl.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtimezone.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtmetamacros.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtnoop.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtpreprocessorsupport.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtresource.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtsan_impl.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qttranslation.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qttypetraits.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qtversion.h \
@@ -937,9 +1031,11 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QActionGroup \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QBrush \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QColor \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QFont \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QIcon \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QPen \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QPixmap \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/QTransform \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/qaction.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtGui.framework/Versions/A/Headers/qactiongroup.h \
@@ -1008,10 +1104,14 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetwork-config.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetworkexports.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtNetwork.framework/Versions/A/Headers/qtnetworkglobal.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QBoxLayout \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QButtonGroup \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QCheckBox \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QComboBox \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QDialog \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QFrame \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsEllipseItem \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsLineItem \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsPixmapItem \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsTextItem \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsView \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QGraphicsWidget \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QLabel \
@@ -1019,18 +1119,23 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QMainWindow \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QPushButton \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QSplitter \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QStackedWidget \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QTabBar \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QTabWidget \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QTableWidget \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QTextEdit \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QToolButton \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QTreeWidget \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/QWidget \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractbutton.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractitemdelegate.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractitemview.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractscrollarea.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractslider.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qabstractspinbox.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qboxlayout.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qbuttongroup.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qcheckbox.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qcombobox.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qdialog.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qframe.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsitem.h \
@@ -1038,10 +1143,7 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsscene.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicsview.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgraphicswidget.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qgridlayout.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlabel.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlayout.h \
-	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlayoutitem.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qlineedit.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qmainwindow.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qpushbutton.h \
@@ -1050,12 +1152,14 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qsizepolicy.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qslider.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qsplitter.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qstackedwidget.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qstyle.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qstyleoption.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtabbar.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtableview.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtablewidget.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtabwidget.h \
+	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtextedit.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtoolbutton.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtreeview.h \
 	/opt/homebrew/Cellar/qtbase/6.11.0/lib/QtWidgets.framework/Versions/A/Headers/qtreewidget.h \
@@ -1078,6 +1182,11 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/Cellar/qtcharts/6.11.0/lib/QtCharts.framework/Versions/A/Headers/qlegend.h \
 	/opt/homebrew/Cellar/qtcharts/6.11.0/lib/QtCharts.framework/Versions/A/Headers/qtcharts-config.h \
 	/opt/homebrew/Cellar/qtcharts/6.11.0/lib/QtCharts.framework/Versions/A/Headers/qtchartsexports.h \
+	/opt/homebrew/Cellar/qtwebengine/6.11.0/lib/QtWebEngineCore.framework/Versions/A/Headers/QWebEngineUrlRequestInterceptor \
+	/opt/homebrew/Cellar/qtwebengine/6.11.0/lib/QtWebEngineCore.framework/Versions/A/Headers/qtwebenginecore-config.h \
+	/opt/homebrew/Cellar/qtwebengine/6.11.0/lib/QtWebEngineCore.framework/Versions/A/Headers/qtwebenginecoreglobal.h \
+	/opt/homebrew/Cellar/qtwebengine/6.11.0/lib/QtWebEngineCore.framework/Versions/A/Headers/qwebengineurlrequestinfo.h \
+	/opt/homebrew/Cellar/qtwebengine/6.11.0/lib/QtWebEngineCore.framework/Versions/A/Headers/qwebengineurlrequestinterceptor.h \
 	/opt/homebrew/lib/cmake/Qt6/FindWrapAtomic.cmake \
 	/opt/homebrew/lib/cmake/Qt6/FindWrapOpenGL.cmake \
 	/opt/homebrew/lib/cmake/Qt6/FindWrapVulkanHeaders.cmake \
@@ -1141,6 +1250,7 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigExtras.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigVersion.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CoreMacros.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Core/Qt6CorePlugins.cmake \
@@ -1379,6 +1489,781 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6OpenGLWidgets/Qt6OpenGLWidgetsTargets.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6OpenGLWidgets/Qt6OpenGLWidgetsTargetsPrecheck.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6OpenGLWidgets/Qt6OpenGLWidgetsVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningPlugins.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6PositioningVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryCLPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryCLPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryCLPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryCLPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryCLPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryNmeaPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryNmeaPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryNmeaPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryNmeaPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryNmeaPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryPollPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryPollPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryPollPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryPollPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Positioning/Qt6QGeoPositionInfoSourceFactoryPollPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportPlugins.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6PrintSupport/Qt6PrintSupportVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6DataVisualizationQmlpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6DataVisualizationQmlpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6DataVisualizationQmlpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6DataVisualizationQmlpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6DataVisualizationQmlpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6GraphspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6GraphspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6GraphspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6GraphspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6GraphspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsPlatformpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsPlatformpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsPlatformpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsPlatformpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsPlatformpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitImplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitImplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitImplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitImplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitImplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsStyleKitpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsSynchronizerpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsSynchronizerpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsSynchronizerpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsSynchronizerpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LabsSynchronizerpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottieVectorImageHelperspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottieVectorImageHelperspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottieVectorImageHelperspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottieVectorImageHelperspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottieVectorImageHelperspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottiepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottiepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottiepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottiepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6LottiepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6PdfQuickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6PdfQuickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6PdfQuickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6PdfQuickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6PdfQuickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlNetworkpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlNetworkpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlNetworkpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlNetworkpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlNetworkpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6Quick3DXrpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6Quick3DXrpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6Quick3DXrpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6Quick3DXrpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6Quick3DXrpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickControlsTestUtilsPrivatepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickControlsTestUtilsPrivatepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickControlsTestUtilsPrivatepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickControlsTestUtilsPrivatepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickControlsTestUtilsPrivatepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickTestpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickTestpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickTestpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickTestpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6QuickTestpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6SensorsQuickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6SensorsQuickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6SensorsQuickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6SensorsQuickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6SensorsQuickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6TextToSpeechQmlAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6TextToSpeechQmlConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6TextToSpeechQmlTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6TextToSpeechQmlTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6TextToSpeechQmlTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6VirtualKeyboardpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6VirtualKeyboardpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6VirtualKeyboardpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6VirtualKeyboardpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6VirtualKeyboardpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6WebChannelQuickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6WebChannelQuickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6WebChannelQuickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6WebChannelQuickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6WebChannelQuickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_locationAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_locationConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_locationTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_locationTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_locationTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_remoteobjectsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_remoteobjectsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_remoteobjectsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_remoteobjectsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_remoteobjectsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_scxmlAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_scxmlConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_scxmlTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_scxmlTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6declarative_scxmlTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6effectspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6effectspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6effectspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6effectspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6effectspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6grpcquickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6grpcquickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6grpcquickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6grpcquickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6grpcquickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsanimationpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsanimationpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsanimationpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsanimationpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsanimationpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsmodelspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsmodelspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsmodelspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsmodelspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6labsmodelspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6modelspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6modelspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6modelspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6modelspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6modelspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6particlespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6particlespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6particlespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6particlespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6particlespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6positioningquickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6positioningquickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6positioningquickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6positioningquickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6positioningquickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6protobufquickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6protobufquickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6protobufquickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6protobufquickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6protobufquickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlfolderlistmodelpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlfolderlistmodelpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlfolderlistmodelpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlfolderlistmodelpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlfolderlistmodelpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmllocalstoragepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmllocalstoragepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmllocalstoragepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmllocalstoragepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmllocalstoragepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlsettingspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlsettingspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlsettingspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlsettingspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlsettingspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlshapespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlshapespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlshapespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlshapespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlshapespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwavefrontmeshpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwavefrontmeshpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwavefrontmeshpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwavefrontmeshpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwavefrontmeshpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwebsocketsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwebsocketsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwebsocketsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwebsocketsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlwebsocketsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlxmllistmodelpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlxmllistmodelpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlxmllistmodelpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlxmllistmodelpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qmlxmllistmodelpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dphysicspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dphysicspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dphysicspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dphysicspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dphysicspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquick3dpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquicklayoutspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquicklayoutspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquicklayoutspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquicklayoutspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquicklayoutspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtchartsqml2AdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtchartsqml2Config.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtchartsqml2Targets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtchartsqml2Targets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtchartsqml2TargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectsprivateAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectsprivateConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectsprivateTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectsprivateTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtgraphicaleffectsprivateTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlcorepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlcorepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlcorepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlcorepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlcorepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlstatemachineAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlstatemachineConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlstatemachineTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlstatemachineTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtqmlstatemachineTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick2pluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick2pluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick2pluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick2pluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick2pluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dassetutilspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dassetutilspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dassetutilspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dassetutilspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dassetutilspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3deffectpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3deffectpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3deffectpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3deffectpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3deffectpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelpersimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelpersimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelpersimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelpersimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelpersimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelperspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelperspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelperspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelperspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dhelperspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticleeffectspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticleeffectspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticleeffectspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticleeffectspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticleeffectspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticles3dpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticles3dpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticles3dpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticles3dpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dparticles3dpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dphysicshelperspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dphysicshelperspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dphysicshelperspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dphysicshelperspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquick3dphysicshelperspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2basicstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3styleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3styleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3styleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3styleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3styleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3stylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3stylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3stylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3stylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fluentwinui3stylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2fusionstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2imaginestylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2implpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2implpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2implpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2implpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2implpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2iosstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2macosstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2materialstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2nativestylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2nativestylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2nativestylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2nativestylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2nativestylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2pluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2pluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2pluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2pluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2pluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstyleimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstyleimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstyleimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstyleimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstyleimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstylepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstylepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstylepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstylepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickcontrols2universalstylepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogs2quickimplpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogs2quickimplpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogs2quickimplpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogs2quickimplpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogs2quickimplpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickdialogspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene2dpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene2dpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene2dpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene2dpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene2dpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene3dpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene3dpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene3dpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene3dpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickscene3dpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickshapesdesignhelperspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickshapesdesignhelperspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickshapesdesignhelperspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickshapesdesignhelperspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquickshapesdesignhelperspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktemplates2pluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktemplates2pluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktemplates2pluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktemplates2pluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktemplates2pluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelineblendtreespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelineblendtreespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelineblendtreespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelineblendtreespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelineblendtreespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhunspellpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhunspellpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhunspellpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhunspellpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhunspellpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickdelegatespluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickdelegatespluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickdelegatespluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickdelegatespluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickdelegatespluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebenginequickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebviewquickpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebviewquickpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebviewquickpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebviewquickpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtwebviewquickpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3danimationpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3danimationpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3danimationpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3danimationpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3danimationpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dcorepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dcorepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dcorepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dcorepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dcorepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dextraspluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dextraspluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dextraspluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dextraspluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dextraspluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dinputpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dinputpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dinputpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dinputpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dinputpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dlogicpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dlogicpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dlogicpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dlogicpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dlogicpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3drenderpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3drenderpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3drenderpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3drenderpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3drenderpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickmultimediaAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickmultimediaConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickmultimediaTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickmultimediaTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickmultimediaTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quicktoolingAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quicktoolingConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quicktoolingTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quicktoolingTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quicktoolingTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickwindowAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickwindowConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickwindowTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickwindowTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6quickwindowTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6sharedimagepluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6sharedimagepluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6sharedimagepluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6sharedimagepluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6sharedimagepluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6workerscriptpluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6workerscriptpluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6workerscriptpluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6workerscriptpluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/QmlPlugins/Qt6workerscriptpluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QDebugMessageServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QDebugMessageServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QDebugMessageServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QDebugMessageServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QDebugMessageServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QLocalClientConnectionFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QLocalClientConnectionFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QLocalClientConnectionFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QLocalClientConnectionFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QLocalClientConnectionFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebugServerFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebugServerFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebugServerFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebugServerFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebugServerFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebuggerServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebuggerServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebuggerServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebuggerServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlDebuggerServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlInspectorServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlInspectorServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlInspectorServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlInspectorServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlInspectorServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugConnectorFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugConnectorFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugConnectorFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugConnectorFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugConnectorFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlNativeDebugServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlPreviewServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlPreviewServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlPreviewServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlPreviewServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlPreviewServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlProfilerServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlProfilerServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlProfilerServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlProfilerServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQmlProfilerServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuick3DProfilerAdapterFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuick3DProfilerAdapterFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuick3DProfilerAdapterFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuick3DProfilerAdapterFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuick3DProfilerAdapterFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickEventReplayServiceFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickEventReplayServiceFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickEventReplayServiceFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickEventReplayServiceFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickEventReplayServiceFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickProfilerAdapterFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickProfilerAdapterFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickProfilerAdapterFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickProfilerAdapterFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QQuickProfilerAdapterFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QTcpServerConnectionFactoryPluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QTcpServerConnectionFactoryPluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QTcpServerConnectionFactoryPluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QTcpServerConnectionFactoryPluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QTcpServerConnectionFactoryPluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlConfigExtras.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlFindQmlscInternal.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlProperties.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlPublicCMakeHelpers.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Qml/Qt6QmlVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlIntegration/Qt6QmlIntegrationVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlMeta/Qt6QmlMetaVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlModels/Qt6QmlModelsVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlTools/Qt6QmlToolsVersionlessTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QmlWorkerScript/Qt6QmlWorkerScriptVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QLottieVectorImagePluginAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QLottieVectorImagePluginConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QLottieVectorImagePluginTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QLottieVectorImagePluginTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QLottieVectorImagePluginTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickPlugins.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6Quick/Qt6QuickVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6QuickToolsVersionlessTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickTools/Qt6SvgToQmlMacros.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6QuickWidgets/Qt6QuickWidgetsVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelExtras.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebChannel/Qt6WebChannelVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreMacros.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCore/Qt6WebEngineCoreVersionlessAliasTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineCoreTools/Qt6WebEngineCoreToolsVersionlessTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsAdditionalTargetInfo.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsConfig.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsConfigVersion.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsConfigVersionImpl.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsDependencies.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsTargets-release.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsTargets.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsTargetsPrecheck.cmake \
+	/opt/homebrew/opt/qt/lib/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsVersionlessAliasTargets.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Widgets/Qt6QMacStylePluginAdditionalTargetInfo.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Widgets/Qt6QMacStylePluginConfig.cmake \
 	/opt/homebrew/opt/qt/lib/cmake/Qt6Widgets/Qt6QMacStylePluginTargets-release.cmake \
@@ -1479,6 +2364,7 @@ StockChart_autogen/timestamp: \
 	/opt/homebrew/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
 	/opt/homebrew/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
+	/opt/homebrew/share/cmake/Modules/FindCups.cmake \
 	/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake \
 	/opt/homebrew/share/cmake/Modules/FindPackageHandleStandardArgs.cmake \
 	/opt/homebrew/share/cmake/Modules/FindPackageMessage.cmake \

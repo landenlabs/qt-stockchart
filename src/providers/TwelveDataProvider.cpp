@@ -153,7 +153,7 @@ void TwelveDataProvider::fetchLatestQuote(const QString &symbol)
         const double price    = root["close"].toString().toDouble();
         const QString dateStr = root["datetime"].toString().left(10); // YYYY-MM-DD
 
-        QDateTime refDt(QDate(2026, 1, 1), QTime(0, 0, 0), Qt::UTC);
+        QDateTime refDt(QDate(2026, 1, 1), QTime(0, 0, 0), QTimeZone::utc());
         qint64 epochRef = refDt.toSecsSinceEpoch();
 
         long epochSec = root["last_quote_at"].toInt(0);

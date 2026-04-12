@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QBoxLayout>
+#include <QScrollArea>
 
 // Returns a compact human-readable size string (e.g. "12K", "850B", "-")
 static QString sizeStr(int bytes)
@@ -25,13 +26,19 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
     , m_panelParent(panelParent)
 {
     // ── Build the panel widget ────────────────────────────────────────────────
+
+    auto *scrollArea = new QScrollArea(panelParent);
+    scrollArea->setWidgetResizable(true); // Crucial: allows panel to expand
+    scrollArea->setFrameShape(QFrame::NoFrame); // Clean look
+
     auto *panel = new QFrame(panelParent);
     panel->setFrameShape(QFrame::StyledPanel);
     panel->setFrameShadow(QFrame::Sunken);
+    panel->setMinimumWidth(300); // Forces scrollbar if viewport < 200
 
     auto *vl = new QVBoxLayout(panel);
     vl->setContentsMargins(6, 4, 6, 4);
-    vl->setSpacing(3);
+    vl->setSpacing(0);
 
     auto *title = new QLabel("API Calls Today", panel);
     QFont tf = title->font();
@@ -49,6 +56,10 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
     QFont sf;
     sf.setPointSize(sf.pointSize() - 1);
 
+    const unsigned NAM_W = 80;
+    const unsigned CALL_W = 26;
+    const unsigned OTH_W = 32;
+
     // ── Column header row ────────────────────────────────────────────────────
     {
         auto *hdr = new QWidget(panel);
@@ -58,7 +69,7 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
 
         auto *hName  = new QLabel("Provider", hdr);
         auto *hCalls = new QLabel("Calls", hdr);
-        auto *hHist  = new QLabel("History", hdr);
+        auto *hHist  = new QLabel("Hours", hdr);
         auto *hQuote = new QLabel("Quote", hdr);
 
         QFont hf = sf;
@@ -69,15 +80,20 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
         hHist->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         hQuote->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-        hCalls->setFixedWidth(30);
-        hHist->setFixedWidth(38);
-        hQuote->setFixedWidth(38);
+        // 1. Set the fixed width for the Provider column
+        hName->setFixedWidth(NAM_W);
 
-        hl->addWidget(hName);
-        hl->addStretch();
-        hl->addWidget(hCalls);
-        hl->addWidget(hHist);
-        hl->addWidget(hQuote);
+        // 2. Set the minimum width for the numeric columns
+        hCalls->setMinimumWidth(CALL_W);
+        hHist->setMinimumWidth(OTH_W);
+        hQuote->setMinimumWidth(OTH_W);
+
+        // 3. Add to layout with equal stretch factors
+        hl->addWidget(hName,  0); // Stretch 0 = only take what is required (50px)
+        hl->addWidget(hCalls, 1); // Stretch 1 = share remaining space equally
+        hl->addWidget(hHist,  1);
+        hl->addWidget(hQuote, 1);
+
         vl->addWidget(hdr);
     }
 
@@ -92,35 +108,43 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
         auto *nameLabel = new QLabel(ProviderRegistry::instance().label(p->id()), row);
         nameLabel->setFont(sf);
         nameLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+        nameLabel->setFixedWidth(NAM_W);
 
         auto *countLabel = new QLabel("0", row);
         countLabel->setFont(sf);
         countLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-        countLabel->setFixedWidth(30);
         countLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+        // countLabel->setFixedWidth(30);
+        countLabel->setMinimumWidth(CALL_W);
 
         // "History" and "Quote" clickable size buttons — fix height to match label rows
-        const int btnH = QFontMetrics(sf).height() + 2;
+        const int btnH = QFontMetrics(sf).height();
 
-        auto *histBtn = new QPushButton("-", row);
-        histBtn->setFlat(true);
+        auto *histBtn = new QPushButton("", row);
+        histBtn->setFlat(true); // Removes the border/background
+        histBtn->setStyleSheet("border: none; color: blue; text-decoration: underline;");
         histBtn->setFont(sf);
         histBtn->setCursor(Qt::PointingHandCursor);
-        histBtn->setFixedSize(38, btnH);
-        histBtn->setToolTip("Click to view last fetchData JSON response");
+        // histBtn->setFixedSize(38, btnH);
+        histBtn->setMinimumWidth(OTH_W);
+        // histBtn->setFixedHeight(btnH);
+        histBtn->setToolTip("Click to view history fetch response");
 
-        auto *quoteBtn = new QPushButton("-", row);
-        quoteBtn->setFlat(true);
+        auto *quoteBtn = new QPushButton("", row);
+        quoteBtn->setFlat(true); // Removes the border/background
+        quoteBtn->setStyleSheet("border: none; color: blue; text-decoration: underline;");
         quoteBtn->setFont(sf);
         quoteBtn->setCursor(Qt::PointingHandCursor);
-        quoteBtn->setFixedSize(38, btnH);
-        quoteBtn->setToolTip("Click to view last fetchLatestQuote JSON response");
+        // quoteBtn->setFixedSize(38, btnH);
+        quoteBtn->setMinimumWidth(OTH_W);
+        // quoteBtn->setFixedHeight(btnH);
+        quoteBtn->setToolTip("Click to view quote response");
 
-        hl->addWidget(nameLabel);
-        hl->addStretch();
-        hl->addWidget(countLabel);
-        hl->addWidget(histBtn);
-        hl->addWidget(quoteBtn);
+        hl->addWidget(nameLabel,  0); // Stretch 0 = only take what is required (50px)
+        hl->addWidget(countLabel, 1); // Stretch 1 = share remaining space equally
+        hl->addWidget(histBtn,  1);
+        hl->addWidget(quoteBtn, 1);
+
 
         vl->addWidget(row);
         m_nameLabels[p->id()]  = nameLabel;
@@ -160,7 +184,10 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
         });
     }
 
-    layout->addWidget(panel);
+    vl->addStretch(1);  // fill bottom with blank causing rows to back tight at top.
+
+    scrollArea->setWidget(panel);
+    layout->addWidget(scrollArea);
 }
 
 QWidget *ApiCallTracker::rowWidget(const QString &providerId) const

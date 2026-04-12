@@ -154,7 +154,9 @@ void YahooFinanceProvider::onReplyFinished(QNetworkReply *reply)
 {
     if (!m_pending.contains(reply)) return;
     reply->deleteLater();
-    auto [symbol, range] = m_pending.take(reply);
+    auto pending = m_pending.take(reply);
+    const QString symbol = pending.first;
+    const QString range  = pending.second;
 
     const int httpStatus = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     Logger::instance().append(QString("Yahoo [%1] HTTP %2").arg(symbol).arg(httpStatus));

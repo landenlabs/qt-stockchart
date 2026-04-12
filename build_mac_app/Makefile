@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/dennislang/opt/projects/qt-projects/qt-stockchart
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app
+CMAKE_BINARY_DIR = /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app/CMakeFiles /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app/CMakeFiles /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_app/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dennislang/opt/projects/qt-projects/qt-stockchart/build_mac_app/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,6 +128,19 @@ StockChart: cmake_check_build_system
 StockChart/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build
 .PHONY : StockChart/fast
+
+#=============================================================================
+# Target rules for targets named StockChart_other_files
+
+# Build rule for target.
+StockChart_other_files: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 StockChart_other_files
+.PHONY : StockChart_other_files
+
+# fast build rule for target.
+StockChart_other_files/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart_other_files.dir/build.make CMakeFiles/StockChart_other_files.dir/build
+.PHONY : StockChart_other_files/fast
 
 #=============================================================================
 # Target rules for targets named StockChart_autogen_timestamp_deps
@@ -179,53 +192,29 @@ StockChart_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/StockChart_autogen/mocs_compilation.cpp.s
 .PHONY : StockChart_autogen/mocs_compilation.cpp.s
 
-src/AlphaVantageProvider.o: src/AlphaVantageProvider.cpp.o
-.PHONY : src/AlphaVantageProvider.o
+build_mac_app/.qt/rcc/qrc_app_resources.o: build_mac_app/.qt/rcc/qrc_app_resources.cpp.o
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.o
 
 # target to build an object file
-src/AlphaVantageProvider.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/AlphaVantageProvider.cpp.o
-.PHONY : src/AlphaVantageProvider.cpp.o
+build_mac_app/.qt/rcc/qrc_app_resources.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_app/.qt/rcc/qrc_app_resources.cpp.o
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.cpp.o
 
-src/AlphaVantageProvider.i: src/AlphaVantageProvider.cpp.i
-.PHONY : src/AlphaVantageProvider.i
-
-# target to preprocess a source file
-src/AlphaVantageProvider.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/AlphaVantageProvider.cpp.i
-.PHONY : src/AlphaVantageProvider.cpp.i
-
-src/AlphaVantageProvider.s: src/AlphaVantageProvider.cpp.s
-.PHONY : src/AlphaVantageProvider.s
-
-# target to generate assembly for a file
-src/AlphaVantageProvider.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/AlphaVantageProvider.cpp.s
-.PHONY : src/AlphaVantageProvider.cpp.s
-
-src/FinnhubProvider.o: src/FinnhubProvider.cpp.o
-.PHONY : src/FinnhubProvider.o
-
-# target to build an object file
-src/FinnhubProvider.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/FinnhubProvider.cpp.o
-.PHONY : src/FinnhubProvider.cpp.o
-
-src/FinnhubProvider.i: src/FinnhubProvider.cpp.i
-.PHONY : src/FinnhubProvider.i
+build_mac_app/.qt/rcc/qrc_app_resources.i: build_mac_app/.qt/rcc/qrc_app_resources.cpp.i
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.i
 
 # target to preprocess a source file
-src/FinnhubProvider.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/FinnhubProvider.cpp.i
-.PHONY : src/FinnhubProvider.cpp.i
+build_mac_app/.qt/rcc/qrc_app_resources.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_app/.qt/rcc/qrc_app_resources.cpp.i
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.cpp.i
 
-src/FinnhubProvider.s: src/FinnhubProvider.cpp.s
-.PHONY : src/FinnhubProvider.s
+build_mac_app/.qt/rcc/qrc_app_resources.s: build_mac_app/.qt/rcc/qrc_app_resources.cpp.s
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.s
 
 # target to generate assembly for a file
-src/FinnhubProvider.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/FinnhubProvider.cpp.s
-.PHONY : src/FinnhubProvider.cpp.s
+build_mac_app/.qt/rcc/qrc_app_resources.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/build_mac_app/.qt/rcc/qrc_app_resources.cpp.s
+.PHONY : build_mac_app/.qt/rcc/qrc_app_resources.cpp.s
 
 src/MainWindow.o: src/MainWindow.cpp.o
 .PHONY : src/MainWindow.o
@@ -251,102 +240,6 @@ src/MainWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/MainWindow.cpp.s
 .PHONY : src/MainWindow.cpp.s
 
-src/PolygonProvider.o: src/PolygonProvider.cpp.o
-.PHONY : src/PolygonProvider.o
-
-# target to build an object file
-src/PolygonProvider.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/PolygonProvider.cpp.o
-.PHONY : src/PolygonProvider.cpp.o
-
-src/PolygonProvider.i: src/PolygonProvider.cpp.i
-.PHONY : src/PolygonProvider.i
-
-# target to preprocess a source file
-src/PolygonProvider.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/PolygonProvider.cpp.i
-.PHONY : src/PolygonProvider.cpp.i
-
-src/PolygonProvider.s: src/PolygonProvider.cpp.s
-.PHONY : src/PolygonProvider.s
-
-# target to generate assembly for a file
-src/PolygonProvider.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/PolygonProvider.cpp.s
-.PHONY : src/PolygonProvider.cpp.s
-
-src/SettingsDialog.o: src/SettingsDialog.cpp.o
-.PHONY : src/SettingsDialog.o
-
-# target to build an object file
-src/SettingsDialog.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/SettingsDialog.cpp.o
-.PHONY : src/SettingsDialog.cpp.o
-
-src/SettingsDialog.i: src/SettingsDialog.cpp.i
-.PHONY : src/SettingsDialog.i
-
-# target to preprocess a source file
-src/SettingsDialog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/SettingsDialog.cpp.i
-.PHONY : src/SettingsDialog.cpp.i
-
-src/SettingsDialog.s: src/SettingsDialog.cpp.s
-.PHONY : src/SettingsDialog.s
-
-# target to generate assembly for a file
-src/SettingsDialog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/SettingsDialog.cpp.s
-.PHONY : src/SettingsDialog.cpp.s
-
-src/StockDataProvider.o: src/StockDataProvider.cpp.o
-.PHONY : src/StockDataProvider.o
-
-# target to build an object file
-src/StockDataProvider.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockDataProvider.cpp.o
-.PHONY : src/StockDataProvider.cpp.o
-
-src/StockDataProvider.i: src/StockDataProvider.cpp.i
-.PHONY : src/StockDataProvider.i
-
-# target to preprocess a source file
-src/StockDataProvider.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockDataProvider.cpp.i
-.PHONY : src/StockDataProvider.cpp.i
-
-src/StockDataProvider.s: src/StockDataProvider.cpp.s
-.PHONY : src/StockDataProvider.s
-
-# target to generate assembly for a file
-src/StockDataProvider.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/StockDataProvider.cpp.s
-.PHONY : src/StockDataProvider.cpp.s
-
-src/TwelveDataProvider.o: src/TwelveDataProvider.cpp.o
-.PHONY : src/TwelveDataProvider.o
-
-# target to build an object file
-src/TwelveDataProvider.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TwelveDataProvider.cpp.o
-.PHONY : src/TwelveDataProvider.cpp.o
-
-src/TwelveDataProvider.i: src/TwelveDataProvider.cpp.i
-.PHONY : src/TwelveDataProvider.i
-
-# target to preprocess a source file
-src/TwelveDataProvider.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TwelveDataProvider.cpp.i
-.PHONY : src/TwelveDataProvider.cpp.i
-
-src/TwelveDataProvider.s: src/TwelveDataProvider.cpp.s
-.PHONY : src/TwelveDataProvider.s
-
-# target to generate assembly for a file
-src/TwelveDataProvider.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/TwelveDataProvider.cpp.s
-.PHONY : src/TwelveDataProvider.cpp.s
-
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -371,6 +264,582 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/providers/AlphaVantageProvider.o: src/providers/AlphaVantageProvider.cpp.o
+.PHONY : src/providers/AlphaVantageProvider.o
+
+# target to build an object file
+src/providers/AlphaVantageProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/AlphaVantageProvider.cpp.o
+.PHONY : src/providers/AlphaVantageProvider.cpp.o
+
+src/providers/AlphaVantageProvider.i: src/providers/AlphaVantageProvider.cpp.i
+.PHONY : src/providers/AlphaVantageProvider.i
+
+# target to preprocess a source file
+src/providers/AlphaVantageProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/AlphaVantageProvider.cpp.i
+.PHONY : src/providers/AlphaVantageProvider.cpp.i
+
+src/providers/AlphaVantageProvider.s: src/providers/AlphaVantageProvider.cpp.s
+.PHONY : src/providers/AlphaVantageProvider.s
+
+# target to generate assembly for a file
+src/providers/AlphaVantageProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/AlphaVantageProvider.cpp.s
+.PHONY : src/providers/AlphaVantageProvider.cpp.s
+
+src/providers/FinnhubProvider.o: src/providers/FinnhubProvider.cpp.o
+.PHONY : src/providers/FinnhubProvider.o
+
+# target to build an object file
+src/providers/FinnhubProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FinnhubProvider.cpp.o
+.PHONY : src/providers/FinnhubProvider.cpp.o
+
+src/providers/FinnhubProvider.i: src/providers/FinnhubProvider.cpp.i
+.PHONY : src/providers/FinnhubProvider.i
+
+# target to preprocess a source file
+src/providers/FinnhubProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FinnhubProvider.cpp.i
+.PHONY : src/providers/FinnhubProvider.cpp.i
+
+src/providers/FinnhubProvider.s: src/providers/FinnhubProvider.cpp.s
+.PHONY : src/providers/FinnhubProvider.s
+
+# target to generate assembly for a file
+src/providers/FinnhubProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FinnhubProvider.cpp.s
+.PHONY : src/providers/FinnhubProvider.cpp.s
+
+src/providers/FmpProvider.o: src/providers/FmpProvider.cpp.o
+.PHONY : src/providers/FmpProvider.o
+
+# target to build an object file
+src/providers/FmpProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FmpProvider.cpp.o
+.PHONY : src/providers/FmpProvider.cpp.o
+
+src/providers/FmpProvider.i: src/providers/FmpProvider.cpp.i
+.PHONY : src/providers/FmpProvider.i
+
+# target to preprocess a source file
+src/providers/FmpProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FmpProvider.cpp.i
+.PHONY : src/providers/FmpProvider.cpp.i
+
+src/providers/FmpProvider.s: src/providers/FmpProvider.cpp.s
+.PHONY : src/providers/FmpProvider.s
+
+# target to generate assembly for a file
+src/providers/FmpProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/FmpProvider.cpp.s
+.PHONY : src/providers/FmpProvider.cpp.s
+
+src/providers/PolygonProvider.o: src/providers/PolygonProvider.cpp.o
+.PHONY : src/providers/PolygonProvider.o
+
+# target to build an object file
+src/providers/PolygonProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/PolygonProvider.cpp.o
+.PHONY : src/providers/PolygonProvider.cpp.o
+
+src/providers/PolygonProvider.i: src/providers/PolygonProvider.cpp.i
+.PHONY : src/providers/PolygonProvider.i
+
+# target to preprocess a source file
+src/providers/PolygonProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/PolygonProvider.cpp.i
+.PHONY : src/providers/PolygonProvider.cpp.i
+
+src/providers/PolygonProvider.s: src/providers/PolygonProvider.cpp.s
+.PHONY : src/providers/PolygonProvider.s
+
+# target to generate assembly for a file
+src/providers/PolygonProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/PolygonProvider.cpp.s
+.PHONY : src/providers/PolygonProvider.cpp.s
+
+src/providers/ProviderRegistry.o: src/providers/ProviderRegistry.cpp.o
+.PHONY : src/providers/ProviderRegistry.o
+
+# target to build an object file
+src/providers/ProviderRegistry.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/ProviderRegistry.cpp.o
+.PHONY : src/providers/ProviderRegistry.cpp.o
+
+src/providers/ProviderRegistry.i: src/providers/ProviderRegistry.cpp.i
+.PHONY : src/providers/ProviderRegistry.i
+
+# target to preprocess a source file
+src/providers/ProviderRegistry.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/ProviderRegistry.cpp.i
+.PHONY : src/providers/ProviderRegistry.cpp.i
+
+src/providers/ProviderRegistry.s: src/providers/ProviderRegistry.cpp.s
+.PHONY : src/providers/ProviderRegistry.s
+
+# target to generate assembly for a file
+src/providers/ProviderRegistry.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/ProviderRegistry.cpp.s
+.PHONY : src/providers/ProviderRegistry.cpp.s
+
+src/providers/StockDataProvider.o: src/providers/StockDataProvider.cpp.o
+.PHONY : src/providers/StockDataProvider.o
+
+# target to build an object file
+src/providers/StockDataProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/StockDataProvider.cpp.o
+.PHONY : src/providers/StockDataProvider.cpp.o
+
+src/providers/StockDataProvider.i: src/providers/StockDataProvider.cpp.i
+.PHONY : src/providers/StockDataProvider.i
+
+# target to preprocess a source file
+src/providers/StockDataProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/StockDataProvider.cpp.i
+.PHONY : src/providers/StockDataProvider.cpp.i
+
+src/providers/StockDataProvider.s: src/providers/StockDataProvider.cpp.s
+.PHONY : src/providers/StockDataProvider.s
+
+# target to generate assembly for a file
+src/providers/StockDataProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/StockDataProvider.cpp.s
+.PHONY : src/providers/StockDataProvider.cpp.s
+
+src/providers/TwelveDataProvider.o: src/providers/TwelveDataProvider.cpp.o
+.PHONY : src/providers/TwelveDataProvider.o
+
+# target to build an object file
+src/providers/TwelveDataProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/TwelveDataProvider.cpp.o
+.PHONY : src/providers/TwelveDataProvider.cpp.o
+
+src/providers/TwelveDataProvider.i: src/providers/TwelveDataProvider.cpp.i
+.PHONY : src/providers/TwelveDataProvider.i
+
+# target to preprocess a source file
+src/providers/TwelveDataProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/TwelveDataProvider.cpp.i
+.PHONY : src/providers/TwelveDataProvider.cpp.i
+
+src/providers/TwelveDataProvider.s: src/providers/TwelveDataProvider.cpp.s
+.PHONY : src/providers/TwelveDataProvider.s
+
+# target to generate assembly for a file
+src/providers/TwelveDataProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/TwelveDataProvider.cpp.s
+.PHONY : src/providers/TwelveDataProvider.cpp.s
+
+src/providers/YahooFinanceProvider.o: src/providers/YahooFinanceProvider.cpp.o
+.PHONY : src/providers/YahooFinanceProvider.o
+
+# target to build an object file
+src/providers/YahooFinanceProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooFinanceProvider.cpp.o
+.PHONY : src/providers/YahooFinanceProvider.cpp.o
+
+src/providers/YahooFinanceProvider.i: src/providers/YahooFinanceProvider.cpp.i
+.PHONY : src/providers/YahooFinanceProvider.i
+
+# target to preprocess a source file
+src/providers/YahooFinanceProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooFinanceProvider.cpp.i
+.PHONY : src/providers/YahooFinanceProvider.cpp.i
+
+src/providers/YahooFinanceProvider.s: src/providers/YahooFinanceProvider.cpp.s
+.PHONY : src/providers/YahooFinanceProvider.s
+
+# target to generate assembly for a file
+src/providers/YahooFinanceProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooFinanceProvider.cpp.s
+.PHONY : src/providers/YahooFinanceProvider.cpp.s
+
+src/providers/YahooPageProvider.o: src/providers/YahooPageProvider.cpp.o
+.PHONY : src/providers/YahooPageProvider.o
+
+# target to build an object file
+src/providers/YahooPageProvider.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooPageProvider.cpp.o
+.PHONY : src/providers/YahooPageProvider.cpp.o
+
+src/providers/YahooPageProvider.i: src/providers/YahooPageProvider.cpp.i
+.PHONY : src/providers/YahooPageProvider.i
+
+# target to preprocess a source file
+src/providers/YahooPageProvider.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooPageProvider.cpp.i
+.PHONY : src/providers/YahooPageProvider.cpp.i
+
+src/providers/YahooPageProvider.s: src/providers/YahooPageProvider.cpp.s
+.PHONY : src/providers/YahooPageProvider.s
+
+# target to generate assembly for a file
+src/providers/YahooPageProvider.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/providers/YahooPageProvider.cpp.s
+.PHONY : src/providers/YahooPageProvider.cpp.s
+
+src/stock/CsvPorter.o: src/stock/CsvPorter.cpp.o
+.PHONY : src/stock/CsvPorter.o
+
+# target to build an object file
+src/stock/CsvPorter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/CsvPorter.cpp.o
+.PHONY : src/stock/CsvPorter.cpp.o
+
+src/stock/CsvPorter.i: src/stock/CsvPorter.cpp.i
+.PHONY : src/stock/CsvPorter.i
+
+# target to preprocess a source file
+src/stock/CsvPorter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/CsvPorter.cpp.i
+.PHONY : src/stock/CsvPorter.cpp.i
+
+src/stock/CsvPorter.s: src/stock/CsvPorter.cpp.s
+.PHONY : src/stock/CsvPorter.s
+
+# target to generate assembly for a file
+src/stock/CsvPorter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/CsvPorter.cpp.s
+.PHONY : src/stock/CsvPorter.cpp.s
+
+src/stock/StockCacheManager.o: src/stock/StockCacheManager.cpp.o
+.PHONY : src/stock/StockCacheManager.o
+
+# target to build an object file
+src/stock/StockCacheManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockCacheManager.cpp.o
+.PHONY : src/stock/StockCacheManager.cpp.o
+
+src/stock/StockCacheManager.i: src/stock/StockCacheManager.cpp.i
+.PHONY : src/stock/StockCacheManager.i
+
+# target to preprocess a source file
+src/stock/StockCacheManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockCacheManager.cpp.i
+.PHONY : src/stock/StockCacheManager.cpp.i
+
+src/stock/StockCacheManager.s: src/stock/StockCacheManager.cpp.s
+.PHONY : src/stock/StockCacheManager.s
+
+# target to generate assembly for a file
+src/stock/StockCacheManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockCacheManager.cpp.s
+.PHONY : src/stock/StockCacheManager.cpp.s
+
+src/stock/StockGroupManager.o: src/stock/StockGroupManager.cpp.o
+.PHONY : src/stock/StockGroupManager.o
+
+# target to build an object file
+src/stock/StockGroupManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockGroupManager.cpp.o
+.PHONY : src/stock/StockGroupManager.cpp.o
+
+src/stock/StockGroupManager.i: src/stock/StockGroupManager.cpp.i
+.PHONY : src/stock/StockGroupManager.i
+
+# target to preprocess a source file
+src/stock/StockGroupManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockGroupManager.cpp.i
+.PHONY : src/stock/StockGroupManager.cpp.i
+
+src/stock/StockGroupManager.s: src/stock/StockGroupManager.cpp.s
+.PHONY : src/stock/StockGroupManager.s
+
+# target to generate assembly for a file
+src/stock/StockGroupManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/stock/StockGroupManager.cpp.s
+.PHONY : src/stock/StockGroupManager.cpp.s
+
+src/ui/ApiCallTracker.o: src/ui/ApiCallTracker.cpp.o
+.PHONY : src/ui/ApiCallTracker.o
+
+# target to build an object file
+src/ui/ApiCallTracker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ApiCallTracker.cpp.o
+.PHONY : src/ui/ApiCallTracker.cpp.o
+
+src/ui/ApiCallTracker.i: src/ui/ApiCallTracker.cpp.i
+.PHONY : src/ui/ApiCallTracker.i
+
+# target to preprocess a source file
+src/ui/ApiCallTracker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ApiCallTracker.cpp.i
+.PHONY : src/ui/ApiCallTracker.cpp.i
+
+src/ui/ApiCallTracker.s: src/ui/ApiCallTracker.cpp.s
+.PHONY : src/ui/ApiCallTracker.s
+
+# target to generate assembly for a file
+src/ui/ApiCallTracker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ApiCallTracker.cpp.s
+.PHONY : src/ui/ApiCallTracker.cpp.s
+
+src/ui/ChartManager.o: src/ui/ChartManager.cpp.o
+.PHONY : src/ui/ChartManager.o
+
+# target to build an object file
+src/ui/ChartManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ChartManager.cpp.o
+.PHONY : src/ui/ChartManager.cpp.o
+
+src/ui/ChartManager.i: src/ui/ChartManager.cpp.i
+.PHONY : src/ui/ChartManager.i
+
+# target to preprocess a source file
+src/ui/ChartManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ChartManager.cpp.i
+.PHONY : src/ui/ChartManager.cpp.i
+
+src/ui/ChartManager.s: src/ui/ChartManager.cpp.s
+.PHONY : src/ui/ChartManager.s
+
+# target to generate assembly for a file
+src/ui/ChartManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/ChartManager.cpp.s
+.PHONY : src/ui/ChartManager.cpp.s
+
+src/ui/JsonViewerDialog.o: src/ui/JsonViewerDialog.cpp.o
+.PHONY : src/ui/JsonViewerDialog.o
+
+# target to build an object file
+src/ui/JsonViewerDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/JsonViewerDialog.cpp.o
+.PHONY : src/ui/JsonViewerDialog.cpp.o
+
+src/ui/JsonViewerDialog.i: src/ui/JsonViewerDialog.cpp.i
+.PHONY : src/ui/JsonViewerDialog.i
+
+# target to preprocess a source file
+src/ui/JsonViewerDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/JsonViewerDialog.cpp.i
+.PHONY : src/ui/JsonViewerDialog.cpp.i
+
+src/ui/JsonViewerDialog.s: src/ui/JsonViewerDialog.cpp.s
+.PHONY : src/ui/JsonViewerDialog.s
+
+# target to generate assembly for a file
+src/ui/JsonViewerDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/JsonViewerDialog.cpp.s
+.PHONY : src/ui/JsonViewerDialog.cpp.s
+
+src/ui/SettingsDialog.o: src/ui/SettingsDialog.cpp.o
+.PHONY : src/ui/SettingsDialog.o
+
+# target to build an object file
+src/ui/SettingsDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/SettingsDialog.cpp.o
+.PHONY : src/ui/SettingsDialog.cpp.o
+
+src/ui/SettingsDialog.i: src/ui/SettingsDialog.cpp.i
+.PHONY : src/ui/SettingsDialog.i
+
+# target to preprocess a source file
+src/ui/SettingsDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/SettingsDialog.cpp.i
+.PHONY : src/ui/SettingsDialog.cpp.i
+
+src/ui/SettingsDialog.s: src/ui/SettingsDialog.cpp.s
+.PHONY : src/ui/SettingsDialog.s
+
+# target to generate assembly for a file
+src/ui/SettingsDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/SettingsDialog.cpp.s
+.PHONY : src/ui/SettingsDialog.cpp.s
+
+src/ui/TableManager.o: src/ui/TableManager.cpp.o
+.PHONY : src/ui/TableManager.o
+
+# target to build an object file
+src/ui/TableManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/TableManager.cpp.o
+.PHONY : src/ui/TableManager.cpp.o
+
+src/ui/TableManager.i: src/ui/TableManager.cpp.i
+.PHONY : src/ui/TableManager.i
+
+# target to preprocess a source file
+src/ui/TableManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/TableManager.cpp.i
+.PHONY : src/ui/TableManager.cpp.i
+
+src/ui/TableManager.s: src/ui/TableManager.cpp.s
+.PHONY : src/ui/TableManager.s
+
+# target to generate assembly for a file
+src/ui/TableManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/ui/TableManager.cpp.s
+.PHONY : src/ui/TableManager.cpp.s
+
+src/util/AppSettings.o: src/util/AppSettings.cpp.o
+.PHONY : src/util/AppSettings.o
+
+# target to build an object file
+src/util/AppSettings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/AppSettings.cpp.o
+.PHONY : src/util/AppSettings.cpp.o
+
+src/util/AppSettings.i: src/util/AppSettings.cpp.i
+.PHONY : src/util/AppSettings.i
+
+# target to preprocess a source file
+src/util/AppSettings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/AppSettings.cpp.i
+.PHONY : src/util/AppSettings.cpp.i
+
+src/util/AppSettings.s: src/util/AppSettings.cpp.s
+.PHONY : src/util/AppSettings.s
+
+# target to generate assembly for a file
+src/util/AppSettings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/AppSettings.cpp.s
+.PHONY : src/util/AppSettings.cpp.s
+
+src/util/CrashHandler.o: src/util/CrashHandler.cpp.o
+.PHONY : src/util/CrashHandler.o
+
+# target to build an object file
+src/util/CrashHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/CrashHandler.cpp.o
+.PHONY : src/util/CrashHandler.cpp.o
+
+src/util/CrashHandler.i: src/util/CrashHandler.cpp.i
+.PHONY : src/util/CrashHandler.i
+
+# target to preprocess a source file
+src/util/CrashHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/CrashHandler.cpp.i
+.PHONY : src/util/CrashHandler.cpp.i
+
+src/util/CrashHandler.s: src/util/CrashHandler.cpp.s
+.PHONY : src/util/CrashHandler.s
+
+# target to generate assembly for a file
+src/util/CrashHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/CrashHandler.cpp.s
+.PHONY : src/util/CrashHandler.cpp.s
+
+src/util/JSettings.o: src/util/JSettings.cpp.o
+.PHONY : src/util/JSettings.o
+
+# target to build an object file
+src/util/JSettings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/JSettings.cpp.o
+.PHONY : src/util/JSettings.cpp.o
+
+src/util/JSettings.i: src/util/JSettings.cpp.i
+.PHONY : src/util/JSettings.i
+
+# target to preprocess a source file
+src/util/JSettings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/JSettings.cpp.i
+.PHONY : src/util/JSettings.cpp.i
+
+src/util/JSettings.s: src/util/JSettings.cpp.s
+.PHONY : src/util/JSettings.s
+
+# target to generate assembly for a file
+src/util/JSettings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/JSettings.cpp.s
+.PHONY : src/util/JSettings.cpp.s
+
+src/util/Logger.o: src/util/Logger.cpp.o
+.PHONY : src/util/Logger.o
+
+# target to build an object file
+src/util/Logger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/Logger.cpp.o
+.PHONY : src/util/Logger.cpp.o
+
+src/util/Logger.i: src/util/Logger.cpp.i
+.PHONY : src/util/Logger.i
+
+# target to preprocess a source file
+src/util/Logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/Logger.cpp.i
+.PHONY : src/util/Logger.cpp.i
+
+src/util/Logger.s: src/util/Logger.cpp.s
+.PHONY : src/util/Logger.s
+
+# target to generate assembly for a file
+src/util/Logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/util/Logger.cpp.s
+.PHONY : src/util/Logger.cpp.s
+
+src/web/AdBlockDialog.o: src/web/AdBlockDialog.cpp.o
+.PHONY : src/web/AdBlockDialog.o
+
+# target to build an object file
+src/web/AdBlockDialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/AdBlockDialog.cpp.o
+.PHONY : src/web/AdBlockDialog.cpp.o
+
+src/web/AdBlockDialog.i: src/web/AdBlockDialog.cpp.i
+.PHONY : src/web/AdBlockDialog.i
+
+# target to preprocess a source file
+src/web/AdBlockDialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/AdBlockDialog.cpp.i
+.PHONY : src/web/AdBlockDialog.cpp.i
+
+src/web/AdBlockDialog.s: src/web/AdBlockDialog.cpp.s
+.PHONY : src/web/AdBlockDialog.s
+
+# target to generate assembly for a file
+src/web/AdBlockDialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/AdBlockDialog.cpp.s
+.PHONY : src/web/AdBlockDialog.cpp.s
+
+src/web/RequestInterceptor.o: src/web/RequestInterceptor.cpp.o
+.PHONY : src/web/RequestInterceptor.o
+
+# target to build an object file
+src/web/RequestInterceptor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/RequestInterceptor.cpp.o
+.PHONY : src/web/RequestInterceptor.cpp.o
+
+src/web/RequestInterceptor.i: src/web/RequestInterceptor.cpp.i
+.PHONY : src/web/RequestInterceptor.i
+
+# target to preprocess a source file
+src/web/RequestInterceptor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/RequestInterceptor.cpp.i
+.PHONY : src/web/RequestInterceptor.cpp.i
+
+src/web/RequestInterceptor.s: src/web/RequestInterceptor.cpp.s
+.PHONY : src/web/RequestInterceptor.s
+
+# target to generate assembly for a file
+src/web/RequestInterceptor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/RequestInterceptor.cpp.s
+.PHONY : src/web/RequestInterceptor.cpp.s
+
+src/web/WebBrowserWidget.o: src/web/WebBrowserWidget.cpp.o
+.PHONY : src/web/WebBrowserWidget.o
+
+# target to build an object file
+src/web/WebBrowserWidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/WebBrowserWidget.cpp.o
+.PHONY : src/web/WebBrowserWidget.cpp.o
+
+src/web/WebBrowserWidget.i: src/web/WebBrowserWidget.cpp.i
+.PHONY : src/web/WebBrowserWidget.i
+
+# target to preprocess a source file
+src/web/WebBrowserWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/WebBrowserWidget.cpp.i
+.PHONY : src/web/WebBrowserWidget.cpp.i
+
+src/web/WebBrowserWidget.s: src/web/WebBrowserWidget.cpp.s
+.PHONY : src/web/WebBrowserWidget.s
+
+# target to generate assembly for a file
+src/web/WebBrowserWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/StockChart.dir/build.make CMakeFiles/StockChart.dir/src/web/WebBrowserWidget.cpp.s
+.PHONY : src/web/WebBrowserWidget.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -381,34 +850,92 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... StockChart_autogen"
 	@echo "... StockChart_autogen_timestamp_deps"
+	@echo "... StockChart_other_files"
 	@echo "... StockChart"
 	@echo "... StockChart_autogen/mocs_compilation.o"
 	@echo "... StockChart_autogen/mocs_compilation.i"
 	@echo "... StockChart_autogen/mocs_compilation.s"
-	@echo "... src/AlphaVantageProvider.o"
-	@echo "... src/AlphaVantageProvider.i"
-	@echo "... src/AlphaVantageProvider.s"
-	@echo "... src/FinnhubProvider.o"
-	@echo "... src/FinnhubProvider.i"
-	@echo "... src/FinnhubProvider.s"
+	@echo "... build_mac_app/.qt/rcc/qrc_app_resources.o"
+	@echo "... build_mac_app/.qt/rcc/qrc_app_resources.i"
+	@echo "... build_mac_app/.qt/rcc/qrc_app_resources.s"
 	@echo "... src/MainWindow.o"
 	@echo "... src/MainWindow.i"
 	@echo "... src/MainWindow.s"
-	@echo "... src/PolygonProvider.o"
-	@echo "... src/PolygonProvider.i"
-	@echo "... src/PolygonProvider.s"
-	@echo "... src/SettingsDialog.o"
-	@echo "... src/SettingsDialog.i"
-	@echo "... src/SettingsDialog.s"
-	@echo "... src/StockDataProvider.o"
-	@echo "... src/StockDataProvider.i"
-	@echo "... src/StockDataProvider.s"
-	@echo "... src/TwelveDataProvider.o"
-	@echo "... src/TwelveDataProvider.i"
-	@echo "... src/TwelveDataProvider.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/providers/AlphaVantageProvider.o"
+	@echo "... src/providers/AlphaVantageProvider.i"
+	@echo "... src/providers/AlphaVantageProvider.s"
+	@echo "... src/providers/FinnhubProvider.o"
+	@echo "... src/providers/FinnhubProvider.i"
+	@echo "... src/providers/FinnhubProvider.s"
+	@echo "... src/providers/FmpProvider.o"
+	@echo "... src/providers/FmpProvider.i"
+	@echo "... src/providers/FmpProvider.s"
+	@echo "... src/providers/PolygonProvider.o"
+	@echo "... src/providers/PolygonProvider.i"
+	@echo "... src/providers/PolygonProvider.s"
+	@echo "... src/providers/ProviderRegistry.o"
+	@echo "... src/providers/ProviderRegistry.i"
+	@echo "... src/providers/ProviderRegistry.s"
+	@echo "... src/providers/StockDataProvider.o"
+	@echo "... src/providers/StockDataProvider.i"
+	@echo "... src/providers/StockDataProvider.s"
+	@echo "... src/providers/TwelveDataProvider.o"
+	@echo "... src/providers/TwelveDataProvider.i"
+	@echo "... src/providers/TwelveDataProvider.s"
+	@echo "... src/providers/YahooFinanceProvider.o"
+	@echo "... src/providers/YahooFinanceProvider.i"
+	@echo "... src/providers/YahooFinanceProvider.s"
+	@echo "... src/providers/YahooPageProvider.o"
+	@echo "... src/providers/YahooPageProvider.i"
+	@echo "... src/providers/YahooPageProvider.s"
+	@echo "... src/stock/CsvPorter.o"
+	@echo "... src/stock/CsvPorter.i"
+	@echo "... src/stock/CsvPorter.s"
+	@echo "... src/stock/StockCacheManager.o"
+	@echo "... src/stock/StockCacheManager.i"
+	@echo "... src/stock/StockCacheManager.s"
+	@echo "... src/stock/StockGroupManager.o"
+	@echo "... src/stock/StockGroupManager.i"
+	@echo "... src/stock/StockGroupManager.s"
+	@echo "... src/ui/ApiCallTracker.o"
+	@echo "... src/ui/ApiCallTracker.i"
+	@echo "... src/ui/ApiCallTracker.s"
+	@echo "... src/ui/ChartManager.o"
+	@echo "... src/ui/ChartManager.i"
+	@echo "... src/ui/ChartManager.s"
+	@echo "... src/ui/JsonViewerDialog.o"
+	@echo "... src/ui/JsonViewerDialog.i"
+	@echo "... src/ui/JsonViewerDialog.s"
+	@echo "... src/ui/SettingsDialog.o"
+	@echo "... src/ui/SettingsDialog.i"
+	@echo "... src/ui/SettingsDialog.s"
+	@echo "... src/ui/TableManager.o"
+	@echo "... src/ui/TableManager.i"
+	@echo "... src/ui/TableManager.s"
+	@echo "... src/util/AppSettings.o"
+	@echo "... src/util/AppSettings.i"
+	@echo "... src/util/AppSettings.s"
+	@echo "... src/util/CrashHandler.o"
+	@echo "... src/util/CrashHandler.i"
+	@echo "... src/util/CrashHandler.s"
+	@echo "... src/util/JSettings.o"
+	@echo "... src/util/JSettings.i"
+	@echo "... src/util/JSettings.s"
+	@echo "... src/util/Logger.o"
+	@echo "... src/util/Logger.i"
+	@echo "... src/util/Logger.s"
+	@echo "... src/web/AdBlockDialog.o"
+	@echo "... src/web/AdBlockDialog.i"
+	@echo "... src/web/AdBlockDialog.s"
+	@echo "... src/web/RequestInterceptor.o"
+	@echo "... src/web/RequestInterceptor.i"
+	@echo "... src/web/RequestInterceptor.s"
+	@echo "... src/web/WebBrowserWidget.o"
+	@echo "... src/web/WebBrowserWidget.i"
+	@echo "... src/web/WebBrowserWidget.s"
 .PHONY : help
 
 

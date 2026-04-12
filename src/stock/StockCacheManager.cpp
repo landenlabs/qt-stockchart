@@ -306,9 +306,9 @@ QString StockCacheManager::ageString(const QString &sym) const
 {
     const qint64 secs = dataSecs(sym);
     if (secs < 0) return {};
-    const qint64 days = secs / 86400;
-    const qint64 hrs  = secs / 3600;
-    const qint64 mins = secs / 60;
+    const unsigned days = unsigned(secs / 86400);
+    const unsigned hrs  = unsigned(secs / 3600);
+    const unsigned mins = unsigned(secs / 60);
     if (days > 1)
         return QString::asprintf("%02dD%02d", days, hrs-24*days);
     else

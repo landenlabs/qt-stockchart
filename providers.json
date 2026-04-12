@@ -36,17 +36,8 @@
     "quote_from_id": "yahoopage"
   },
   {
-    "id":            "yahoo",
-    "label":         "Yahoo Finance",
-    "comment":       "Unofficial v8 API — no key required. May be rate-limited or break without warning.",
-    "enable":        true,
-    "url":           "",
-    "accountUrl":    "",
-    "quote_from_id": "yahoopage"
-  },
-  {
     "id":            "fmp",
-    "label":         "Fin. Modeling Prep",
+    "label":         "Fin. Modeling",
     "comment":       "Free tier: 250 requests/day, 5/min. US stocks and ETFs.",
     "enable":        true,
     "url":           "https://financialmodelingprep.com/developer/docs/",
@@ -54,8 +45,17 @@
     "quote_from_id": "yahoopage"
   },
   {
+    "id":            "yahoo",
+    "label":         "Yahoo Finance",
+    "comment":       "Unofficial v8 API — no key required. May be rate-limited or break without warning.",
+    "enable":        false,
+    "url":           "",
+    "accountUrl":    "",
+    "quote_from_id": "yahoopage"
+  },
+  {
     "id":            "yahoopage",
-    "label":         "Yahoo Finance (page)",
+    "label":         "Yahoo Quote",
     "comment":       "Page scraper — no key required. Returns current price only, no history.",
     "enable":        true,
     "url":           "",
