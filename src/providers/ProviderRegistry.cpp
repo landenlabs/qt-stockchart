@@ -61,18 +61,40 @@ ProviderInfo ProviderRegistry::info(const QString &id) const
     return fallback;
 }
 
-void ProviderRegistry::validate(const QList<StockDataProvider*> &providers) const
+QList<StockDataProvider*> ProviderRegistry::validate(const QList<StockDataProvider*> &providers) const
 {
-    // Check every code-registered provider has a JSON entry
-    for (const StockDataProvider *p : providers) {
-        if (!m_map.contains(p->id()))
-            qWarning() << "ProviderRegistry: no JSON entry for provider id:" << p->id();
+    QList<StockDataProvider*> validProviders;
+
+    // 1. Map the incoming providers by ID for O(1) lookup.
+    // This decouples their original order from the lookup process.
+    QMap<QString, StockDataProvider*> providerMap;
+    for (StockDataProvider *p : providers) {
+        providerMap.insert(p->id(), p);
     }
-    // Check every JSON entry has a corresponding code object
-    QStringList codeIds;
-    for (const StockDataProvider *p : providers) codeIds.append(p->id());
+
+    // 2. Iterate through m_ordered to build the final list.
+    // This ensures the return list follows the JSON order.
     for (const ProviderInfo &pi : m_ordered) {
-        if (!codeIds.contains(pi.id))
-            qWarning() << "ProviderRegistry: JSON provider not found in code:" << pi.id;
+        // Condition: ID must exist in the code-provided list AND the JSON map
+        if (providerMap.contains(pi.id) && m_map.contains(pi.id)) {
+            if (m_map[pi.id].enabled)
+                validProviders.append(providerMap.value(pi.id));
+        } else {
+            if (!providerMap.contains(pi.id)) {
+                qWarning() << "ProviderRegistry: JSON ID" << pi.id << "not found in code.";
+            }
+            if (!m_map.contains(pi.id)) {
+                qWarning() << "ProviderRegistry: JSON ID" << pi.id << "not found in m_map.";
+            }
+        }
     }
+
+    // 3. Optional: Warn about "Orphan" code objects (Code exists but not in JSON)
+    for (StockDataProvider *p : providers) {
+        if (!m_map.contains(p->id())) {
+            qWarning() << "ProviderRegistry: Code object" << p->id() << "discarded (no JSON entry).";
+        }
+    }
+
+    return validProviders;
 }

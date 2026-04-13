@@ -64,7 +64,8 @@ private:
     void applyFontSize(int pointSize);
 
     // ── Widgets ──────────────────────────────────────────────────────────────
-    QSplitter     *m_splitter    = nullptr;
+    QSplitter     *m_splitter        = nullptr;
+    QSplitter     *m_leftVSplitter   = nullptr; // stock tree (top) | API tracker (bottom)
     QTreeWidget   *m_stockTree   = nullptr;
     QLabel        *m_statusLabel = nullptr;
     QWidget       *m_periodBtnsContainer  = nullptr;

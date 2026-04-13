@@ -6,7 +6,7 @@
 #include "StockDataProvider.h"
 
 class QWidget;
-class QBoxLayout;
+class QScrollArea;
 class QLabel;
 class QPushButton;
 
@@ -16,7 +16,7 @@ class ApiCallTracker : public QObject
     Q_OBJECT
 public:
     explicit ApiCallTracker(const QList<StockDataProvider*> &providers,
-                            QWidget *panelParent, QBoxLayout *layout,
+                            QWidget *panelParent,
                             QObject *parent = nullptr);
 
     void loadDailyCallCounts();
@@ -27,6 +27,9 @@ public:
     // Exposed so MainWindow::eventFilter can identify provider row clicks
     QWidget *rowWidget(const QString &providerId) const;
 
+    // Returns the scroll-area widget; caller places it in the layout or splitter
+    QWidget *panelWidget() const;
+
 private:
     QList<StockDataProvider*>   m_providers;
     QDate                       m_currentDay;
@@ -36,5 +39,6 @@ private:
     QMap<QString, QPushButton*> m_histBtns;
     QMap<QString, QPushButton*> m_quoteBtns;
     QMap<QString, QWidget*>     m_rowWidgets;
-    QWidget                    *m_panelParent = nullptr;
+    QWidget                    *m_panelParent  = nullptr;
+    QScrollArea                *m_scrollArea   = nullptr;
 };

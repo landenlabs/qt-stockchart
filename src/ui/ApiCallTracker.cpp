@@ -7,7 +7,6 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QBoxLayout>
 #include <QScrollArea>
 
 // Returns a compact human-readable size string (e.g. "12K", "850B", "-")
@@ -19,7 +18,7 @@ static QString sizeStr(int bytes)
 }
 
 ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
-                               QWidget *panelParent, QBoxLayout *layout,
+                               QWidget *panelParent,
                                QObject *parent)
     : QObject(parent)
     , m_providers(providers)
@@ -27,9 +26,9 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
 {
     // ── Build the panel widget ────────────────────────────────────────────────
 
-    auto *scrollArea = new QScrollArea(panelParent);
-    scrollArea->setWidgetResizable(true); // Crucial: allows panel to expand
-    scrollArea->setFrameShape(QFrame::NoFrame); // Clean look
+    m_scrollArea = new QScrollArea(panelParent);
+    m_scrollArea->setWidgetResizable(true); // Crucial: allows panel to expand
+    m_scrollArea->setFrameShape(QFrame::NoFrame); // Clean look
 
     auto *panel = new QFrame(panelParent);
     panel->setFrameShape(QFrame::StyledPanel);
@@ -186,13 +185,17 @@ ApiCallTracker::ApiCallTracker(const QList<StockDataProvider*> &providers,
 
     vl->addStretch(1);  // fill bottom with blank causing rows to back tight at top.
 
-    scrollArea->setWidget(panel);
-    layout->addWidget(scrollArea);
+    m_scrollArea->setWidget(panel);
 }
 
 QWidget *ApiCallTracker::rowWidget(const QString &providerId) const
 {
     return m_rowWidgets.value(providerId, nullptr);
+}
+
+QWidget *ApiCallTracker::panelWidget() const
+{
+    return m_scrollArea;
 }
 
 void ApiCallTracker::updatePanel(const QString &activeProviderId)

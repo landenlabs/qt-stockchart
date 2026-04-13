@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
         new YahooPageProvider(this)
     };
 
-    ProviderRegistry::instance().validate(m_providers);
+    m_providers = ProviderRegistry::instance().validate(m_providers);
 
     for (StockDataProvider *p : m_providers) {
         connect(p, &StockDataProvider::dataReady,       this, &MainWindow::onDataReady);
@@ -230,7 +230,12 @@ void MainWindow::setupUI()
 
     // auto *addGroupBtn = new QPushButton("+ Add Group", leftPanel);
 
-    leftLayout->addWidget(m_stockTree, 1);
+    m_leftVSplitter = new QSplitter(Qt::Vertical, leftPanel);
+    m_leftVSplitter->setHandleWidth(8);
+    m_leftVSplitter->setChildrenCollapsible(false);
+    m_leftVSplitter->addWidget(m_stockTree);
+
+    leftLayout->addWidget(m_leftVSplitter, 1);
     // leftLayout->addWidget(addGroupBtn);
 
     // Create StockGroupManager before setupRightPanel: the yScaleCombo and range
@@ -1043,12 +1048,11 @@ void MainWindow::loadSettings()
         p->setCredentials(creds);
     }
 
-    // Build the API info panel now that the left layout is complete.
-    // We need to reach the left panel's layout — find it via the splitter.
+    // Build the API info panel and add it as the second pane of the left splitter.
     QWidget *leftPanel = m_splitter->widget(0);
-    auto *leftLayout   = qobject_cast<QVBoxLayout*>(leftPanel->layout());
-    m_apiTracker = new ApiCallTracker(m_providers, leftPanel, leftLayout, this);
+    m_apiTracker = new ApiCallTracker(m_providers, leftPanel, this);
     m_apiTracker->loadDailyCallCounts();
+    m_leftVSplitter->addWidget(m_apiTracker->panelWidget());
 
     // Install event filter on provider rows so clicks are caught in eventFilter()
     for (StockDataProvider *p : m_providers)
@@ -1107,6 +1111,7 @@ void MainWindow::saveSettings()
     as.setYScaleIndex(m_yScaleCombo ? m_yScaleCombo->currentIndex() : 2);
     as.setMainSplitterPos(m_splitter->sizes().value(0, 0));
     as.setOuterSplitterPos(m_outerSplitter->sizes().value(1, 0));
+    if (m_leftVSplitter) as.setLeftSplitterPos(m_leftVSplitter->sizes().value(1, 0));
     if (m_groupManager)
         as.setSelectedSymbols(m_groupManager->selectedSymbols());
     m_cacheManager->saveCache();
@@ -1139,6 +1144,14 @@ void MainWindow::showEvent(QShowEvent *event)
                 const int total = m_splitter->width();
                 if (total > 0)
                     m_splitter->setSizes({leftW, total - leftW});
+            }
+
+            // Left vertical splitter (stock tree | API tracker).
+            if (m_leftVSplitter && m_leftVSplitter->count() == 2) {
+                const int apiH = as.leftSplitterPos();
+                const int total = m_leftVSplitter->height();
+                if (apiH > 0 && total > 0)
+                    m_leftVSplitter->setSizes({total - apiH, apiH});
             }
 
             // Outer vertical splitter (chart+table | log).

@@ -44,7 +44,8 @@ public:
 
     // Logs a qWarning() for every provider id that appears in code but not in
     // providers.json, and vice-versa. Call once at startup after building m_providers.
-    void validate(const QList<StockDataProvider*> &providers) const;
+    // Returns pruned list and order by providers.json order
+    QList<StockDataProvider*> validate(const QList<StockDataProvider*> &providers) const;
 
 private:
     ProviderRegistry();

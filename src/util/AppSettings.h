@@ -37,6 +37,9 @@ public:
     int        outerSplitterPos() const;  // log-pane height
     void       setOuterSplitterPos(int v);
 
+    int        leftSplitterPos() const;   // API tracker height inside left panel
+    void       setLeftSplitterPos(int v);
+
     // ── Provider ──────────────────────────────────────────────────────────────
     QString     activeProvider() const;
     void        setActiveProvider(const QString &v);

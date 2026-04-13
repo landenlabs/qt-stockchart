@@ -49,6 +49,11 @@ int AppSettings::outerSplitterPos() const
 void AppSettings::setOuterSplitterPos(int v)
     { m_settings.setValue("outerSplitterPos", v); }
 
+int AppSettings::leftSplitterPos() const
+    { return m_settings.value("leftSplitterPos", 0).toInt(); }
+void AppSettings::setLeftSplitterPos(int v)
+    { m_settings.setValue("leftSplitterPos", v); }
+
 // ── Provider ──────────────────────────────────────────────────────────────────
 
 QString AppSettings::activeProvider() const
