@@ -10,6 +10,10 @@
 #include <QTime>
 #include <QTimeZone>
 
+/**
+ * Rebranded to Massive
+ *    massive.com/pricing
+ */
 PolygonProvider::PolygonProvider(QObject *parent)
     : StockDataProvider(parent)
     , m_manager(new QNetworkAccessManager(this))
@@ -23,10 +27,30 @@ QList<QPair<QString,QString>> PolygonProvider::credentialFields() const
     return {{"apiKey", "API Key"}};
 }
 
+/*
+   {
+    "adjusted": true,
+    "count": 61,
+    "queryCount": 61,
+    "request_id": "6e8cabcaa3b61ef4174819d81f32ac2c",
+    "results": [
+        {
+            "c": 119.76,
+            "h": 122.21,
+            "l": 119.36,
+            "n": 32715,
+            "o": 121.62,
+            "t": 1768280400000,
+            "v": 2020208,
+            "vw": 120.3919
+        },
+        ...
+    }
+ */
 void PolygonProvider::fetchData(const QString &symbol, const QString &range)
 {
     QDate toDate   = QDate::currentDate();
-    QDate fromDate = toDate.addDays(-rangeToDays(range));
+    QDate fromDate = toDate.addDays(-rangeToDays(range));  // TODO - force to 1 year ?
 
     QString path = QString("/v2/aggs/ticker/%1/range/1/day/%2/%3")
                        .arg(symbol,
@@ -118,6 +142,7 @@ void PolygonProvider::onReplyFinished(QNetworkReply *reply)
         });
     }
 
+    Logger::instance().append(QString("Polygon [%1] Got %2").arg(symbol).arg(points.size()));
     emit dataReady(symbol, points);
 }
 

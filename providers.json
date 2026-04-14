@@ -19,12 +19,12 @@
   },
   {
     "id":            "polygon",
-    "label":         "Polygon.io",
-    "comment":       "Free tier: 15-min delayed data. Paid plans for real-time US stocks.",
+    "label":         "Massive",
+    "comment":       "5calls/min. Paid $29/mon, 15min delay.",
     "enable":        true,
     "url":           "https://polygon.io/dashboard/signup",
     "accountUrl":    "https://polygon.io/dashboard/billing",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "twelvedata",
@@ -61,5 +61,14 @@
     "url":           "",
     "accountUrl":    "",
     "quote_from_id": "yahoopage"
+  },
+  {
+    "id":            "morningstar",
+    "label":         "Morningstar",
+    "comment":       "Page scraper — no key required. Returns current price only, no history. Auto-detects exchange (NYSE→NASDAQ→AMEX).",
+    "enable":        true,
+    "url":           "https://www.morningstar.com/stocks",
+    "accountUrl":    "",
+    "quote_from_id": "morningstar"
   }
 ]

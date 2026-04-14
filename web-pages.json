@@ -21,6 +21,12 @@
       "enabled": true
     },
     {
+      "name": "BarChart",
+      "url": "https://www.barchart.com/stocks/quotes/{upper}/interactive-chart",
+      "comment": "Historical chart on BarChart.com.",
+      "enabled": true
+    },
+    {
       "name": "Zacks",
       "url": "https://www.zacks.com/stock/quote/{upper}?q={lower}",
       "comment": "Stock analysis, earnings estimates, and ratings on Zacks.com.",

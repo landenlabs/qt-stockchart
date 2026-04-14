@@ -48,9 +48,15 @@ void YahooPageProvider::fetchSymbolType(const QString &symbol)
 
 void YahooPageProvider::doFetch(const QString &symbol)
 {
+    // Try:
+    //   https://finance.yahoo.com/quote/{UPPER}/history/
+    //   https://finance.yahoo.com/quote/{UPPER}
+    //
+    //   https://www.barchart.com/stocks/quotes/NFLX/overview
+
     // ^ must be percent-encoded in the URL path (%5E).
-    const QUrl url("https://finance.yahoo.com/quote/" +
-                   QString::fromUtf8(QUrl::toPercentEncoding(symbol)) + "/");
+    const QUrl url("https://www.barchart.com/stocks/quotes/" +
+                   QString::fromUtf8(QUrl::toPercentEncoding(symbol)) + "/overview");
 
     QNetworkRequest request{url};
     request.setRawHeader("User-Agent",      kUserAgent);
@@ -143,6 +149,8 @@ void YahooPageProvider::onReplyFinished(QNetworkReply *reply)
         else if (m2.hasMatch()) price = m2.captured(1).toDouble();
     }
 
+    // data-testid="qsp-price">10.16
+    // data-testid="qsp-overnight-price">103.16
 
     if (price <= 0.0) {
         // ue,\"regularMarketPrice\":{\"raw\":27.35,\"fmt\":\"27.35\"}
@@ -164,12 +172,12 @@ void YahooPageProvider::onReplyFinished(QNetworkReply *reply)
             priceStr.remove(',');
             price = priceStr.toDouble();
         }
-        QRegularExpression priceRx1(R"rx(navPrice)rx");
-        QRegularExpression priceRx2(R"rx(navPrice.":)rx");
-        QRegularExpression priceRx3(R"rx(navPrice.":\s*\{."raw")rx");
-        bool b1 = priceRx1.match(html).hasMatch();
-        bool b2 = priceRx2.match(html).hasMatch();
-        bool b3 = priceRx3.match(html).hasMatch();
+        // QRegularExpression priceRx1(R"rx(navPrice)rx");
+        // QRegularExpression priceRx2(R"rx(navPrice.":)rx");
+        // QRegularExpression priceRx3(R"rx(navPrice.":\s*\{."raw")rx");
+        // bool b1 = priceRx1.match(html).hasMatch();
+        // bool b2 = priceRx2.match(html).hasMatch();
+        // bool b3 = priceRx3.match(html).hasMatch();
     }
 
     if (price <= 0.0) {

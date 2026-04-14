@@ -33,6 +33,7 @@ set(SOURCES
     src/providers/YahooFinanceProvider.cpp
     src/providers/FmpProvider.cpp
     src/providers/YahooPageProvider.cpp
+    src/providers/MorningstarProvider.cpp
     # stock/ — stock data, caching, grouping
     src/stock/StockCacheManager.cpp
     src/stock/StockGroupManager.cpp
@@ -67,6 +68,7 @@ set(HEADERS
     src/providers/YahooFinanceProvider.h
     src/providers/FmpProvider.h
     src/providers/YahooPageProvider.h
+    src/providers/MorningstarProvider.h
     # stock/
     src/stock/StockCacheManager.h
     src/stock/StockGroupManager.h

@@ -8,6 +8,7 @@
 #include "YahooFinanceProvider.h"
 #include "FmpProvider.h"
 #include "YahooPageProvider.h"
+#include "MorningstarProvider.h"
 #include "Logger.h"
 #include "AppSettings.h"
 #include <QVBoxLayout>
@@ -64,7 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
         new TwelveDataProvider(this),
         new YahooFinanceProvider(this),
         new FmpProvider(this),
-        new YahooPageProvider(this)
+        new YahooPageProvider(this),
+        new MorningstarProvider(this)
     };
 
     m_providers = ProviderRegistry::instance().validate(m_providers);
