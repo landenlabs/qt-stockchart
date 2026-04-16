@@ -6,7 +6,7 @@
     "enable":        true,
     "url":           "https://www.alphavantage.co/support/#api-key",
     "accountUrl":    "https://www.alphavantage.co/premium/",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "finnhub",
@@ -15,7 +15,7 @@
     "enable":        true,
     "url":           "https://finnhub.io/register",
     "accountUrl":    "https://finnhub.io/dashboard",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "polygon",
@@ -33,7 +33,7 @@
     "enable":        true,
     "url":           "https://twelvedata.com/",
     "accountUrl":    "https://twelvedata.com/account",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "fmp",
@@ -42,7 +42,7 @@
     "enable":        true,
     "url":           "https://financialmodelingprep.com/developer/docs/",
     "accountUrl":    "https://financialmodelingprep.com/developer/docs/",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "yahoo",
@@ -51,7 +51,7 @@
     "enable":        false,
     "url":           "",
     "accountUrl":    "",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "yahoopage",
@@ -60,7 +60,7 @@
     "enable":        true,
     "url":           "",
     "accountUrl":    "",
-    "quote_from_id": "yahoopage"
+    "quote_from_id": "none"
   },
   {
     "id":            "morningstar",
@@ -69,7 +69,7 @@
     "enable":        true,
     "url":           "https://www.morningstar.com/stocks",
     "accountUrl":    "",
-    "quote_from_id": "morningstar"
+    "quote_from_id": "none"
   },
   {
     "id":            "morningstarweb",
@@ -78,7 +78,7 @@
     "enable":        true,
     "url":           "https://www.morningstar.com/stocks",
     "accountUrl":    "",
-    "quote_from_id": "morningstarweb"
+    "quote_from_id": "none"
   },
   {
     "id":            "googlefinanceweb",
@@ -87,6 +87,6 @@
     "enable":        true,
     "url":           "https://www.google.com/finance",
     "accountUrl":    "",
-    "quote_from_id": "googlefinanceweb"
+    "quote_from_id": "none"
   }
 ]
