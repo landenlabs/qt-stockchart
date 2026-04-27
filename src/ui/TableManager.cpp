@@ -273,6 +273,10 @@ void TableManager::refresh(const QStringList &syms, const QDate &clickedDate)
     // Col nCols+2: Purchase.
     m_table->setRowCount(nRows);
     m_table->setColumnCount(nCols + 3);
+    m_table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
+    m_table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
+    m_table->setColumnWidth(0, 22);
+    m_table->setColumnWidth(1, 22);
 
     // Find the period column (0-based period index) matching the active graph range.
     int activeOffset = 0;  // fallback to first period

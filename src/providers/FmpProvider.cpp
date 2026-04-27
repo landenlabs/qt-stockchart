@@ -27,8 +27,9 @@ void FmpProvider::fetchData(const QString &symbol, const QString &range)
     const QDate today = QDate::currentDate();
     const QDate from  = today.addDays(-rangeToDays(range));
 
-    QUrl url(QString("https://financialmodelingprep.com/api/v3/historical-price-full/%1").arg(symbol));
+    QUrl url("https://financialmodelingprep.com/stable/historical-price-eod/full");
     QUrlQuery q;
+    q.addQueryItem("symbol", symbol);
     q.addQueryItem("from",   from.toString("yyyy-MM-dd"));
     q.addQueryItem("to",     today.toString("yyyy-MM-dd"));
     q.addQueryItem("apikey", key);
@@ -46,8 +47,9 @@ void FmpProvider::fetchLatestQuote(const QString &symbol)
 {
     const QString key = m_credentials.value("apiKey").trimmed();
 
-    QUrl url(QString("https://financialmodelingprep.com/api/v3/quote-short/%1").arg(symbol));
+    QUrl url("https://financialmodelingprep.com/stable/quote");
     QUrlQuery q;
+    q.addQueryItem("symbol", symbol);
     q.addQueryItem("apikey", key);
     url.setQuery(q);
 
@@ -63,8 +65,9 @@ void FmpProvider::fetchSymbolType(const QString &symbol)
 {
     const QString key = m_credentials.value("apiKey").trimmed();
 
-    QUrl url(QString("https://financialmodelingprep.com/api/v3/profile/%1").arg(symbol));
+    QUrl url("https://financialmodelingprep.com/stable/profile");
     QUrlQuery q;
+    q.addQueryItem("symbol", symbol);
     q.addQueryItem("apikey", key);
     url.setQuery(q);
 
@@ -156,7 +159,8 @@ void FmpProvider::onReplyFinished(QNetworkReply *reply)
     }
 
     // ── Historical data ───────────────────────────────────────────────────────
-    const QJsonArray historical = root["historical"].toArray();
+    // Stable API returns a direct array, not {"historical": [...]}.
+    const QJsonArray historical = doc.array();
     if (historical.isEmpty()) {
         emit errorOccurred(symbol, "FMP: no historical data for " + symbol +
                            " — check symbol or upgrade plan");

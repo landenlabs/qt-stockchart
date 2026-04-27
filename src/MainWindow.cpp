@@ -508,12 +508,6 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     stockTable->setMinimumHeight(0);
     tablePanelLayout->addWidget(stockTable, 1);
 
-    // Col 0 (color swatch) and col 1 (eye) are fixed-width icon columns.
-    stockTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
-    stockTable->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);
-    stockTable->setColumnWidth(0, 22);
-    stockTable->setColumnWidth(1, 22);
-
     vertSplitter->addWidget(m_contentStack);
     vertSplitter->addWidget(tablePanel);
 
@@ -595,6 +589,7 @@ void MainWindow::setupRightPanel(QWidget *parent, QBoxLayout *layout)
     m_tableManager = new TableManager(stockTable, vertSplitter,
                                       tableToggleBtn, displayModeBtn,
                                       m_cacheManager, this, this);
+
     connect(m_tableManager, &TableManager::periodsChanged,
             this, &MainWindow::rebuildPeriodButtons);
     connect(tableToggleBtn, &QToolButton::clicked, m_tableManager, &TableManager::onToggle);

@@ -11,7 +11,7 @@
   {
     "id":            "finnhub",
     "label":         "Finnhub",
-    "comment":       "Free tier: 60 calls/min. US stocks and some international markets.",
+    "comment":       "Free tier: real-time quotes only — historical data requires a paid plan.",
     "enable":        true,
     "url":           "https://finnhub.io/register",
     "accountUrl":    "https://finnhub.io/dashboard",

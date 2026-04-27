@@ -57,3 +57,20 @@ git push origin v1.0.1
 
 https://github.com/landenlabs/qt-stockchart/actions
 
+
+Must open the Visual Studio Dev terminal and set to x64
+
+to make a sln 
+
+lr -rf build
+cmake -S . -B build\vs -G "Visual Studio 18 2026" -A x64 -DCMAKE_PREFIX_PATH=C:\opt\dev\qt\6.11.0\msvc2022_64
+ 
+open 
+   build\vs\StockChart.slnx
+   
+   Set StockChart as default startuup in VS
+   
+   After build - copy QT dll'set  
+    C:\opt\dev\qt\6.11.0\msvc2022_64\bin\windeployqt.exe build\vs\Debug\StockChart.exe
+	
+ 

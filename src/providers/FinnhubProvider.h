@@ -15,9 +15,6 @@ public:
     void fetchSymbolType(const QString &symbol) override;
     void fetchLatestQuote(const QString &symbol) override;
 
-private slots:
-    void onReplyFinished(QNetworkReply *reply);
-
 private:
     QNetworkAccessManager *m_manager;
 };
