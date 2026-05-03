@@ -73,4 +73,16 @@ open
    After build - copy QT dll'set  
     C:\opt\dev\qt\6.11.0\msvc2022_64\bin\windeployqt.exe build\vs\Debug\StockChart.exe
 	
+	
+	Build  with cmake
+	set CMAKE_PREFIX_PATH=C:\opt\dev\qt\6.11.0\msvc2022_64
+	C:\opt\cmake\bin\cmake.exe -S C:/opt/projects/qt-projects/qt-stockchart -B C:/opt/projects/qt-projects/qt-stockchart/build
+	
+	or 
+	
+	C:\opt\cmake\bin\cmake.exe  -B 
+	
+	
+	
+	
  

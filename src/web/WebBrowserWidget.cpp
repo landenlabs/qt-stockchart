@@ -26,8 +26,8 @@ WebBrowserWidget::WebBrowserWidget(QWidget *parent)
     m_profile->setUrlRequestInterceptor(m_interceptor);
 
     // ── Web view ──────────────────────────────────────────────────────────────
-    auto *page = new QWebEnginePage(m_profile, this);
     m_webView = new QWebEngineView(this);
+    auto *page = new QWebEnginePage(m_profile, m_webView);
     m_webView->setPage(page);
 
     // ── Tab bar row (tabs + "+" button) ───────────────────────────────────────

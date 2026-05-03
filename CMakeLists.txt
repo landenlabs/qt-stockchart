@@ -1,7 +1,9 @@
-# For an App builds: 
-#  cd build
+# For an App builds:
+#  macOS: cd build
 #    cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=ON
 #    cmake .. -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DBUILD_AS_BUNDLE=OFF
+#  Windows: cd build\vs
+#    cmake ../.. -DCMAKE_PREFIX_PATH="C:\opt\dev\qt\6.11.0\msvc2022_64"
 
 cmake_minimum_required(VERSION 3.16)
 project(StockChart VERSION 0.1 LANGUAGES CXX)
